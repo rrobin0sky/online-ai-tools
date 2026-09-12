@@ -12,26 +12,34 @@ export function prepareSvgForRasterization(
 ): string {
   let processed = svgString.trim();
 
-  // 1. Ensure XML namespace is present
-  if (!processed.includes('xmlns="http://www.w3.org/2000/svg"') && !processed.includes("xmlns='http://www.w3.org/2000/svg'")) {
-    processed = processed.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
-  }
-
-  // 2. Ensure width & height are explicitly set on the root SVG tag
-  if (!/width=/.test(processed)) {
-    processed = processed.replace('<svg', `<svg width="${size}"`);
-  } else {
-    processed = processed.replace(/width="[^"]*"/, `width="${size}"`);
-  }
-
-  if (!/height=/.test(processed)) {
-    processed = processed.replace('<svg', `<svg height="${size}"`);
-  } else {
-    processed = processed.replace(/height="[^"]*"/, `height="${size}"`);
-  }
-
-  // 3. Replace any un-replaced currentColor with an actual color
+  // 1. Replace currentColor with actual fallback color
   processed = processed.replace(/currentColor/g, fallbackColor);
+
+  // 2. Manipulate ONLY the root opening <svg ...> tag
+  processed = processed.replace(/<svg\b([^>]*)>/i, (match, attrs) => {
+    let newAttrs = attrs;
+
+    // Ensure xmlns is present on root
+    if (!/xmlns\s*=/.test(newAttrs)) {
+      newAttrs += ' xmlns="http://www.w3.org/2000/svg"';
+    }
+
+    // Replace root width (NOT stroke-width) or append it
+    if (/(?<!-)\bwidth\s*=\s*"[^"]*"/i.test(newAttrs)) {
+      newAttrs = newAttrs.replace(/(?<!-)\bwidth\s*=\s*"[^"]*"/i, `width="${size}"`);
+    } else {
+      newAttrs += ` width="${size}"`;
+    }
+
+    // Replace root height (NOT stroke-height or anything else) or append it
+    if (/(?<!-)\bheight\s*=\s*"[^"]*"/i.test(newAttrs)) {
+      newAttrs = newAttrs.replace(/(?<!-)\bheight\s*=\s*"[^"]*"/i, `height="${size}"`);
+    } else {
+      newAttrs += ` height="${size}"`;
+    }
+
+    return `<svg${newAttrs}>`;
+  });
 
   return processed;
 }
