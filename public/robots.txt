@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bin0sky.tech/sitemap.xml
