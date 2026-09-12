@@ -1,0 +1,75 @@
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { Header } from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { ArrowLeft, FileText } from 'lucide-react';
+
+export default function TermsPage() {
+  const [lang, setLang] = useState<'zh' | 'en'>('en');
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  return (
+    <div className="flex-1 flex flex-col bg-grid-pattern min-h-screen">
+      <Header
+        lang={lang}
+        onToggleLang={() => setLang(lang === 'zh' ? 'en' : 'zh')}
+        darkMode={darkMode}
+        onToggleDarkMode={() => {
+          setDarkMode(!darkMode);
+          document.documentElement.classList.toggle('dark');
+        }}
+      />
+
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline mb-8"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          {lang === 'zh' ? '返回首页' : 'Back to Home'}
+        </Link>
+
+        <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <FileText className="w-8 h-8 text-blue-500" />
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                {lang === 'zh' ? '服务条款 (Terms of Service)' : 'Terms of Service'}
+              </h1>
+              <p className="text-xs text-slate-500">Last updated: September 2026</p>
+            </div>
+          </div>
+
+          <div className="space-y-6 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <section>
+              <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2">1. Terms</h2>
+              <p>
+                By accessing this website, accessible from bin0sky.tech, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2">2. Use License & Trademark Disclaimer</h2>
+              <p>
+                Permission is granted to freely browse and copy SVG code and download icon assets for architecture diagramming and design purposes.
+                All product names, logos, and brands (including AWS, Microsoft Azure, Google Cloud, Alibaba Cloud, Kubernetes) are property of their respective owners.
+                All company, product and service names used in this website are for identification and informational purposes only.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2">3. Disclaimer</h2>
+              <p>
+                All the materials on ArchIcons are provided &apos;as is&apos;. ArchIcons makes no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, ArchIcons does not make any representations concerning the accuracy or reliability of the use of the materials on its website.
+              </p>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <Footer lang={lang} />
+    </div>
+  );
+}
