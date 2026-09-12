@@ -77,12 +77,12 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Domain / GitHub Link */}
           <a
-            href="https://bin0sky.tech"
+            href="https://tools.bin0sky.tech"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden lg:flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            <span>bin0sky.tech</span>
+            <span>tools.bin0sky.tech</span>
           </a>
         </div>
       </div>
