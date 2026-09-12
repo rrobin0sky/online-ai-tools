@@ -101,8 +101,8 @@ export default function HomePage() {
             <Sparkles className="w-3.5 h-3.5 text-blue-500" />
             <span>
               {lang === 'zh'
-                ? '专为解决方案与网络架构师打造的在线图标库'
-                : 'Free Vector Architecture & Topology Icons'}
+                ? '云与网络架构矢量图标库'
+                : 'Cloud & Network Architecture Icons'}
             </span>
           </div>
 
@@ -118,10 +118,10 @@ export default function HomePage() {
             )}
           </h1>
 
-          <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
             {lang === 'zh'
-              ? '专为架构师打造：支持一键直接复制 PNG 图片（直接贴入 PPT/Word/微信无需下载）、一键复制 SVG 源码、厂商官方图标直接使用、中立设备统一自定义颜色批量打包下载！'
-              : 'Built for Architects: 1-click copy PNG directly to clipboard (paste to PPT/Word), 1-click copy SVG, direct vendor equivalents, and batch ZIP download with unified custom theme!'}
+              ? '支持一键复制 SVG / PNG、多云等价对照、逻辑拓扑与物理设备双模式。'
+              : 'Instant SVG & PNG copy, cross-cloud mapping, and logical & physical dual-mode topology icons.'}
           </p>
         </div>
 

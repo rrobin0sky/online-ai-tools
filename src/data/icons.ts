@@ -41,6 +41,7 @@ export const PROVIDERS: ProviderMeta[] = [
 
 export const CATEGORIES: CategoryMeta[] = [
   { id: 'network', name: { en: 'Network & CDN', zh: '网络与分发' }, iconName: 'Network' },
+  { id: 'physical', name: { en: 'Physical & Cabling', zh: '物理与布线' }, iconName: 'Server' },
   { id: 'compute', name: { en: 'Compute & Containers', zh: '计算与容器' }, iconName: 'Cpu' },
   { id: 'storage', name: { en: 'Storage & Backup', zh: '存储与归档' }, iconName: 'HardDrive' },
   { id: 'database', name: { en: 'Database & Cache', zh: '数据库与缓存' }, iconName: 'Database' },
@@ -593,6 +594,139 @@ export const ICONS: IconMeta[] = [
     svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#EF4444" fill-opacity="0.12"/><path d="M18 24L32 16L46 24L32 32L18 24Z" stroke="#EF4444" stroke-width="3" stroke-linejoin="round"/><path d="M18 32L32 40L46 32" stroke="#EF4444" stroke-width="3" stroke-linejoin="round"/><path d="M18 40L32 48L46 40" stroke="#EF4444" stroke-width="3" stroke-linejoin="round"/></svg>`,
     officialDocUrl: 'https://redis.io/',
     description: { en: 'Ultra-fast in-memory key-value data structure store', zh: '高性能开源分布式内存键值数据存储与缓存' }
+  },
+
+  // ==================== 10. 物理设备与综合布线 (Physical Devices & Cabling) ====================
+  {
+    id: 'generic-physical-rack-42u',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '42U Server Rack Cabinet', zh: '42U 标准服务器机柜' },
+    code: '42U-Rack',
+    tags: ['rack', 'cabinet', '42u', 'idc', 'jigui', '机柜', '服务器机柜', '机房'],
+    isTintable: true,
+    defaultColor: '#1e293b',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="22" x="3" y="1" rx="2"/><line x1="7" x2="7" y1="1" y2="23"/><line x1="17" x2="17" y1="1" y2="23"/><line x1="7" x2="17" y1="5" y2="5"/><line x1="7" x2="17" y1="9" y2="9"/><line x1="7" x2="17" y1="13" y2="13"/><line x1="7" x2="17" y1="17" y2="17"/><line x1="7" x2="17" y1="21" y2="21"/><circle cx="19.5" cy="12" r="0.75" fill="currentColor"/></svg>`,
+    description: { en: 'Standard 19-inch 42U server and network equipment rack enclosure', zh: '标准 19 英寸 42U 数据中心服务器与网络设备装配机柜' }
+  },
+  {
+    id: 'generic-physical-switch-24p',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U 24-Port Gigabit Switch', zh: '1U 24口千兆交换机' },
+    code: 'SW-24P',
+    tags: ['switch', '24 port', 'gigabit', '1u', '24kou', '24口交换机', '千兆交换机'],
+    isTintable: true,
+    defaultColor: '#0ea5e9',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5"/><line x1="4" x2="20" y1="12" y2="12" stroke-dasharray="1 1"/><circle cx="3" cy="12" r="0.5" fill="currentColor"/><circle cx="21" cy="12" r="0.5" fill="currentColor"/></svg>`,
+    description: { en: 'Standard 1U rackmount 24-port RJ45 ethernet access switch', zh: '标准 1U 机架式 24 口 RJ45 以太网接入交换机' }
+  },
+  {
+    id: 'generic-physical-switch-48p',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U 48-Port Enterprise Switch', zh: '1U 48口企业级交换机' },
+    code: 'SW-48P',
+    tags: ['switch', '48 port', 'enterprise', '1u', '48kou', '48口交换机', '高密汇聚'],
+    isTintable: true,
+    defaultColor: '#2563eb',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5"/><line x1="3.5" x2="20.5" y1="10.5" y2="10.5" stroke-dasharray="0.8 0.8"/><line x1="3.5" x2="20.5" y1="13.5" y2="13.5" stroke-dasharray="0.8 0.8"/><rect x="18" y="10" width="3" height="4" rx="0.5"/></svg>`,
+    description: { en: 'High-density 1U 48-port RJ45 plus 4 SFP+ uplink ports enterprise switch', zh: '高密度 1U 48 口以太网并带 4 路上行万兆光口的汇聚交换机' }
+  },
+  {
+    id: 'generic-physical-switch-poe',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U 24-Port PoE+ Power Switch', zh: '1U 24口 PoE+ 供电交换机' },
+    code: 'PoE-SW',
+    tags: ['poe', 'poe+', 'switch', 'power', 'power over ethernet', 'gongdian', 'PoE交换机', '监控AP供电'],
+    isTintable: true,
+    defaultColor: '#f59e0b',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="8" x="1" y="8" rx="1.5"/><line x1="4" x2="16" y1="12" y2="12" stroke-dasharray="1 1"/><path d="M19.5 9.5 17.5 12h2l-1 2.5"/></svg>`,
+    description: { en: 'Power over Ethernet (PoE+) switch supplying power to IP cameras and APs', zh: '支持 802.3at/af 标准为 AP 和摄像头远程供电的网络交换机' }
+  },
+  {
+    id: 'generic-physical-switch-nonpoe',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U Non-PoE Standard Switch', zh: '1U 24口非 PoE 交换机' },
+    code: 'Non-PoE',
+    tags: ['non-poe', 'switch', 'feipoe', '普通交换机', '数据接入'],
+    isTintable: true,
+    defaultColor: '#64748b',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5"/><line x1="4" x2="18" y1="12" y2="12" stroke-dasharray="1 1"/><line x1="18.5" x2="20.5" y1="10.5" y2="13.5"/></svg>`,
+    description: { en: 'Standard non-powered data switching device for regular workstations', zh: '纯数据传输无供电功能的标准网络接入交换设备' }
+  },
+  {
+    id: 'generic-physical-ap-ceiling',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: 'Enterprise Ceiling Wireless AP', zh: '企业吸顶式无线 AP' },
+    code: 'AP',
+    tags: ['ap', 'wireless', 'wifi', 'wifi6', 'wlan', 'access point', 'xidingshi', '无线接入点', '吸顶AP'],
+    isTintable: true,
+    defaultColor: '#059669',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>`,
+    description: { en: 'Ceiling or wall-mounted Wi-Fi 6/7 enterprise indoor access point', zh: '吸顶或壁挂式室内 Wi-Fi 6/7 企业级无线无线接入点' }
+  },
+  {
+    id: 'generic-physical-sfp',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '10G SFP+ Optical Module', zh: '10G SFP+ 光纤收发模块' },
+    code: 'SFP+',
+    tags: ['sfp', 'sfp+', 'optical', 'transceiver', '10g', 'guangmokuai', '光模块', '万兆光纤'],
+    isTintable: true,
+    defaultColor: '#6366f1',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="8" x="3" y="8" rx="1"/><rect width="3" height="4" x="4" y="10" rx="0.5"/><rect width="3" height="4" x="8" y="10" rx="0.5"/><path d="M18 10h2v4h-2"/><line x1="14" x2="14" y1="8" y2="16"/></svg>`,
+    description: { en: 'Hot-pluggable optical transceiver module with duplex LC interface', zh: '双工 LC 接口可热插拔千兆/万兆光纤收发一体模块' }
+  },
+  {
+    id: 'generic-physical-fiber',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: 'Optical Fiber Patch Cable', zh: 'LC-LC 双芯光纤跳线' },
+    code: 'Fiber',
+    tags: ['fiber', 'optical', 'patch cord', 'lc-lc', 'single mode', 'multi mode', 'guangxian', '光纤线', '跳线'],
+    isTintable: true,
+    defaultColor: '#ea580c',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19C7 19 8 5 12 5s5 14 8 14"/><circle cx="4" cy="19" r="1.5" fill="currentColor"/><circle cx="20" cy="19" r="1.5" fill="currentColor"/><rect x="2" y="17.5" width="4" height="3" rx="0.5"/><rect x="18" y="17.5" width="4" height="3" rx="0.5"/></svg>`,
+    description: { en: 'Duplex single-mode or multi-mode optical fiber patch cord with LC connectors', zh: '带 LC 接口的双芯单模(黄色)/多模(橙色)设备互联光纤跳线' }
+  },
+  {
+    id: 'generic-physical-pdu',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: 'Rackmount 1U PDU Power Unit', zh: '机柜 1U 防雷 PDU 电源排插' },
+    code: 'PDU',
+    tags: ['pdu', 'power', 'rack', 'socket', 'surge', 'dianyuan', '排插', '机柜供电', '防雷PDU'],
+    isTintable: true,
+    defaultColor: '#dc2626',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="6" x="1" y="9" rx="1"/><circle cx="5" cy="12" r="1.2"/><circle cx="9" cy="12" r="1.2"/><circle cx="13" cy="12" r="1.2"/><circle cx="17" cy="12" r="1.2"/><rect x="19.5" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/></svg>`,
+    description: { en: 'Standard 1U rack-mountable power distribution unit with surge protection', zh: '标准 1U 8位防雷抗浪涌机架式机柜专用电源分配单元' }
+  },
+  {
+    id: 'generic-physical-ups',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '2U Rackmount Online UPS Power', zh: '2U 机架式在线 UPS 不间断电源' },
+    code: 'UPS',
+    tags: ['ups', 'battery', 'backup power', 'online ups', 'bujianduan', '不间断电源', '备用电源', '机房后备'],
+    isTintable: true,
+    defaultColor: '#475569',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="1.5"/><line x1="2" x2="22" y1="12" y2="12"/><rect x="5" y="8" width="4" height="2" rx="0.5"/><path d="M15 8l-2 4h3l-2 4"/><circle cx="18" cy="9" r="0.5" fill="currentColor"/></svg>`,
+    description: { en: 'Rackmount online dual-conversion uninterruptible emergency power supply', zh: '机房专用 2U 在线式双变换后备应急不间断稳压电源系统' }
   }
 ];
+
 

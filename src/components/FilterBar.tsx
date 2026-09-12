@@ -125,11 +125,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         <div className="flex items-center gap-2">
           <span className="font-medium text-slate-700 dark:text-slate-300">
             {lang === 'zh'
-              ? `共匹配到 ${filteredCount} 个架构图标`
-              : `Showing ${filteredCount} of ${totalCount} architecture icons`}
-          </span>
-          <span className="text-[11px] text-slate-400 hidden md:inline">
-            {lang === 'zh' ? '(支持直接复制 SVG / PNG)' : '(Directly copy SVG & PNG)'}
+              ? `共 ${filteredCount} 个图标`
+              : `${filteredCount} icons`}
           </span>
         </div>
 
@@ -138,7 +135,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/80 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/80 font-semibold text-xs transition-all shadow-sm"
         >
           <span>📦</span>
-          <span>{lang === 'zh' ? '批量打包下载 (支持统一定制颜色)' : 'Batch Download (Custom Theme)'}</span>
+          <span>{lang === 'zh' ? '打包下载 (ZIP)' : 'Batch Export (ZIP)'}</span>
         </button>
       </div>
     </div>

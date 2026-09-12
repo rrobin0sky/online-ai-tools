@@ -15,6 +15,7 @@ export type IconCategory =
   | 'database'      // 数据库与缓存
   | 'security'      // 安全与身份
   | 'integration'   // 消息与集成
+  | 'physical'      // 物理设备与布线
   | 'analytics'     // 大数据与 AI
   | 'general';      // 边界与客户端
 
