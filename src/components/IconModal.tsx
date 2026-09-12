@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Copy, Check, Download, ExternalLink, Palette, ArrowRight, Sparkles } from 'lucide-react';
+import { X, Copy, Check, Download, ExternalLink, Palette, ArrowRight, Sparkles, Image as ImageIcon } from 'lucide-react';
 import { IconMeta } from '../types/icon';
 import { PROVIDERS, ICONS } from '../data/icons';
+import { copyPngToClipboard, copySvgToClipboard, svgToPngBlob } from '../lib/clipboard';
 
 interface IconModalProps {
   icon: IconMeta | null;
@@ -14,13 +15,13 @@ interface IconModalProps {
 
 const PRESET_COLORS = [
   '#0ea5e9', // Sky Blue
-  '#3b82f6', // Royal Blue
-  '#10b981', // Emerald
-  '#ef4444', // Red
-  '#f59e0b', // Amber
-  '#8b5cf6', // Violet
-  '#475569', // Slate
-  '#111827', // Black
+  '#2563eb', // Corporate Blue
+  '#059669', // Emerald Green
+  '#dc2626', // Crimson Red
+  '#d97706', // Amber
+  '#7c3aed', // Violet
+  '#334155', // Slate
+  '#0f172a', // Obsidian Dark
 ];
 
 export const IconModal: React.FC<IconModalProps> = ({
@@ -31,9 +32,9 @@ export const IconModal: React.FC<IconModalProps> = ({
 }) => {
   if (!icon) return null;
 
-  const [copied, setCopied] = useState(false);
+  const [copiedType, setCopiedType] = useState<'svg' | 'png' | null>(null);
+  const [eqCopiedId, setEqCopiedId] = useState<string | null>(null);
   const [customColor, setCustomColor] = useState<string>(icon.defaultColor || '#0ea5e9');
-  const [resolution, setResolution] = useState<number>(256);
 
   const providerMeta = PROVIDERS.find((p) => p.id === icon.provider);
 
@@ -42,18 +43,41 @@ export const IconModal: React.FC<IconModalProps> = ({
     ? ICONS.filter((i) => i.equivalentGroup === icon.equivalentGroup && i.id !== icon.id)
     : [];
 
-  const getProcessedSvg = () => {
-    if (icon.isTintable && customColor) {
-      return icon.svgRaw.replace(/currentColor/g, customColor);
+  const getProcessedSvg = (targetIcon = icon, color = customColor) => {
+    if (targetIcon.isTintable && color) {
+      return targetIcon.svgRaw.replace(/currentColor/g, color);
     }
-    return icon.svgRaw;
+    return targetIcon.svgRaw;
   };
 
-  const handleCopySvg = () => {
-    const finalSvg = getProcessedSvg();
-    navigator.clipboard.writeText(finalSvg);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopySvg = async (targetIcon = icon, isEquivalent = false) => {
+    const finalSvg = getProcessedSvg(targetIcon);
+    const ok = await copySvgToClipboard(finalSvg);
+    if (ok) {
+      if (isEquivalent) {
+        setEqCopiedId(`${targetIcon.id}-svg`);
+        setTimeout(() => setEqCopiedId(null), 1800);
+      } else {
+        setCopiedType('svg');
+        setTimeout(() => setCopiedType(null), 1800);
+      }
+    }
+  };
+
+  const handleCopyPng = async (targetIcon = icon, size = 256, isEquivalent = false) => {
+    const finalSvg = getProcessedSvg(targetIcon);
+    const ok = await copyPngToClipboard(finalSvg, size);
+    if (ok) {
+      if (isEquivalent) {
+        setEqCopiedId(`${targetIcon.id}-png`);
+        setTimeout(() => setEqCopiedId(null), 1800);
+      } else {
+        setCopiedType('png');
+        setTimeout(() => setCopiedType(null), 1800);
+      }
+    } else {
+      handleDownloadPng(size, targetIcon);
+    }
   };
 
   const handleDownloadSvg = () => {
@@ -67,28 +91,19 @@ export const IconModal: React.FC<IconModalProps> = ({
     URL.revokeObjectURL(url);
   };
 
-  const handleDownloadPng = (size: number) => {
-    const svgString = getProcessedSvg();
-    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-    const blobURL = URL.createObjectURL(svgBlob);
-
-    const image = new Image();
-    image.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(image, 0, 0, size, size);
-        const png = canvas.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.href = png;
-        a.download = `${icon.id}-${size}px.png`;
-        a.click();
-      }
-      URL.revokeObjectURL(blobURL);
-    };
-    image.src = blobURL;
+  const handleDownloadPng = async (size: number, targetIcon = icon) => {
+    try {
+      const finalSvg = getProcessedSvg(targetIcon);
+      const blob = await svgToPngBlob(finalSvg, size);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${targetIcon.id}-${size}px.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -133,18 +148,18 @@ export const IconModal: React.FC<IconModalProps> = ({
 
         {/* Description */}
         {icon.description && (
-          <p className="mt-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+          <p className="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
             {icon.description[lang]}
           </p>
         )}
 
-        {/* Tintable Color Picker (If Vendor-Neutral / Tintable) */}
+        {/* Custom Color Palette (If tintable) */}
         {icon.isTintable && (
-          <div className="mt-6 p-4 rounded-xl border border-blue-100 dark:border-blue-900/40 bg-blue-50/40 dark:bg-blue-950/20">
+          <div className="mt-5 p-4 rounded-xl border border-blue-100 dark:border-blue-900/40 bg-blue-50/40 dark:bg-blue-950/20">
             <div className="flex items-center justify-between mb-2.5">
               <label className="text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
                 <Palette className="w-3.5 h-3.5 text-blue-500" />
-                {lang === 'zh' ? '自定义设备图标颜色' : 'Customize Icon Color'}
+                {lang === 'zh' ? '自定义设备专属主题色' : 'Customize Icon Color'}
               </label>
               <span className="text-xs font-mono font-medium text-slate-500">{customColor}</span>
             </div>
@@ -172,90 +187,142 @@ export const IconModal: React.FC<IconModalProps> = ({
           </div>
         )}
 
-        {/* Action Buttons */}
-        <div className="mt-6 flex flex-wrap gap-2.5">
-          <button
-            onClick={handleCopySvg}
-            className="flex-1 min-w-[140px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm shadow-md shadow-blue-500/20 transition-all"
-          >
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-            <span>{copied ? (lang === 'zh' ? '已复制 SVG' : 'Copied SVG') : (lang === 'zh' ? '一键复制 SVG 源码' : 'Copy SVG Code')}</span>
-          </button>
+        {/* Primary Actions (Copy PNG & Copy SVG) */}
+        <div className="mt-6 space-y-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {/* Direct Copy PNG */}
+            <button
+              onClick={() => handleCopyPng()}
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md shadow-blue-500/20 transition-all active:scale-95"
+            >
+              {copiedType === 'png' ? <Check className="w-4 h-4" /> : <ImageIcon className="w-4 h-4" />}
+              <span>
+                {copiedType === 'png'
+                  ? (lang === 'zh' ? '✓ PNG 已直接复制到剪贴板！' : '✓ PNG Copied to Clipboard!')
+                  : (lang === 'zh' ? '复制 PNG 图片 (直接贴 PPT/微信)' : 'Copy PNG Image (Ready to Paste)')}
+              </span>
+            </button>
 
-          <button
-            onClick={handleDownloadSvg}
-            className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors"
-          >
-            <Download className="w-4 h-4 text-blue-500" />
-            <span>.SVG</span>
-          </button>
-
-          {/* PNG Resolution Selector */}
-          <div className="flex items-center border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
-            {[128, 256, 512].map((size) => (
-              <button
-                key={size}
-                onClick={() => handleDownloadPng(size)}
-                className="px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border-r last:border-r-0 border-slate-200 dark:border-slate-800 transition-colors"
-                title={`Download PNG ${size}x${size}px`}
-              >
-                {size}px PNG
-              </button>
-            ))}
+            {/* Direct Copy SVG */}
+            <button
+              onClick={() => handleCopySvg()}
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-semibold text-sm shadow-md transition-all active:scale-95"
+            >
+              {copiedType === 'svg' ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+              <span>
+                {copiedType === 'svg'
+                  ? (lang === 'zh' ? '✓ SVG 源码已复制！' : '✓ SVG Code Copied!')
+                  : (lang === 'zh' ? '复制 SVG 矢量源码' : 'Copy SVG Vector Code')}
+              </span>
+            </button>
           </div>
 
-          {icon.officialDocUrl && (
-            <a
-              href={icon.officialDocUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-blue-600 text-sm font-medium transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-              <span>{lang === 'zh' ? '官方文档' : 'Docs'}</span>
-            </a>
-          )}
+          {/* Secondary Download Bar */}
+          <div className="flex items-center justify-between flex-wrap gap-2 pt-2 text-xs text-slate-500">
+            <div className="flex items-center gap-2">
+              <span>{lang === 'zh' ? '本地下载：' : 'Download:'}</span>
+              <button
+                onClick={handleDownloadSvg}
+                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
+              >
+                .SVG 矢量文件
+              </button>
+              {[256, 512].map((size) => (
+                <button
+                  key={size}
+                  onClick={() => handleDownloadPng(size)}
+                  className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
+                >
+                  {size}px PNG
+                </button>
+              ))}
+            </div>
+
+            {icon.officialDocUrl && (
+              <a
+                href={icon.officialDocUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-slate-500 hover:text-blue-600 transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>{lang === 'zh' ? '官方文档' : 'Official Docs'}</span>
+              </a>
+            )}
+          </div>
         </div>
 
-        {/* Cross-Cloud Equivalence Suggestion (杀手级特性) */}
+        {/* Cross-Cloud Equivalence (With Instant Copy for Each Vendor) */}
         {equivalentIcons.length > 0 && (
           <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-            <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-amber-500" />
-              <h4 className="text-sm font-bold text-slate-800 dark:text-slate-100">
-                {lang === 'zh' ? '跨云服务等价对照 (Cross-Cloud Equivalence)' : 'Cross-Cloud Equivalents'}
-              </h4>
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-500" />
+                <h4 className="text-sm font-bold text-slate-800 dark:text-slate-100">
+                  {lang === 'zh' ? '跨云/中立服务等价对照 (各大厂商可直接复制使用)' : 'Cross-Cloud Equivalents (Directly Copyable)'}
+                </h4>
+              </div>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
               {lang === 'zh'
-                ? '正在绘制多云架构或迁移拓扑？以下是其他云厂商的同类架构服务：'
-                : 'Drawing multi-cloud or migration topologies? Here are the equivalent services across providers:'}
+                ? '以下为各厂商官方标准图标或中立替代品，同样支持一键直接复制使用：'
+                : 'Official vendor and neutral equivalents. Copy PNG or SVG directly for each:'}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {equivalentIcons.map((eq) => {
                 const eqProvider = PROVIDERS.find((p) => p.id === eq.provider);
+                const isSvgCopied = eqCopiedId === `${eq.id}-svg`;
+                const isPngCopied = eqCopiedId === `${eq.id}-png`;
+
                 return (
                   <div
                     key={eq.id}
-                    onClick={() => onSelectIcon(eq)}
-                    className="flex items-center justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 bg-slate-50/50 dark:bg-slate-800/30 cursor-pointer group transition-all"
+                    className="flex items-center justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 bg-slate-50/60 dark:bg-slate-800/40 transition-all"
                   >
-                    <div className="flex items-center gap-2.5">
+                    <div
+                      onClick={() => onSelectIcon(eq)}
+                      className="flex items-center gap-2.5 cursor-pointer min-w-0 flex-1 pr-2"
+                    >
                       <div
-                        className="w-7 h-7 flex items-center justify-center shrink-0"
+                        className="w-8 h-8 flex items-center justify-center shrink-0"
                         dangerouslySetInnerHTML={{ __html: eq.svgRaw }}
                       />
-                      <div>
-                        <div className="text-xs font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors">
+                      <div className="min-w-0">
+                        <div className="text-xs font-semibold text-slate-800 dark:text-slate-100 truncate hover:text-blue-600 transition-colors">
                           {eq.name[lang]}
                         </div>
-                        <div className="text-[11px] text-slate-400">
+                        <div className="text-[10px] text-slate-400 truncate">
                           {eqProvider?.name[lang]}
                         </div>
                       </div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 group-hover:text-blue-500 transition-all" />
+
+                    {/* Quick Copy Buttons for Equivalent Icons */}
+                    <div className="flex items-center gap-1 shrink-0">
+                      <button
+                        onClick={() => handleCopySvg(eq, true)}
+                        className={`px-2 py-1 rounded text-[11px] font-semibold border transition-all ${
+                          isSvgCopied
+                            ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
+                            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600'
+                        }`}
+                        title="复制该厂商官方 SVG"
+                      >
+                        {isSvgCopied ? '已复制' : 'SVG'}
+                      </button>
+                      <button
+                        onClick={() => handleCopyPng(eq, 256, true)}
+                        className={`px-2 py-1 rounded text-[11px] font-semibold border transition-all ${
+                          isPngCopied
+                            ? 'bg-blue-50 text-blue-600 border-blue-300'
+                            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600'
+                        }`}
+                        title="直接复制该厂商官方 PNG"
+                      >
+                        {isPngCopied ? '已复制' : 'PNG'}
+                      </button>
+                    </div>
                   </div>
                 );
               })}

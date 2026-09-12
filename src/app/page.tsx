@@ -6,10 +6,11 @@ import { Footer } from '../components/Footer';
 import { FilterBar } from '../components/FilterBar';
 import { IconCard } from '../components/IconCard';
 import { IconModal } from '../components/IconModal';
+import { BatchExportModal } from '../components/BatchExportModal';
 import { AdSenseSlot } from '../components/AdSenseSlot';
 import { ICONS, PROVIDERS, CATEGORIES } from '../data/icons';
 import { IconMeta, CloudProvider, IconCategory } from '../types/icon';
-import { Sparkles, Layers, Download, CheckCircle2, Shield, Share2, BookOpen } from 'lucide-react';
+import { Sparkles, Layers, Download, CheckCircle2, Shield, Share2, BookOpen, Image as ImageIcon } from 'lucide-react';
 
 export default function HomePage() {
   const [lang, setLang] = useState<'zh' | 'en'>('zh');
@@ -18,6 +19,7 @@ export default function HomePage() {
   const [selectedProvider, setSelectedProvider] = useState<CloudProvider | 'all'>('all');
   const [selectedCategory, setSelectedCategory] = useState<IconCategory | 'all'>('all');
   const [activeModalIcon, setActiveModalIcon] = useState<IconMeta | null>(null);
+  const [isBatchExportOpen, setIsBatchExportOpen] = useState<boolean>(false);
 
   // Initialize theme based on user preference
   useEffect(() => {
@@ -118,8 +120,8 @@ export default function HomePage() {
 
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
             {lang === 'zh'
-              ? '收录 AWS、Azure、阿里云、Kubernetes 及通用网络设备矢量图标。一键复制 SVG 源码直接粘贴进 Draw.io、Figma、PPT；独创跨云等价物映射，拓扑迁移一目了然。'
-              : 'Official AWS, Azure, GCP, Alibaba Cloud, and vendor-neutral network topology symbols. 1-click copy clean SVG to Draw.io, Figma or PPT with cross-cloud equivalence mapping.'}
+              ? '专为架构师打造：支持一键直接复制 PNG 图片（直接贴入 PPT/Word/微信无需下载）、一键复制 SVG 源码、厂商官方图标直接使用、中立设备统一自定义颜色批量打包下载！'
+              : 'Built for Architects: 1-click copy PNG directly to clipboard (paste to PPT/Word), 1-click copy SVG, direct vendor equivalents, and batch ZIP download with unified custom theme!'}
           </p>
         </div>
 
@@ -135,6 +137,7 @@ export default function HomePage() {
             lang={lang}
             totalCount={ICONS.length}
             filteredCount={filteredIcons.length}
+            onOpenBatchExport={() => setIsBatchExportOpen(true)}
           />
         </div>
 
@@ -225,6 +228,15 @@ export default function HomePage() {
         lang={lang}
         onClose={() => setActiveModalIcon(null)}
         onSelectIcon={(icon) => setActiveModalIcon(icon)}
+      />
+
+      {/* Modal for batch packaging and unified theme color export */}
+      <BatchExportModal
+        isOpen={isBatchExportOpen}
+        onClose={() => setIsBatchExportOpen(false)}
+        lang={lang}
+        allIcons={ICONS}
+        filteredIcons={filteredIcons}
       />
 
       <Footer lang={lang} />

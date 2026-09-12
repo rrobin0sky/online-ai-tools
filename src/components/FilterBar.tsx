@@ -15,6 +15,7 @@ interface FilterBarProps {
   lang: 'en' | 'zh';
   totalCount: number;
   filteredCount: number;
+  onOpenBatchExport: () => void;
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -27,6 +28,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   lang,
   totalCount,
   filteredCount,
+  onOpenBatchExport,
 }) => {
   return (
     <div className="w-full space-y-4">
@@ -118,16 +120,26 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         })}
       </div>
 
-      {/* Result stats */}
-      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 pt-1">
-        <span>
-          {lang === 'zh'
-            ? `共匹配到 ${filteredCount} 个架构图标`
-            : `Showing ${filteredCount} of ${totalCount} architecture icons`}
-        </span>
-        <span className="text-[11px] text-slate-400">
-          {lang === 'zh' ? '提示：点击卡片可查看跨云等价物与换色' : 'Tip: Click any icon for cross-cloud mapping'}
-        </span>
+      {/* Result stats and Batch Action */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 px-1 pt-1">
+        <div className="flex items-center gap-2">
+          <span className="font-medium text-slate-700 dark:text-slate-300">
+            {lang === 'zh'
+              ? `共匹配到 ${filteredCount} 个架构图标`
+              : `Showing ${filteredCount} of ${totalCount} architecture icons`}
+          </span>
+          <span className="text-[11px] text-slate-400 hidden md:inline">
+            {lang === 'zh' ? '(支持直接复制 SVG / PNG)' : '(Directly copy SVG & PNG)'}
+          </span>
+        </div>
+
+        <button
+          onClick={onOpenBatchExport}
+          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/80 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/80 font-semibold text-xs transition-all shadow-sm"
+        >
+          <span>📦</span>
+          <span>{lang === 'zh' ? '批量打包下载 (支持统一定制颜色)' : 'Batch Download (Custom Theme)'}</span>
+        </button>
       </div>
     </div>
   );
