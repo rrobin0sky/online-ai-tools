@@ -5,12 +5,10 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { IconCard } from '../components/IconCard';
 import { IconModal } from '../components/IconModal';
-import { BatchExportModal } from '../components/BatchExportModal';
 import { FloatingHudToast, HudToastState } from '../components/FloatingHudToast';
 import { AdSenseSlot } from '../components/AdSenseSlot';
 import { ICONS } from '../data/icons';
 import { IconMeta, IconCategory } from '../types/icon';
-import { downloadDrawioLibrary } from '../lib/drawio';
 import { Layers, BookOpen, CheckCircle2, Sparkles, FileCode2, Star } from 'lucide-react';
 
 export default function HomePage() {
@@ -19,9 +17,7 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<IconCategory | 'all'>('all');
   const [themeColor, setThemeColor] = useState<string>('#0284c7');
-  const [preserveAccents, setPreserveAccents] = useState<boolean>(true);
   const [activeModalIcon, setActiveModalIcon] = useState<IconMeta | null>(null);
-  const [isBatchExportOpen, setIsBatchExportOpen] = useState<boolean>(false);
   const [hudToast, setHudToast] = useState<HudToastState | null>(null);
 
   // Favorites state with localStorage persistence
@@ -100,23 +96,7 @@ export default function HomePage() {
     setHudToast({ show: true, title, subtitle, type });
     setTimeout(() => {
       setHudToast((prev) => (prev?.title === title ? null : prev));
-    }, 2200);
-  };
-
-  // Direct Draw.io stencil library export
-  const handleExportDrawio = () => {
-    downloadDrawioLibrary(filteredIcons, `ArchIcons-Topology.xml`, {
-      themeColor,
-      preserveAccents,
-      lang,
-    });
-    handleNotify(
-      lang === 'zh' ? '✓ Draw.io 图库文件已下载' : '✓ Draw.io Stencil Downloaded',
-      lang === 'zh'
-        ? `已导出 ${filteredIcons.length} 个图标，可直接拖入 Draw.io`
-        : `${filteredIcons.length} icons exported. Drag into Draw.io to use!`,
-      'download'
-    );
+    }, 2000);
   };
 
   // Filter & search logic
@@ -154,7 +134,7 @@ export default function HomePage() {
 
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-[#09090b] min-h-screen text-slate-900 dark:text-white transition-colors">
-      {/* Floating HUD Toast Notification */}
+      {/* Floating Apple HUD Toast Notification */}
       <FloatingHudToast toast={hudToast} />
 
       {/* Top Sticky Header with all search, filter, and utility buttons */}
@@ -169,17 +149,13 @@ export default function HomePage() {
         onCategoryChange={setSelectedCategory}
         themeColor={themeColor}
         onThemeColorChange={setThemeColor}
-        preserveAccents={preserveAccents}
-        onTogglePreserveAccents={setPreserveAccents}
         favoritesCount={favorites.length}
         showOnlyFavorites={showOnlyFavorites}
         onToggleShowOnlyFavorites={() => setShowOnlyFavorites((prev) => !prev)}
-        onOpenBatchExport={() => setIsBatchExportOpen(true)}
-        onExportDrawio={handleExportDrawio}
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16">
-        {/* Compact Status Bar: Count & Quick Action Links */}
+        {/* Compact Status Bar: Count only */}
         <div className="flex items-center justify-between py-2 mb-4 border-b border-slate-100 dark:border-zinc-800 text-xs text-slate-500 dark:text-zinc-400">
           <div className="flex items-center gap-2 font-medium">
             <span>
@@ -200,21 +176,6 @@ export default function HomePage() {
               </button>
             )}
           </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handleExportDrawio}
-              className="text-slate-600 dark:text-zinc-300 hover:text-black dark:hover:text-white font-semibold transition-colors hidden sm:inline"
-            >
-              {lang === 'zh' ? '📐 导出 Draw.io 图库' : '📐 Draw.io Library'}
-            </button>
-            <button
-              onClick={() => setIsBatchExportOpen(true)}
-              className="text-slate-600 dark:text-zinc-300 hover:text-black dark:hover:text-white font-semibold transition-colors"
-            >
-              {lang === 'zh' ? '📦 打包下载' : '📦 Batch Export'}
-            </button>
-          </div>
         </div>
 
         {/* Google AdSense / Sponsor Slot */}
@@ -229,7 +190,7 @@ export default function HomePage() {
                 icon={icon}
                 lang={lang}
                 themeColor={themeColor}
-                preserveAccents={preserveAccents}
+                preserveAccents={true}
                 isFavorite={favorites.includes(icon.id)}
                 onToggleFavorite={handleToggleFavorite}
                 onSelect={(selected) => setActiveModalIcon(selected)}
@@ -253,7 +214,7 @@ export default function HomePage() {
                 </p>
                 <button
                   onClick={() => setShowOnlyFavorites(false)}
-                  className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-black dark:bg-white text-white dark:text-black hover:opacity-90 transition-opacity"
+                  className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-black dark:bg-white text-white dark:text-black hover:opacity-90 active:scale-95 transition-all"
                 >
                   {lang === 'zh' ? '查看全部图标' : 'Browse all icons'}
                 </button>
@@ -274,7 +235,7 @@ export default function HomePage() {
                     setSearchQuery('');
                     setSelectedCategory('all');
                   }}
-                  className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-black dark:bg-white text-white dark:text-black hover:opacity-90 transition-opacity"
+                  className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-black dark:bg-white text-white dark:text-black hover:opacity-90 active:scale-95 transition-all"
                 >
                   {lang === 'zh' ? '重置所有筛选' : 'Reset all filters'}
                 </button>
@@ -322,16 +283,16 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* 3. Draw.io Stencil Library */}
+              {/* 3. Direct Draw.io Paste */}
               <div className="p-4 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60">
                 <h3 className="font-bold text-slate-900 dark:text-white text-sm mb-1.5 flex items-center gap-1.5">
                   <FileCode2 className="w-4 h-4 text-indigo-500" />
-                  {lang === 'zh' ? 'Draw.io 永久常驻图库' : 'Draw.io Library'}
+                  {lang === 'zh' ? '原生支持 Draw.io 矢量编辑' : 'Native Draw.io Vector'}
                 </h3>
                 <p>
                   {lang === 'zh'
-                    ? '点击右上角「导出 Draw.io 图库」，下载 XML 文件。在 Draw.io 中点击「文件 -> 打开图库 -> 从设备」，整套图标即可常驻左侧栏，随拖随用。'
-                    : 'Download the customized Draw.io library XML, open Draw.io -> "File -> Open Library from -> Device". All icons stay permanently in your sidebar!'}
+                    ? '在任意设备卡片点击「SVG」后，直接在 Draw.io 画板按下 Cmd+V / Ctrl+V，矢量图元立即呈现，支持无限缩放、无损旋转与解散编组。'
+                    : 'Click "SVG" on any device card and press Cmd+V directly in Draw.io. The vector graphic will appear instantly.'}
                 </p>
               </div>
             </div>
@@ -339,26 +300,13 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Modal for detail view */}
+      {/* Apple-style Focused Modal for detail view */}
       <IconModal
         icon={activeModalIcon}
         lang={lang}
         themeColor={themeColor}
-        preserveAccents={preserveAccents}
+        preserveAccents={true}
         onClose={() => setActiveModalIcon(null)}
-        onSelectIcon={(icon) => setActiveModalIcon(icon)}
-        onNotify={handleNotify}
-      />
-
-      {/* Modal for batch packaging */}
-      <BatchExportModal
-        isOpen={isBatchExportOpen}
-        onClose={() => setIsBatchExportOpen(false)}
-        lang={lang}
-        allIcons={ICONS}
-        filteredIcons={filteredIcons}
-        currentColor={themeColor}
-        preserveAccents={preserveAccents}
         onNotify={handleNotify}
       />
 

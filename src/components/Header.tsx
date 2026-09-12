@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, X, Star, Moon, Sun, Globe, ArrowLeft } from 'lucide-react';
 import { PalettePopover } from './PalettePopover';
@@ -18,13 +18,9 @@ interface HeaderProps {
   onCategoryChange?: (category: IconCategory | 'all') => void;
   themeColor?: string;
   onThemeColorChange?: (color: string) => void;
-  preserveAccents?: boolean;
-  onTogglePreserveAccents?: (preserve: boolean) => void;
   favoritesCount?: number;
   showOnlyFavorites?: boolean;
   onToggleShowOnlyFavorites?: () => void;
-  onOpenBatchExport?: () => void;
-  onExportDrawio?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -38,20 +34,33 @@ export const Header: React.FC<HeaderProps> = ({
   onCategoryChange,
   themeColor = '#0284c7',
   onThemeColorChange,
-  preserveAccents = true,
-  onTogglePreserveAccents,
   favoritesCount = 0,
   showOnlyFavorites = false,
   onToggleShowOnlyFavorites,
-  onOpenBatchExport,
-  onExportDrawio,
 }) => {
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Apple-style Keyboard Shortcut: ⌘K or / to focus search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      } else if (e.key === '/' && document.activeElement !== searchInputRef.current) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <header className="sticky top-0 z-40 w-full bg-white dark:bg-[#09090b] border-b border-slate-200 dark:border-zinc-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-4">
-        {/* 1. Left: Brand Logo & Concise English Subtitle */}
+        {/* 1. Left: Pure Brand Logo (Removed "Diagram assets" tag) */}
         <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group">
-          <div className="w-9 h-9 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black transition-transform group-hover:scale-105 shadow-xs">
+          <div className="w-9 h-9 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black transition-transform group-hover:scale-105 active:scale-95 shadow-xs">
             {/* Custom 30° Isometric Cube & Topology Node SVG */}
             <svg
               viewBox="0 0 32 32"
@@ -73,18 +82,13 @@ export const Header: React.FC<HeaderProps> = ({
             </svg>
           </div>
           <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white">
-                ArchIcons
-              </span>
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-600 dark:text-zinc-300">
-                Diagram Assets
-              </span>
-            </div>
+            <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white">
+              ArchIcons
+            </span>
           </div>
         </Link>
 
-        {/* 2. Middle: Integrated Search Box with Category Dropdown (if onSearchChange is passed) */}
+        {/* 2. Middle: Integrated Search Box with Category Dropdown & ⌘K shortcut */}
         {onSearchChange ? (
           <div className="flex-1 max-w-xl hidden md:flex items-center">
             <div className="relative flex items-center w-full rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50/70 dark:bg-zinc-900/80 focus-within:border-slate-900 dark:focus-within:border-white focus-within:bg-white dark:focus-within:bg-zinc-900 transition-all">
@@ -113,19 +117,20 @@ export const Header: React.FC<HeaderProps> = ({
 
               {/* Search Input */}
               <input
+                ref={searchInputRef}
                 type="text"
                 value={searchQuery || ''}
                 onChange={(e) => onSearchChange(e.target.value)}
                 placeholder={
                   lang === 'zh'
-                    ? '搜索交换机、防火墙、服务器、VPC、WAF...'
-                    : 'Search Switch, Firewall, Server, VPC, WAF...'
+                    ? '搜索核心交换机、防火墙、服务器、VPC...'
+                    : 'Search Core Switch, Firewall, Server, VPC...'
                 }
-                className="w-full pl-2 pr-8 py-2 text-xs sm:text-sm bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none font-medium"
+                className="w-full pl-2 pr-12 py-2 text-xs sm:text-sm bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none font-medium"
               />
 
-              {/* Clear Button */}
-              {searchQuery && (
+              {/* Apple-style ⌘K badge or Clear button */}
+              {searchQuery ? (
                 <button
                   type="button"
                   onClick={() => onSearchChange('')}
@@ -133,6 +138,10 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
+              ) : (
+                <span className="absolute right-2.5 px-1.5 py-0.5 rounded border border-slate-200 dark:border-zinc-700 text-[10px] font-mono font-semibold text-slate-400 dark:text-zinc-500 pointer-events-none">
+                  ⌘K
+                </span>
               )}
             </div>
           </div>
@@ -150,16 +159,12 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* 3. Right: 4 Utility Buttons (Palette, Lang, Dark/Light, Favorites) */}
         <div className="flex items-center gap-1.5 sm:gap-2">
-          {/* Button 1: Palette Popover (if onThemeColorChange passed) */}
-          {onThemeColorChange && onTogglePreserveAccents && (
+          {/* Button 1: Palette Popover */}
+          {onThemeColorChange && (
             <PalettePopover
               currentColor={themeColor}
               onColorChange={onThemeColorChange}
-              preserveAccents={preserveAccents}
-              onTogglePreserveAccents={onTogglePreserveAccents}
               lang={lang}
-              onOpenBatchExport={onOpenBatchExport}
-              onExportDrawio={onExportDrawio}
             />
           )}
 
@@ -167,7 +172,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onToggleLang}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
             title={lang === 'zh' ? '切换语言 (Switch to English)' : 'Switch Language (切换中文)'}
           >
             <Globe className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" />
@@ -178,7 +183,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onToggleDarkMode}
-            className="p-2 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
+            className="p-2 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
             title={darkMode ? (lang === 'zh' ? '切换为亮色模式' : 'Light Mode') : (lang === 'zh' ? '切换为暗色模式' : 'Dark Mode')}
           >
             {darkMode ? (
@@ -188,12 +193,12 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </button>
 
-          {/* Button 4: Favorites Filter Button (if onToggleShowOnlyFavorites passed) */}
+          {/* Button 4: Favorites Filter Button */}
           {onToggleShowOnlyFavorites && (
             <button
               type="button"
               onClick={onToggleShowOnlyFavorites}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-bold active:scale-95 transition-all ${
                 showOnlyFavorites
                   ? 'border-amber-500 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
                   : 'border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800'
@@ -224,7 +229,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Mobile Search Bar (Only shown on small screens below md if onSearchChange is passed) */}
+      {/* Mobile Search Bar */}
       {onSearchChange && (
         <div className="md:hidden px-4 pb-3 pt-1">
           <div className="relative flex items-center w-full rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900">

@@ -35,7 +35,6 @@ export const IconCard: React.FC<IconCardProps> = ({
   // Clean name without redundant "2.5D" prefix
   const cleanName = (name: string) => name.replace(/^2\.5D\s*/i, '').trim();
   const displayName = cleanName(icon.name[lang]);
-  const subName = icon.code || cleanName(icon.name[lang === 'zh' ? 'en' : 'zh']);
 
   const handleCopySvg = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -94,7 +93,7 @@ export const IconCard: React.FC<IconCardProps> = ({
   return (
     <div
       onClick={() => onSelect(icon)}
-      className="group relative flex flex-col justify-between p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#09090b] hover:border-slate-900 dark:hover:border-zinc-500 hover:shadow-lg transition-all duration-200 cursor-pointer"
+      className="group relative flex flex-col justify-between p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#09090b] hover:border-slate-900 dark:hover:border-zinc-500 hover:shadow-lg transition-all duration-200 cursor-pointer active:scale-[0.98]"
     >
       {/* Top row: Favorite Star button */}
       <div className="flex items-center justify-between h-5">
@@ -133,17 +132,14 @@ export const IconCard: React.FC<IconCardProps> = ({
         />
       </div>
 
-      {/* Clean Title & Code */}
-      <div className="text-center my-1">
+      {/* Clean Title */}
+      <div className="text-center my-1.5">
         <h3
           className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate"
           title={displayName}
         >
           {displayName}
         </h3>
-        <p className="text-[11px] font-medium text-slate-400 dark:text-zinc-400 truncate mt-0.5">
-          {subName}
-        </p>
       </div>
 
       {/* Dual Copy Action Buttons: Minimal and high-contrast */}
