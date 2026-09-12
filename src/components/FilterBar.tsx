@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, X, Filter } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { CloudProvider, IconCategory } from '../types/icon';
 import { PROVIDERS, CATEGORIES } from '../data/icons';
 
@@ -34,7 +34,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     <div className="w-full space-y-4">
       {/* Search Input Bar */}
       <div className="relative w-full max-w-2xl mx-auto">
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 dark:text-slate-400">
           <Search className="w-5 h-5" />
         </div>
         <input
@@ -43,15 +43,15 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={
             lang === 'zh'
-              ? '实时毫秒搜索：输入服务名/拼音/缩写（如 S3, EC2, 防火墙, Router, LB, 数据库）...'
-              : 'Instant search: service name, acronym, category (e.g. S3, EC2, Firewall, Router, LB, Cache)...'
+              ? '搜索图标：输入服务名/拼音/缩写（如 S3, EC2, 防火墙, AP, 机柜, 24口, POE）...'
+              : 'Search icons: name, acronym, category (e.g. S3, EC2, Firewall, AP, Rack, 24P, PoE)...'
           }
-          className="w-full pl-11 pr-10 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm text-sm sm:text-base backdrop-blur-md transition-all"
+          className="w-full pl-11 pr-10 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm sm:text-base transition-all font-medium"
         />
         {searchQuery && (
           <button
             onClick={() => onSearchChange('')}
-            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
           >
             <X className="w-4 h-4" />
           </button>
@@ -62,10 +62,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none justify-start md:justify-center">
         <button
           onClick={() => onProviderChange('all')}
-          className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+          className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all border ${
             selectedProvider === 'all'
-              ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/20'
-              : 'bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
+              ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
+              : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400'
           }`}
         >
           {lang === 'zh' ? '全部厂商' : 'All Providers'} ({totalCount})
@@ -77,10 +77,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             <button
               key={p.id}
               onClick={() => onProviderChange(p.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap border transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap border transition-all ${
                 isSelected
-                  ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-slate-900 dark:border-white shadow-sm'
-                  : 'bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white border-slate-900 dark:border-blue-600 shadow-md'
+                  : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400'
               }`}
             >
               {p.name[lang]}
@@ -93,10 +93,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none justify-start md:justify-center text-xs">
         <button
           onClick={() => onCategoryChange('all')}
-          className={`px-3 py-1 rounded-lg font-medium whitespace-nowrap transition-colors ${
+          className={`px-3 py-1 rounded-lg font-bold whitespace-nowrap transition-colors ${
             selectedCategory === 'all'
-              ? 'bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold'
-              : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900'
+              : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-slate-800'
           }`}
         >
           {lang === 'zh' ? '全部分类' : 'All Categories'}
@@ -108,10 +108,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             <button
               key={c.id}
               onClick={() => onCategoryChange(c.id)}
-              className={`px-3 py-1 rounded-lg font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 py-1 rounded-lg font-bold whitespace-nowrap transition-colors ${
                 isSelected
-                  ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-semibold'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  ? 'bg-blue-600 text-white dark:bg-blue-600 dark:text-white shadow-sm'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-slate-800'
               }`}
             >
               {c.name[lang]}
@@ -121,9 +121,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       </div>
 
       {/* Result stats and Batch Action */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 px-1 pt-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-300 px-1 pt-1">
         <div className="flex items-center gap-2">
-          <span className="font-medium text-slate-700 dark:text-slate-300">
+          <span className="font-bold text-slate-900 dark:text-slate-100">
             {lang === 'zh'
               ? `共 ${filteredCount} 个图标`
               : `${filteredCount} icons`}
@@ -132,7 +132,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
         <button
           onClick={onOpenBatchExport}
-          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/80 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/80 font-semibold text-xs transition-all shadow-sm"
+          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-300 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/80 font-bold text-xs transition-all shadow-sm"
         >
           <span>📦</span>
           <span>{lang === 'zh' ? '打包下载 (ZIP)' : 'Batch Export (ZIP)'}</span>

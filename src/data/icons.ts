@@ -5,37 +5,37 @@ export const PROVIDERS: ProviderMeta[] = [
     id: 'generic',
     name: { en: 'Vendor-Neutral', zh: '通用设备/中立' },
     color: '#0ea5e9',
-    badgeBg: 'bg-sky-50 text-sky-700 dark:bg-sky-950/40 dark:text-sky-300 border-sky-200 dark:border-sky-800',
+    badgeBg: 'bg-sky-100 text-sky-950 border-sky-300 dark:bg-sky-500/20 dark:text-sky-200 dark:border-sky-500/40 font-bold',
   },
   {
     id: 'aws',
     name: { en: 'AWS', zh: '亚马逊云 AWS' },
     color: '#ff9900',
-    badgeBg: 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border-amber-200 dark:border-amber-800',
+    badgeBg: 'bg-amber-100 text-amber-950 border-amber-300 dark:bg-amber-500/20 dark:text-amber-200 dark:border-amber-500/40 font-bold',
   },
   {
     id: 'azure',
     name: { en: 'Azure', zh: '微软 Azure' },
     color: '#0089d6',
-    badgeBg: 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border-blue-200 dark:border-blue-800',
+    badgeBg: 'bg-blue-100 text-blue-950 border-blue-300 dark:bg-blue-500/20 dark:text-blue-200 dark:border-blue-500/40 font-bold',
   },
   {
     id: 'gcp',
     name: { en: 'Google Cloud', zh: '谷歌云 GCP' },
     color: '#ea4335',
-    badgeBg: 'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border-rose-200 dark:border-rose-800',
+    badgeBg: 'bg-rose-100 text-rose-950 border-rose-300 dark:bg-rose-500/20 dark:text-rose-200 dark:border-rose-500/40 font-bold',
   },
   {
     id: 'aliyun',
     name: { en: 'Alibaba Cloud', zh: '阿里云' },
     color: '#ff6a00',
-    badgeBg: 'bg-orange-50 text-orange-700 dark:bg-orange-950/40 dark:text-orange-300 border-orange-200 dark:border-orange-800',
+    badgeBg: 'bg-orange-100 text-orange-950 border-orange-300 dark:bg-orange-500/20 dark:text-orange-200 dark:border-orange-500/40 font-bold',
   },
   {
     id: 'k8s',
     name: { en: 'Kubernetes', zh: 'K8s / 云原生' },
     color: '#326ce5',
-    badgeBg: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800',
+    badgeBg: 'bg-indigo-100 text-indigo-950 border-indigo-300 dark:bg-indigo-500/20 dark:text-indigo-200 dark:border-indigo-500/40 font-bold',
   },
 ];
 

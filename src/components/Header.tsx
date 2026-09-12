@@ -34,22 +34,22 @@ export const Header: React.FC<HeaderProps> = ({
                 Toolbox
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
+            <p className="text-xs text-slate-600 dark:text-slate-300 font-medium hidden sm:block">
               {lang === 'zh' ? '多云与通用架构拓扑图标库' : 'Cloud & Generic Topology Icons'}
             </p>
           </div>
         </Link>
 
-        {/* Navigation links */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
-          <Link href="/" className="text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1.5">
+        {/* Navigation links with high contrast */}
+        <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700 dark:text-slate-200">
+          <Link href="/" className="text-blue-600 dark:text-blue-400 font-bold flex items-center gap-1.5">
             <Sparkles className="w-4 h-4" />
             {lang === 'zh' ? '图标库' : 'Icon Library'}
           </Link>
-          <Link href="/about" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+          <Link href="/about" className="hover:text-blue-600 dark:hover:text-white transition-colors">
             {lang === 'zh' ? '使用指南 & 关于' : 'Guide & About'}
           </Link>
-          <Link href="/privacy" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+          <Link href="/privacy" className="hover:text-blue-600 dark:hover:text-white transition-colors">
             {lang === 'zh' ? '隐私政策' : 'Privacy'}
           </Link>
         </nav>
@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Language Switcher */}
           <button
             onClick={onToggleLang}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             title="Switch Language"
           >
             <Globe className="w-3.5 h-3.5 text-blue-500" />

@@ -66,8 +66,9 @@ export const IconModal: React.FC<IconModalProps> = ({
 
   const handleCopyPng = async (targetIcon = icon, size = 256, isEquivalent = false) => {
     const finalSvg = getProcessedSvg(targetIcon);
-    const ok = await copyPngToClipboard(finalSvg, size);
-    if (ok) {
+    const color = targetIcon.isTintable ? customColor : undefined;
+    const res = await copyPngToClipboard(finalSvg, size, color);
+    if (res.success) {
       if (isEquivalent) {
         setEqCopiedId(`${targetIcon.id}-png`);
         setTimeout(() => setEqCopiedId(null), 1800);
@@ -76,7 +77,14 @@ export const IconModal: React.FC<IconModalProps> = ({
         setTimeout(() => setCopiedType(null), 1800);
       }
     } else {
-      handleDownloadPng(size, targetIcon);
+      await handleDownloadPng(size, targetIcon);
+      if (isEquivalent) {
+        setEqCopiedId(`${targetIcon.id}-png`);
+        setTimeout(() => setEqCopiedId(null), 1800);
+      } else {
+        setCopiedType('png');
+        setTimeout(() => setCopiedType(null), 1800);
+      }
     }
   };
 
@@ -140,15 +148,15 @@ export const IconModal: React.FC<IconModalProps> = ({
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">
               {icon.name[lang]}
             </h2>
-            <p className="text-xs text-slate-400 dark:text-slate-500">
+            <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">
               {icon.name[lang === 'zh' ? 'en' : 'zh']}
             </p>
           </div>
         </div>
 
-        {/* Description */}
+        {/* Description with high contrast */}
         {icon.description && (
-          <p className="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+          <p className="mt-4 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-100 dark:bg-slate-800/80 p-3 rounded-xl border border-slate-200 dark:border-slate-700 font-medium">
             {icon.description[lang]}
           </p>
         )}
@@ -263,7 +271,7 @@ export const IconModal: React.FC<IconModalProps> = ({
                 </h4>
               </div>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+            <p className="text-xs font-semibold text-slate-600 dark:text-slate-300 mb-3">
               {lang === 'zh'
                 ? '以下为各厂商官方标准图标或中立替代品，同样支持一键直接复制使用：'
                 : 'Official vendor and neutral equivalents. Copy PNG or SVG directly for each:'}
@@ -278,7 +286,7 @@ export const IconModal: React.FC<IconModalProps> = ({
                 return (
                   <div
                     key={eq.id}
-                    className="flex items-center justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 bg-slate-50/60 dark:bg-slate-800/40 transition-all"
+                    className="flex items-center justify-between p-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 bg-white dark:bg-slate-800 shadow-sm transition-all"
                   >
                     <div
                       onClick={() => onSelectIcon(eq)}
@@ -289,23 +297,23 @@ export const IconModal: React.FC<IconModalProps> = ({
                         dangerouslySetInnerHTML={{ __html: eq.svgRaw }}
                       />
                       <div className="min-w-0">
-                        <div className="text-xs font-semibold text-slate-800 dark:text-slate-100 truncate hover:text-blue-600 transition-colors">
+                        <div className="text-xs font-bold text-slate-900 dark:text-white truncate hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                           {eq.name[lang]}
                         </div>
-                        <div className="text-[10px] text-slate-400 truncate">
+                        <div className="text-[11px] font-medium text-slate-600 dark:text-slate-300 truncate">
                           {eqProvider?.name[lang]}
                         </div>
                       </div>
                     </div>
 
-                    {/* Quick Copy Buttons for Equivalent Icons */}
-                    <div className="flex items-center gap-1 shrink-0">
+                    {/* Quick Copy Buttons for Equivalent Icons with high contrast */}
+                    <div className="flex items-center gap-1.5 shrink-0">
                       <button
                         onClick={() => handleCopySvg(eq, true)}
-                        className={`px-2 py-1 rounded text-[11px] font-semibold border transition-all ${
+                        className={`px-2 py-1 rounded-lg text-[11px] font-bold border transition-all ${
                           isSvgCopied
-                            ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
-                            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600'
+                            ? 'bg-emerald-600 text-white border-emerald-600'
+                            : 'bg-slate-100 dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-600'
                         }`}
                         title="复制该厂商官方 SVG"
                       >
@@ -313,10 +321,10 @@ export const IconModal: React.FC<IconModalProps> = ({
                       </button>
                       <button
                         onClick={() => handleCopyPng(eq, 256, true)}
-                        className={`px-2 py-1 rounded text-[11px] font-semibold border transition-all ${
+                        className={`px-2 py-1 rounded-lg text-[11px] font-bold border transition-all ${
                           isPngCopied
-                            ? 'bg-blue-50 text-blue-600 border-blue-300'
-                            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600'
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-blue-50 dark:bg-blue-950 border-blue-300 dark:border-blue-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900'
                         }`}
                         title="直接复制该厂商官方 PNG"
                       >

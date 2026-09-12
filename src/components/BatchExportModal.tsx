@@ -116,42 +116,42 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
             <div className="grid grid-cols-3 gap-2 text-xs">
               <button
                 onClick={() => setScope('neutral')}
-                className={`p-2.5 rounded-xl border text-center font-medium transition-all ${
+                className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
                   scope === 'neutral'
-                    ? 'border-blue-500 bg-blue-50/60 dark:bg-blue-950/40 text-blue-600 dark:text-blue-300 font-bold'
-                    : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-sm'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
                 {lang === 'zh' ? '全套中立设备' : 'Neutral Set'}
-                <span className="block text-[10px] text-slate-400 mt-0.5">
+                <span className="block text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 font-medium">
                   ({allIcons.filter((i) => i.provider === 'generic').length} 项)
                 </span>
               </button>
 
               <button
                 onClick={() => setScope('filtered')}
-                className={`p-2.5 rounded-xl border text-center font-medium transition-all ${
+                className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
                   scope === 'filtered'
-                    ? 'border-blue-500 bg-blue-50/60 dark:bg-blue-950/40 text-blue-600 dark:text-blue-300 font-bold'
-                    : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-sm'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
                 {lang === 'zh' ? '当前筛选结果' : 'Filtered Set'}
-                <span className="block text-[10px] text-slate-400 mt-0.5">
+                <span className="block text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 font-medium">
                   ({filteredIcons.length} 项)
                 </span>
               </button>
 
               <button
                 onClick={() => setScope('all')}
-                className={`p-2.5 rounded-xl border text-center font-medium transition-all ${
+                className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
                   scope === 'all'
-                    ? 'border-blue-500 bg-blue-50/60 dark:bg-blue-950/40 text-blue-600 dark:text-blue-300 font-bold'
-                    : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-sm'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
                 {lang === 'zh' ? '全站所有图标' : 'All Icons'}
-                <span className="block text-[10px] text-slate-400 mt-0.5">
+                <span className="block text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 font-medium">
                   ({allIcons.length} 项)
                 </span>
               </button>
