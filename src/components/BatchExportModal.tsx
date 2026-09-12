@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Download, Archive, Palette, Check, Sparkles, Layers, FileBox } from 'lucide-react';
 import { IconMeta } from '../types/icon';
 import { generateIconsZip } from '../lib/zip';
 import { downloadDrawioLibrary } from '../lib/drawio';
+import { PRESET_THEMES } from '../lib/colorEngine';
 
 interface BatchExportModalProps {
   isOpen: boolean;
@@ -12,19 +13,10 @@ interface BatchExportModalProps {
   lang: 'en' | 'zh';
   allIcons: IconMeta[];
   filteredIcons: IconMeta[];
+  currentColor?: string;
+  preserveAccents?: boolean;
   onNotify?: (title: string, subtitle?: string, type?: 'copy' | 'download' | 'code' | 'success') => void;
 }
-
-const PRESET_THEMES = [
-  { name: { zh: '电信企业蓝', en: 'Telecom Blue' }, color: '#0284c7' },
-  { name: { zh: '商务科技蓝', en: 'Corporate Blue' }, color: '#2563eb' },
-  { name: { zh: '暗夜极客青', en: 'Cyber Cyan' }, color: '#06b6d4' },
-  { name: { zh: '高雅莫兰迪灰', en: 'Morandi Slate' }, color: '#475569' },
-  { name: { zh: '金融安全绿', en: 'Fintech Forest' }, color: '#059669' },
-  { name: { zh: '关键任务红', en: 'Mission Red' }, color: '#dc2626' },
-  { name: { zh: '沉稳幽紫', en: 'Deep Violet' }, color: '#7c3aed' },
-  { name: { zh: '预警琥珀', en: 'Amber Warning' }, color: '#d97706' },
-];
 
 export const BatchExportModal: React.FC<BatchExportModalProps> = ({
   isOpen,
@@ -32,20 +24,31 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
   lang,
   allIcons,
   filteredIcons,
+  currentColor = '#0284c7',
+  preserveAccents = true,
   onNotify,
 }) => {
   if (!isOpen) return null;
 
-  const [scope, setScope] = useState<'neutral' | 'filtered' | 'all'>('neutral');
-  const [selectedColor, setSelectedColor] = useState<string>('#0284c7');
+  const [scope, setScope] = useState<'all' | 'physical' | 'cloud' | 'filtered'>('all');
+  const [selectedColor, setSelectedColor] = useState<string>(currentColor);
   const [format, setFormat] = useState<'both' | 'drawio' | 'svg' | 'png'>('both');
   const [isPackaging, setIsPackaging] = useState<boolean>(false);
   const [progress, setProgress] = useState<{ current: number; total: number } | null>(null);
 
+  useEffect(() => {
+    if (currentColor) {
+      setSelectedColor(currentColor);
+    }
+  }, [currentColor]);
+
   // Compute icons to export
   const exportList = React.useMemo(() => {
-    if (scope === 'neutral') {
-      return allIcons.filter((i) => i.provider === 'generic');
+    if (scope === 'physical') {
+      return allIcons.filter((i) => i.deviceType === 'physical' || i.provider === 'physical');
+    }
+    if (scope === 'cloud') {
+      return allIcons.filter((i) => i.deviceType === 'cloud' || i.provider === 'cloud');
     }
     if (scope === 'filtered') {
       return filteredIcons;
@@ -56,14 +59,15 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
   const handleStartDownload = async () => {
     if (format === 'drawio') {
       // Direct instant download of Draw.io library XML
-      downloadDrawioLibrary(exportList, `ArchIcons-${scope}-theme.xml`, {
+      downloadDrawioLibrary(exportList, `ArchIcons-2.5D-${scope}.xml`, {
         themeColor: selectedColor,
+        preserveAccents,
         lang,
       });
       if (onNotify) {
         onNotify(
           lang === 'zh' ? '✓ Draw.io 图库已生成下载' : '✓ Draw.io Library Exported',
-          `ArchIcons-${scope}-theme.xml (${exportList.length} 个图标)`,
+          `ArchIcons-2.5D-${scope}.xml (${exportList.length} 个图标)`,
           'download'
         );
       }
@@ -78,6 +82,7 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
       const zipBlob = await generateIconsZip({
         icons: exportList,
         themeColor: selectedColor,
+        preserveAccents,
         format: format === 'both' ? 'both' : (format as 'svg' | 'png'),
         onProgress: (current, total) => {
           setProgress({ current, total });
@@ -88,7 +93,7 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
       const url = URL.createObjectURL(zipBlob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `archicons-${scope}-${format}.zip`;
+      a.download = `archicons-2.5d-${scope}-${format}.zip`;
       a.click();
       URL.revokeObjectURL(url);
 
@@ -97,7 +102,7 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
       if (onNotify) {
         onNotify(
           lang === 'zh' ? '✓ 图标包已打包完成' : '✓ Package Download Ready',
-          `archicons-${scope}-${format}.zip (${exportList.length} 项)`,
+          `archicons-2.5d-${scope}-${format}.zip (${exportList.length} 项)`,
           'download'
         );
       }
@@ -144,18 +149,46 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
               {lang === 'zh' ? '1. 选择打包范围' : '1. Select Package Scope'}
             </label>
-            <div className="grid grid-cols-3 gap-2 text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
               <button
-                onClick={() => setScope('neutral')}
+                onClick={() => setScope('all')}
                 className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
-                  scope === 'neutral'
+                  scope === 'all'
                     ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
                     : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
-                {lang === 'zh' ? '全套中立设备' : 'Neutral Set'}
+                {lang === 'zh' ? '全部 2.5D' : 'All 2.5D'}
                 <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
-                  ({allIcons.filter((i) => i.provider === 'generic').length} 项)
+                  ({allIcons.length} 项)
+                </span>
+              </button>
+
+              <button
+                onClick={() => setScope('physical')}
+                className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
+                  scope === 'physical'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                {lang === 'zh' ? '物理设备' : 'Physical'}
+                <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+                  ({allIcons.filter((i) => i.deviceType === 'physical' || i.provider === 'physical').length} 项)
+                </span>
+              </button>
+
+              <button
+                onClick={() => setScope('cloud')}
+                className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
+                  scope === 'cloud'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                {lang === 'zh' ? '云上设备' : 'Cloud'}
+                <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+                  ({allIcons.filter((i) => i.deviceType === 'cloud' || i.provider === 'cloud').length} 项)
                 </span>
               </button>
 
@@ -167,23 +200,9 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
                     : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
-                {lang === 'zh' ? '当前筛选结果' : 'Filtered Set'}
+                {lang === 'zh' ? '筛选结果' : 'Filtered'}
                 <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                   ({filteredIcons.length} 项)
-                </span>
-              </button>
-
-              <button
-                onClick={() => setScope('all')}
-                className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
-                  scope === 'all'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
-                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                {lang === 'zh' ? '全站所有图标' : 'All Icons'}
-                <span className="block text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
-                  ({allIcons.length} 项)
                 </span>
               </button>
             </div>
@@ -198,97 +217,109 @@ export const BatchExportModal: React.FC<BatchExportModalProps> = ({
               </label>
               <span className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400">{selectedColor}</span>
             </div>
-            <div className="flex items-center gap-2 flex-wrap mb-2">
+
+            {/* Presets */}
+            <div className="flex items-center gap-2 flex-wrap mb-3">
               {PRESET_THEMES.map((theme) => (
                 <button
-                  key={theme.color}
+                  key={theme.id}
                   onClick={() => setSelectedColor(theme.color)}
                   style={{ backgroundColor: theme.color }}
-                  className={`w-7 h-7 rounded-full transition-transform ${
+                  className={`w-7 h-7 rounded-full transition-all ${
                     selectedColor.toLowerCase() === theme.color.toLowerCase()
                       ? 'scale-110 ring-2 ring-offset-2 ring-blue-500 shadow-md'
-                      : 'hover:scale-105 opacity-85 hover:opacity-100'
+                      : 'hover:scale-105 opacity-80 hover:opacity-100'
                   }`}
                   title={theme.name[lang]}
                 />
               ))}
+              {/* Custom input */}
               <input
                 type="color"
                 value={selectedColor}
                 onChange={(e) => setSelectedColor(e.target.value)}
-                className="w-7 h-7 rounded-full cursor-pointer border-0 bg-transparent"
-                title="Custom hex color"
+                className="w-7 h-7 rounded-full cursor-pointer border-0 p-0 bg-transparent hover:scale-105 transition-transform"
+                title={lang === 'zh' ? '自定义拾色' : 'Pick custom color'}
               />
             </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
-              {lang === 'zh'
-                ? '* 此主题色将批量注入到所有通用中立设备；原厂官方图标严格保持官方品牌色。'
-                : '* Injected into neutral devices; official vendor logos preserve original colors.'}
-            </p>
           </div>
 
-          {/* 3. Export Format */}
+          {/* 3. Format Selection */}
           <div>
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-              {lang === 'zh' ? '3. 导出格式 (含 Draw.io 原生库)' : '3. Export Format (inc. Draw.io)'}
+              {lang === 'zh' ? '3. 导出交付格式' : '3. Export Delivery Format'}
             </label>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              {[
-                { id: 'both', label: lang === 'zh' ? '完整包 (SVG+PNG+Draw.io)' : 'Full Pack (All)', icon: '📦' },
-                { id: 'drawio', label: lang === 'zh' ? 'Draw.io 库 (.xml)' : 'Draw.io Library (.xml)', icon: '📐' },
-                { id: 'svg', label: lang === 'zh' ? '纯 SVG 矢量包' : 'SVG Vector Only', icon: '⚡' },
-                { id: 'png', label: lang === 'zh' ? '高清 PNG 图包' : 'PNG Images', icon: '🖼️' },
-              ].map((f) => (
-                <button
-                  key={f.id}
-                  onClick={() => setFormat(f.id as any)}
-                  className={`p-2.5 rounded-xl border text-left font-bold transition-all flex items-center gap-2 ${
-                    format === f.id
-                      ? 'border-blue-500 bg-blue-50/70 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 shadow-xs'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  <span className="text-base">{f.icon}</span>
-                  <span className="text-xs truncate">{f.label}</span>
-                </button>
-              ))}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <button
+                onClick={() => setFormat('both')}
+                className={`p-2.5 rounded-xl border font-bold transition-all text-center ${
+                  format === 'both'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                SVG + PNG
+              </button>
+              <button
+                onClick={() => setFormat('drawio')}
+                className={`p-2.5 rounded-xl border font-bold transition-all text-center ${
+                  format === 'drawio'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                Draw.io (.xml)
+              </button>
+              <button
+                onClick={() => setFormat('svg')}
+                className={`p-2.5 rounded-xl border font-bold transition-all text-center ${
+                  format === 'svg'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                仅 SVG (矢量)
+              </button>
+              <button
+                onClick={() => setFormat('png')}
+                className={`p-2.5 rounded-xl border font-bold transition-all text-center ${
+                  format === 'png'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 shadow-xs'
+                    : 'border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                仅 PNG (透明)
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Progress Bar or Action */}
-        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
-          {isPackaging && progress ? (
-            <div className="space-y-2 text-center py-2">
-              <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden">
-                <div
-                  className="bg-blue-600 h-2.5 rounded-full transition-all duration-150"
-                  style={{ width: `${(progress.current / progress.total) * 100}%` }}
-                />
-              </div>
-              <span className="text-xs text-slate-500 font-mono">
-                {lang === 'zh'
-                  ? `正在处理矢量文件 (${progress.current} / ${progress.total})...`
-                  : `Packaging icons (${progress.current} / ${progress.total})...`}
+        {/* Footer & Download trigger */}
+        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+          <div className="text-xs text-slate-500">
+            {progress && (
+              <span>
+                {lang === 'zh' ? '正在渲染并打包' : 'Rendering & Packing'} ({progress.current}/{progress.total})...
               </span>
-            </div>
-          ) : (
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onClose}
+              disabled={isPackaging}
+              className="px-4 py-2 text-xs font-bold rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              {lang === 'zh' ? '取消' : 'Cancel'}
+            </button>
             <button
               onClick={handleStartDownload}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md shadow-blue-500/20 transition-all active:scale-95"
+              disabled={isPackaging || exportList.length === 0}
+              className="px-5 py-2 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-md shadow-blue-500/20 flex items-center gap-1.5 disabled:opacity-50"
             >
-              <Download className="w-4 h-4" />
-              <span>
-                {format === 'drawio'
-                  ? (lang === 'zh'
-                      ? `一键导出 Draw.io 图库文件 (${exportList.length} 项)`
-                      : `Download Draw.io Stencil (.xml)`)
-                  : (lang === 'zh'
-                      ? `一键生成并下载 (${exportList.length} 个图标)`
-                      : `Download Package (${exportList.length} icons)`)}
-              </span>
+              <Download className="w-3.5 h-3.5" />
+              <span>{isPackaging ? (lang === 'zh' ? '打包中...' : 'Packaging...') : (lang === 'zh' ? '立即导出' : 'Export Now')}</span>
             </button>
-          )}
+          </div>
         </div>
       </div>
     </div>

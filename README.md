@@ -1,21 +1,25 @@
-# ArchIcons - 云厂商与通用架构拓扑图标库
+# ArchIcons - 网络售前工程师 2.5D 拓扑设备图标库
 
-> 面向网络工程师、系统架构师与方案专家的多云及中立架构矢量图标库。
+> 专为网络工程师、售前方案专家与系统架构师打造的 30° 等轴测 2.5D 矢量设备图标库。
 > 官方域名：[bin0sky.tech](https://bin0sky.tech)
 
 ---
 
 ## 🌟 核心特性
 
-- **多云覆盖**：收录 AWS、Azure、Google Cloud、阿里云、Kubernetes 等主流厂商官方架构服务图标。
-- **通用中立网络设备**：独家提供一套高质感、厂商中立的边界与网络设备图标（路由器、交换机、防火墙、负载均衡等），支持**在线无级换色**。
-- **跨云等价物映射 (Cross-Cloud Equivalence)**：独创多云服务对照关系（例如查看 AWS S3 即可一秒联想并获取 Azure Blob、阿里云 OSS 及通用对象存储图标）。
-- **极速交互**：
-  - **1-Click 复制 SVG 源码**：直接在 Draw.io、Figma、Excalidraw、PPT 中无损粘贴。
-  - **多尺寸 PNG 导出**：支持 128px / 256px / 512px 快速下载。
-  - **毫秒级本地搜索**：支持中文服务名、英文名、拼音、缩写（如 `EC2`, `S3`, `RDS`, `FW`, `LB`）。
-- **零成本全球极速部署**：纯静态输出（SSG），一键托管在 Cloudflare Pages 或 GitHub Pages，全球 Anycast CDN 秒级响应。
-- **商业化合规**：内置完整隐私政策、服务条款、商标免责声明与自适应 Google 广告位插槽。
+- **精选常用网络设备**：精选最常用的 **12 款物理网络设备**（框式核心交换机、1U汇聚交换机、三层路由器、下一代防火墙NGFW、WAF网关、运维堡垒机、机架服务器、SAN存储、无线AP、42U机柜等）与 **10 款云上/虚拟化设备**（VPC底座、云服务器ECS、云SLB、云RDS、对象存储OSS、云安全组、VPN网关、K8s Pod等）。
+- **统一 30° 等轴测 2.5D 规范**：告别传统拓扑拼凑杂乱、角度不一的痛点，全部遵循标准等轴测立体视角与机架模数。
+- **全局动态光影调色盘**：
+  - 支持一键切换**商务科技蓝、华为/信创红、暗夜极客青、极简石墨灰、金融安全绿、高可用紫**等售前场景预设，支持自由 Hex 拾色。
+  - **自动光影算法**：基于基准色实时动态计算顶面高光（Top Face）、侧面基色（Left Face）、阴影暗面（Right Face）与底座投影，确保任何颜色下立体感十足。
+  - **语义点睛色开关**：支持一键开启/关闭指示灯点睛（端口绿灯、告警黄灯、网络青光），或一键导出 100% 极简纯单色。
+- **专为方案交付优化的极速交互**：
+  - **1-Click 复制 SVG 源码**：直接在 PowerPoint (PPT)、Figma、Draw.io 中 `Ctrl+V` (Cmd+V) 原生矢量粘贴，支持在 PPT 中任意缩放或解散组合。
+  - **1-Click 复制透明 PNG**：透明背景高清图片直接存入剪贴板，秒贴 Word 技术标书、竞标方案或微信。
+  - **一键打包下载当前配色 ZIP**：自动批量打包生成当前所选主题色下的全套 SVG / PNG 资源。
+  - **Draw.io 库 (.xml) 一键导出**：生成的图库文件可直接导入 Draw.io 永久常驻左侧栏。
+- **毫秒级本地搜索**：支持中文设备名、英文名、拼音、缩写（如 `CORE-SW`, `NGFW`, `WAF`, `SLB`, `RDS`, `VPC`, `AP`, `机柜`）。
+- **零成本全球极速部署**：纯静态输出（SSG），一键托管在 Cloudflare Pages，全球 Anycast CDN 秒级响应。
 
 ---
 
@@ -44,51 +48,15 @@ npm run build
 
 ---
 
-## 🌐 域名与 Cloudflare Pages 0 成本部署指南
+## 🌐 Cloudflare Pages 部署
 
-### 第一步：推送到 GitHub
-1. 在 GitHub 上新建一个仓库（如 `online-ai-tools`）。
-2. 将本地代码提交并推送到 GitHub 仓库。
-
-### 第二步：配置 Cloudflare Pages
-1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)。
-2. 进入 **Workers & Pages** -> **Create application** -> **Pages** -> **Connect to Git**。
-3. 选择你的 GitHub 仓库：
-   - **Framework preset**: `Next.js (Static HTML Export)`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `out`
-4. 点击 **Save and Deploy**，Cloudflare 将在 1 分钟内全球自动部署上线！
-
-### 第三步：绑定域名 `bin0sky.tech`
-1. 在 Cloudflare Pages 项目设置中点击 **Custom domains** -> **Set up a custom domain**。
-2. 输入你的域名 `bin0sky.tech`（或 `icons.bin0sky.tech`）。
-3. 按照 Cloudflare 提示，在域名注册商（如阿里云）控制台中将 Nameserver 改为 Cloudflare 提供的地址，或者添加一条 CNAME 解析记录。
-4. 解析生效后，即可全球 CDN 极速访问，自带终身免费 SSL 证书！
+本项目配置为静态输出 (`output: 'export'`)，配合 `wrangler.json`：
+1. 提交代码并推送到 GitHub `main` 分支。
+2. Cloudflare Pages 自动监听并执行 `npm run build`，部署至 `out/` 目录。
+3. 全球 CDN 实时生效，绑定域名 `bin0sky.tech`。
 
 ---
 
-## 🛠️ 如何添加新图标？
+## ⚖️ 免责与使用说明
 
-编辑 `src/data/icons.ts`，按照 `IconMeta` 结构追加新项即可：
-
-```typescript
-{
-  id: 'aws-database-dynamodb',
-  provider: 'aws',
-  category: 'database',
-  name: { en: 'Amazon DynamoDB', zh: 'Amazon DynamoDB 文档数据库' },
-  code: 'DynamoDB',
-  tags: ['nosql', 'dynamodb', 'key-value', 'database'],
-  equivalentGroup: 'db-nosql',
-  isTintable: false,
-  viewBox: '0 0 64 64',
-  svgRaw: `<svg>...</svg>`,
-  officialDocUrl: 'https://aws.amazon.com/dynamodb/'
-}
-```
-
----
-
-## ⚖️ 商标声明 (Trademark Disclaimer)
-
-AWS, Microsoft Azure, Google Cloud Platform, Alibaba Cloud, Kubernetes 及其他相关商标属于各自所有者。本项目为中立开源学习工具。
+本项目为中立开源学习工具。生成的 2.5D 网络设备图标可自由用于网络工程技术标书、汇报演示 PPT 及系统架构设计方案中。

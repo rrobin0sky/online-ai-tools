@@ -24,29 +24,34 @@ import {
   generateD2Snippet,
 } from '../lib/diagramsCode';
 import { downloadDrawioLibrary, generateSingleDrawioModelXml } from '../lib/drawio';
+import { applyThemeToSvg } from '../lib/colorEngine';
 
 interface IconModalProps {
   icon: IconMeta | null;
   lang: 'en' | 'zh';
+  themeColor?: string;
+  preserveAccents?: boolean;
   onClose: () => void;
   onSelectIcon: (icon: IconMeta) => void;
   onNotify?: (title: string, subtitle?: string, type?: 'copy' | 'download' | 'code' | 'success') => void;
 }
 
 const PRESET_COLORS = [
-  '#0ea5e9', // Sky Blue
+  '#0284c7', // Telecom Blue
+  '#dc2626', // Gov / Huawei Red
+  '#06b6d4', // Cyber Cyan
+  '#475569', // Slate Gray
+  '#059669', // Fintech Green
+  '#7c3aed', // High Availability Violet
   '#2563eb', // Corporate Blue
-  '#059669', // Emerald Green
-  '#dc2626', // Crimson Red
   '#d97706', // Amber
-  '#7c3aed', // Violet
-  '#334155', // Slate
-  '#0f172a', // Obsidian Dark
 ];
 
 export const IconModal: React.FC<IconModalProps> = ({
   icon,
   lang,
+  themeColor = '#0284c7',
+  preserveAccents = true,
   onClose,
   onSelectIcon,
   onNotify,
@@ -55,7 +60,7 @@ export const IconModal: React.FC<IconModalProps> = ({
 
   const [copiedType, setCopiedType] = useState<string | null>(null);
   const [eqCopiedId, setEqCopiedId] = useState<string | null>(null);
-  const [customColor, setCustomColor] = useState<string>(icon.defaultColor || '#0ea5e9');
+  const [customColor, setCustomColor] = useState<string>(themeColor);
   const [codeTab, setCodeTab] = useState<'mermaid' | 'plantuml' | 'd2'>('mermaid');
 
   const providerMeta = PROVIDERS.find((p) => p.id === icon.provider);
@@ -66,10 +71,7 @@ export const IconModal: React.FC<IconModalProps> = ({
     : [];
 
   const getProcessedSvg = (targetIcon = icon, color = customColor) => {
-    if (targetIcon.isTintable && color) {
-      return targetIcon.svgRaw.replace(/currentColor/g, color);
-    }
-    return targetIcon.svgRaw;
+    return applyThemeToSvg(targetIcon.svgRaw, color, preserveAccents);
   };
 
   const notify = (title: string, subtitle?: string, type: 'copy' | 'download' | 'code' | 'success' = 'copy') => {
@@ -209,9 +211,8 @@ export const IconModal: React.FC<IconModalProps> = ({
         <div className="flex items-start gap-4 pr-8">
           <div className="w-16 h-16 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 flex items-center justify-center p-2.5 shrink-0 shadow-sm">
             <div
-              className="w-11 h-11 flex items-center justify-center"
-              style={icon.isTintable ? { color: customColor } : undefined}
-              dangerouslySetInnerHTML={{ __html: icon.svgRaw }}
+              className="w-11 h-11 flex items-center justify-center drop-shadow-xs"
+              dangerouslySetInnerHTML={{ __html: getProcessedSvg(icon, customColor) }}
             />
           </div>
           <div>

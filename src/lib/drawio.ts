@@ -1,4 +1,5 @@
 import { IconMeta } from '../types/icon';
+import { applyThemeToSvg } from './colorEngine';
 
 /**
  * Utility for generating Draw.io (diagrams.net) custom libraries and shape snippets
@@ -6,6 +7,7 @@ import { IconMeta } from '../types/icon';
 
 interface DrawioLibraryOptions {
   themeColor?: string;
+  preserveAccents?: boolean;
   lang?: 'zh' | 'en';
   width?: number;
   height?: number;
@@ -24,13 +26,8 @@ function toBase64(str: string): string {
 /**
  * Prepares the processed SVG with active colors and dimensions
  */
-export function getCleanSvgForDrawio(icon: IconMeta, themeColor?: string): string {
-  let svg = icon.svgRaw.trim();
-  const color = icon.isTintable ? (themeColor || icon.defaultColor || '#0ea5e9') : undefined;
-
-  if (color) {
-    svg = svg.replace(/currentColor/g, color);
-  }
+export function getCleanSvgForDrawio(icon: IconMeta, themeColor = '#0284c7', preserveAccents = true): string {
+  let svg = applyThemeToSvg(icon.svgRaw, themeColor, preserveAccents).trim();
 
   // Ensure xmlns is present on root svg
   if (!/xmlns\s*=/.test(svg)) {
@@ -44,8 +41,8 @@ export function getCleanSvgForDrawio(icon: IconMeta, themeColor?: string): strin
  * Generates an mxGraphModel XML string for a single icon
  */
 export function generateSingleDrawioModelXml(icon: IconMeta, options: DrawioLibraryOptions = {}): string {
-  const { themeColor, lang = 'zh', width = 64, height = 64 } = options;
-  const svg = getCleanSvgForDrawio(icon, themeColor);
+  const { themeColor = '#0284c7', preserveAccents = true, lang = 'zh', width = 64, height = 64 } = options;
+  const svg = getCleanSvgForDrawio(icon, themeColor, preserveAccents);
   const base64Svg = toBase64(svg);
   const dataUri = `data:image/svg+xml;base64,${base64Svg}`;
   const label = icon.name[lang] || icon.name.en;

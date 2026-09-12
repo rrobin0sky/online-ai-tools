@@ -45,8 +45,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder={
             lang === 'zh'
-              ? '搜索图标：输入服务名/拼音/缩写（如 S3, EC2, 防火墙, AP, 机柜, 24口, POE）...'
-              : 'Search icons: name, acronym, category (e.g. S3, EC2, Firewall, AP, Rack, 24P, PoE)...'
+              ? '搜索常用设备：核心交换机、防火墙、服务器、VPC、S3、WAF、堡垒机、AP...'
+              : 'Search 2.5D devices: Core Switch, NGFW, Server, VPC, S3, WAF, Bastion, AP...'
           }
           className="w-full pl-11 pr-10 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm sm:text-base transition-all font-medium"
         />
@@ -60,26 +60,26 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         )}
       </div>
 
-      {/* Provider Filter Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none justify-start md:justify-center">
+      {/* Main Scope Filter Tabs (All / Physical / Cloud) */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none justify-start md:justify-center">
         <button
           onClick={() => onProviderChange('all')}
-          className={`px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all border ${
+          className={`px-4 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all border ${
             selectedProvider === 'all'
               ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
               : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400'
           }`}
         >
-          {lang === 'zh' ? '全部厂商' : 'All Providers'} ({totalCount})
+          {lang === 'zh' ? '全部 2.5D 设备' : 'All 2.5D Icons'} ({totalCount})
         </button>
 
-        {PROVIDERS.map((p) => {
+        {PROVIDERS.filter((p) => p.id === 'physical' || p.id === 'cloud').map((p) => {
           const isSelected = selectedProvider === p.id;
           return (
             <button
               key={p.id}
               onClick={() => onProviderChange(p.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap border transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap border transition-all ${
                 isSelected
                   ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white border-slate-900 dark:border-blue-600 shadow-md'
                   : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400'
@@ -122,13 +122,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         })}
       </div>
 
-      {/* Result stats and Batch Action */}
+      {/* Result stats and Action bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-600 dark:text-slate-300 px-1 pt-1">
         <div className="flex items-center gap-2">
           <span className="font-bold text-slate-900 dark:text-slate-100">
             {lang === 'zh'
-              ? `共 ${filteredCount} 个图标`
-              : `${filteredCount} icons`}
+              ? `已展示 ${filteredCount} 个常用拓扑设备图标`
+              : `Showing ${filteredCount} 2.5D equipment icons`}
           </span>
         </div>
 
@@ -137,7 +137,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             <button
               onClick={onExportDrawio}
               className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-indigo-300 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/80 font-bold text-xs transition-all shadow-xs"
-              title={lang === 'zh' ? '直接下载 Draw.io 图库文件 (.xml)，拖入 Draw.io 即可使用' : 'Export as Draw.io Stencil (.xml)'}
+              title={lang === 'zh' ? '下载当前配色 Draw.io 图库文件 (.xml)' : 'Export as Draw.io Stencil (.xml)'}
             >
               <span>📐</span>
               <span>{lang === 'zh' ? 'Draw.io 库 (.xml)' : 'Draw.io Library'}</span>
@@ -149,7 +149,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-300 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/80 font-bold text-xs transition-all shadow-xs"
           >
             <span>📦</span>
-            <span>{lang === 'zh' ? '打包与调色' : 'Batch & Palette'}</span>
+            <span>{lang === 'zh' ? '一键打包导出' : 'Batch Export'}</span>
           </button>
         </div>
       </div>
