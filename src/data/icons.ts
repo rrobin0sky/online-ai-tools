@@ -3,7 +3,7 @@ import { IconMeta, ProviderMeta, CategoryMeta } from '../types/icon';
 export const PROVIDERS: ProviderMeta[] = [
   {
     id: 'generic',
-    name: { en: 'Vendor-Neutral (3D Cisco)', zh: '通用中立 (经典3D工程风)' },
+    name: { en: 'Vendor-Neutral (Modern 2.5D)', zh: '通用中立 (现代2.5D立体风)' },
     color: '#0ea5e9',
     badgeBg: 'bg-sky-100 text-sky-950 border-sky-300 dark:bg-sky-500/20 dark:text-sky-200 dark:border-sky-500/40 font-bold',
   },
@@ -51,224 +51,641 @@ export const CATEGORIES: CategoryMeta[] = [
 ];
 
 export const ICONS: IconMeta[] = [
-  // ==================== 1. 经典 3D 思科/工程规范通用网络 (Cisco 3D Isometric Network) ====================
+  // ==================== 1. 现代 2.5D 等轴测通用网络架构 (Modern 2.5D Isometric Architecture) ====================
   {
     id: 'generic-network-firewall',
     provider: 'generic',
     category: 'network',
-    name: { en: '3D Brick Firewall', zh: '3D 经典红砖防火墙' },
-    code: 'FW-3D',
-    tags: ['firewall', 'security', 'cisco', '3d', 'brick', 'fanghuoqiang', '防火墙', '红砖防火墙', '经典3d'],
+    name: { en: '2.5D Security Firewall', zh: '2.5D 现代等轴测防火墙' },
+    code: 'FW-2.5D',
+    tags: ['firewall', 'security', '2.5d', 'isometric', 'gateway', 'fanghuoqiang', '防火墙', '立体防火墙', '等轴测'],
     equivalentGroup: 'network-firewall',
     isTintable: false,
-    viewBox: '0 0 140 65',
-    svgRaw: `<svg viewBox="0 0 140 65" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <g stroke="#ffffff" stroke-width="1.25" stroke-linejoin="round">
-    <!-- Top Face (lighter red with brick layout) -->
-    <polygon points="10,22 45,6 135,6 100,22" fill="#d32f2f"/>
-    <polygon points="10,22 45,6 63,6 28,22" fill="#ef5350"/>
-    <polygon points="28,22 63,6 81,6 46,22" fill="#e53935"/>
-    <polygon points="46,22 81,6 99,6 64,22" fill="#ef5350"/>
-    <polygon points="64,22 99,6 117,6 82,22" fill="#e53935"/>
-    <polygon points="82,22 117,6 135,6 100,22" fill="#ef5350"/>
-    <!-- Top mid row division -->
-    <polygon points="19,14 54,6 72,6 37,14" fill="#ff7961"/>
-    <polygon points="37,14 72,6 90,6 55,14" fill="#ef5350"/>
-    <polygon points="55,14 90,6 108,6 73,14" fill="#ff7961"/>
-    <polygon points="73,14 108,6 126,6 91,14" fill="#ef5350"/>
-
-    <!-- Right Side Face (dark shadow maroon) -->
-    <polygon points="100,22 135,6 135,40 100,56" fill="#580000"/>
-    <polygon points="100,22 117,14 117,31 100,39" fill="#800000"/>
-    <polygon points="100,39 117,31 117,48 100,56" fill="#6a0000"/>
-    <polygon points="117,14 135,6 135,23 117,31" fill="#750000"/>
-    <polygon points="117,31 135,23 135,40 117,48" fill="#580000"/>
-
-    <!-- Front Face (deep red staggered bricks) -->
-    <polygon points="10,22 25,22 25,44 10,44" fill="#b71c1c"/>
-    <polygon points="10,44 25,44 25,56 10,56" fill="#990000"/>
-    <polygon points="25,22 40,22 40,34 25,34" fill="#990000"/>
-    <polygon points="25,34 40,34 40,56 25,56" fill="#b71c1c"/>
-    <polygon points="40,22 55,22 55,44 40,44" fill="#b71c1c"/>
-    <polygon points="40,44 55,44 55,56 40,56" fill="#990000"/>
-    <polygon points="55,22 70,22 70,34 55,34" fill="#990000"/>
-    <polygon points="55,34 70,34 70,56 55,56" fill="#b71c1c"/>
-    <polygon points="70,22 85,22 85,44 70,44" fill="#b71c1c"/>
-    <polygon points="70,44 85,44 85,56 70,56" fill="#990000"/>
-    <polygon points="85,22 100,22 100,34 85,34" fill="#990000"/>
-    <polygon points="85,34 100,34 100,56 85,56" fill="#b71c1c"/>
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-fw-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="iso-fw-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <linearGradient id="iso-fw-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#991b1b"/>
+      <stop offset="100%" stop-color="#450a0a"/>
+    </linearGradient>
+    <linearGradient id="iso-fw-shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="iso-fw-grid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fca5a5" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#f87171" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <!-- Base Chassis Faces -->
+  <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-fw-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <polygon points="22,46 60,66 60,84 22,64" fill="url(#iso-fw-left)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="60,66 98,46 98,64 60,84" fill="url(#iso-fw-right)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Face Isometric Laser Grid Lines -->
+  <line x1="41" y1="36" x2="79" y2="56" stroke="url(#iso-fw-grid)" stroke-width="1.2"/>
+  <line x1="31" y1="41" x2="69" y2="61" stroke="url(#iso-fw-grid)" stroke-width="1.2"/>
+  <line x1="79" y1="36" x2="41" y2="56" stroke="url(#iso-fw-grid)" stroke-width="1.2"/>
+  <line x1="69" y1="31" x2="51" y2="41" stroke="url(#iso-fw-grid)" stroke-width="1.2"/>
+  <!-- Front Port LEDs & Status Indicators -->
+  <circle cx="32" cy="56" r="2" fill="#22c55e"/>
+  <circle cx="40" cy="60" r="2" fill="#38bdf8"/>
+  <circle cx="48" cy="64" r="2" fill="#facc15"/>
+  <!-- Upright 2.5D Glowing Shield Barrier -->
+  <g transform="translate(60, 48)">
+    <path d="M0,-24 L18,-15 L18,5 C18,17 0,26 0,26 C0,26 -18,17 -18,5 L-18,-15 Z" fill="url(#iso-fw-shield)" stroke="#ffffff" stroke-width="1.5"/>
+    <path d="M0,-20 L14,-13 L14,4 C14,13 0,21 0,21 C0,21 -14,13 -14,4 L-14,-13 Z" fill="#ffffff" fill-opacity="0.2"/>
+    <!-- Keyhole Emblem -->
+    <path d="M0,-8 C-4,-8 -6,-5 -6,0 C-6,4 -3,7 -2,9 L-3,14 L3,14 L2,9 C3,7 6,4 6,0 C6,-5 4,-8 0,-8 Z" fill="#ffffff"/>
   </g>
 </svg>`,
-    description: { en: 'Classic Cisco 3D isometric brick-wall network firewall (exact PPT standard)', zh: '经典思科 3D 等轴测红砖网络防火墙（PPT与技术方案经典原版规范）' }
+    description: { en: 'Modern 2.5D isometric security firewall gateway with neon barrier shield', zh: '现代 2.5D 等轴测立体安全防火墙网关，配高亮防护盾与激光阵列' }
   },
   {
     id: 'generic-network-router',
     provider: 'generic',
     category: 'network',
-    name: { en: '3D Cylinder Router', zh: '3D 经典圆柱路由器' },
-    code: 'RT-3D',
-    tags: ['router', 'cisco', '3d', 'cylinder', 'l3', 'luyouqi', '路由器', '3d路由器', '思科路由器'],
+    name: { en: '2.5D Core Router', zh: '2.5D 现代等轴测路由器' },
+    code: 'RT-2.5D',
+    tags: ['router', '2.5d', 'isometric', 'l3', 'flow', 'luyouqi', '路由器', '立体路由器', '等轴测'],
     equivalentGroup: 'network-router',
     isTintable: false,
-    viewBox: '0 0 90 65',
-    svgRaw: `<svg viewBox="0 0 90 65" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <!-- 3D Lower Cylinder Body -->
-  <path d="M5,22 C5,22 5,42 5,42 C5,51 23,58 45,58 C67,58 85,51 85,42 C85,42 85,22 85,22 Z" fill="#004d80" stroke="#003366" stroke-width="1.2"/>
-  <path d="M5,42 C5,51 23,58 45,58 C67,58 85,51 85,42" fill="none" stroke="#00b0f0" stroke-width="1.5" stroke-opacity="0.4"/>
-  <!-- Top Ellipse Face -->
-  <ellipse cx="45" cy="22" rx="40" ry="16" fill="#0080c0" stroke="#ffffff" stroke-width="1.5"/>
-  <!-- Cisco 4-Way Cross Arrows on Top -->
-  <g fill="#ffffff" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Left Arrow (pointing inwards) -->
-    <line x1="16" y1="22" x2="34" y2="22"/>
-    <polygon points="27,18 35,22 27,26"/>
-    <!-- Right Arrow (pointing inwards) -->
-    <line x1="74" y1="22" x2="56" y2="22"/>
-    <polygon points="63,18 55,22 63,26"/>
-    <!-- Top Arrow (pointing outwards) -->
-    <line x1="45" y1="22" x2="45" y2="10"/>
-    <polygon points="41,15 45,9 49,15"/>
-    <!-- Bottom Arrow (pointing outwards) -->
-    <line x1="45" y1="22" x2="45" y2="34"/>
-    <polygon points="41,29 45,35 49,29"/>
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-rt-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="iso-rt-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#082f49"/>
+    </linearGradient>
+    <linearGradient id="iso-rt-ring" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0c4a6e"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#082f49"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="80" rx="46" ry="15" fill="#0f172a" opacity="0.25"/>
+  <!-- Lower Cylinder Body -->
+  <path d="M 20,40 C 20,58 38,72 60,72 C 82,72 100,58 100,40 L 100,58 C 100,76 82,90 60,90 C 38,90 20,76 20,58 Z" fill="url(#iso-rt-side)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.3"/>
+  <!-- Outer Bevel Edge -->
+  <ellipse cx="60" cy="40" rx="40" ry="18" fill="url(#iso-rt-ring)"/>
+  <!-- Inner Recessed Top Face -->
+  <ellipse cx="60" cy="38" rx="36" ry="16" fill="url(#iso-rt-top)" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.8"/>
+  <!-- Front Status Indicators -->
+  <ellipse cx="60" cy="74" rx="28" ry="8" fill="none" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4 6" opacity="0.7"/>
+  <circle cx="36" cy="62" r="2" fill="#22c55e"/>
+  <circle cx="44" cy="66" r="2" fill="#38bdf8"/>
+  <circle cx="52" cy="69" r="2" fill="#38bdf8"/>
+  <!-- Luminous 4-Directional Flow Arrows on Top Face -->
+  <g stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#ffffff">
+    <!-- Inward Arrow Left -->
+    <line x1="32" y1="38" x2="48" y2="38"/>
+    <polygon points="43,35 51,38 43,41"/>
+    <!-- Inward Arrow Right -->
+    <line x1="88" y1="38" x2="72" y2="38"/>
+    <polygon points="77,35 69,38 77,41"/>
+    <!-- Outward Arrow Top -->
+    <line x1="60" y1="36" x2="60" y2="26"/>
+    <polygon points="57,29 60,24 63,29"/>
+    <!-- Outward Arrow Bottom -->
+    <line x1="60" y1="40" x2="60" y2="50"/>
+    <polygon points="57,47 60,52 63,47"/>
+    <!-- Central Core Node -->
+    <circle cx="60" cy="38" r="3" fill="#ffffff"/>
   </g>
 </svg>`,
-    description: { en: 'Official Cisco 3D isometric blue cylindrical router with 4-way cross arrows', zh: '经典思科 3D 蓝色圆柱路由器，顶部配四向进出交叉箭头' }
+    description: { en: 'Modern 2.5D isometric cylindrical router with 4-directional luminous flow arrows', zh: '现代 2.5D 等轴测圆柱路由器，顶部配四向多路径立体寻址流向' }
   },
   {
     id: 'generic-network-switch-l2',
     provider: 'generic',
     category: 'network',
-    name: { en: '3D Workgroup Switch (L2)', zh: '3D 二层以太网交换机' },
-    code: 'SW-3D',
-    tags: ['switch', 'cisco', '3d', 'workgroup', 'l2', 'jiaohuanji', '交换机', '3d交换机'],
+    name: { en: '2.5D Workgroup Switch (L2)', zh: '2.5D 现代二层以太网交换机' },
+    code: 'SW-L2-2.5D',
+    tags: ['switch', '2.5d', 'isometric', 'l2', 'ethernet', 'ports', 'jiaohuanji', '交换机', '立体交换机'],
     equivalentGroup: 'network-switch',
     isTintable: false,
-    viewBox: '0 0 100 65',
-    svgRaw: `<svg viewBox="0 0 100 65" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <!-- Right Side Face -->
-  <polygon points="75,22 95,8 95,34 75,48" fill="#003d5c" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Front Face -->
-  <polygon points="5,22 75,22 75,48 5,48" fill="#005580" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Top Face -->
-  <polygon points="5,22 25,8 95,8 75,22" fill="#0088cc" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- 2 Pairs of Opposite Parallel Arrows (Cisco Switch Standard) -->
-  <g stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="#ffffff">
-    <!-- Top line right -->
-    <line x1="30" y1="13" x2="65" y2="13"/>
-    <polygon points="60,10 68,13 60,16"/>
-    <!-- Bottom line left -->
-    <line x1="70" y1="18" x2="35" y2="18"/>
-    <polygon points="40,15 32,18 40,21"/>
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-sw-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="iso-sw-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="iso-sw-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="80" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <!-- Isometric 1U Switch Chassis -->
+  <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-sw-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <polygon points="22,46 60,66 60,82 22,62" fill="url(#iso-sw-left)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="60,66 98,46 98,62 60,82" fill="url(#iso-sw-right)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Face: Dual Opposite Parallel High-Speed Traffic Arrows -->
+  <g stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#ffffff">
+    <!-- Top Arrow (flowing right) -->
+    <line x1="42" y1="41" x2="72" y2="47"/>
+    <polygon points="68,43 76,48 67,49"/>
+    <!-- Bottom Arrow (flowing left) -->
+    <line x1="78" y1="51" x2="48" y2="45"/>
+    <polygon points="52,43 44,44 53,49"/>
   </g>
+  <!-- Front Left Panel: 2.5D Isometric 24-Port RJ45 / SFP Matrix with LEDs -->
+  <g stroke="#38bdf8" stroke-width="0.8" fill="#082f49">
+    <!-- Upper Port Row in 2.5D perspective -->
+    <polygon points="26,52 32,55 32,58 26,55"/>
+    <polygon points="34,56 40,59 40,62 34,59"/>
+    <polygon points="42,60 48,63 48,66 42,63"/>
+    <polygon points="50,64 56,67 56,70 50,67"/>
+    <!-- Lower Port Row -->
+    <polygon points="26,57 32,60 32,63 26,60"/>
+    <polygon points="34,61 40,64 40,67 34,64"/>
+    <polygon points="42,65 48,68 48,71 42,68"/>
+    <polygon points="50,69 56,72 56,75 50,72"/>
+  </g>
+  <!-- Port Link Status Activity LEDs (Luminous Green & Amber) -->
+  <circle cx="28" cy="50" r="1.2" fill="#22c55e"/>
+  <circle cx="36" cy="54" r="1.2" fill="#22c55e"/>
+  <circle cx="44" cy="58" r="1.2" fill="#22c55e"/>
+  <circle cx="52" cy="62" r="1.2" fill="#facc15"/>
 </svg>`,
-    description: { en: 'Official Cisco 3D isometric blue workgroup switch with dual parallel arrows', zh: '经典思科 3D 矩形以太网工作组交换机，顶部标准双向平行对射箭头' }
+    description: { en: 'Modern 2.5D isometric 1U rackmount switch with 24-port LED matrix and dual parallel flow arrows', zh: '现代 2.5D 等轴测 1U 交换机，配备精细以太网口阵列、双向对射流向与运行指示灯' }
   },
   {
     id: 'generic-network-switch-l3',
     provider: 'generic',
     category: 'network',
-    name: { en: '3D Multilayer Switch (L3 / Core)', zh: '3D 三层/核心交换机' },
-    code: 'L3-SW-3D',
-    tags: ['l3 switch', 'core switch', 'cisco', 'multilayer', '3d', 'sanceng', '三层交换机', '核心交换机'],
+    name: { en: '2.5D Multilayer Switch (L3 / Core)', zh: '2.5D 现代三层/核心交换机' },
+    code: 'SW-L3-2.5D',
+    tags: ['l3 switch', 'core switch', '2.5d', 'isometric', 'multilayer', 'sanceng', '三层交换机', '核心交换机'],
     equivalentGroup: 'network-switch',
     isTintable: false,
-    viewBox: '0 0 95 70',
-    svgRaw: `<svg viewBox="0 0 95 70" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <!-- Right Side Face -->
-  <polygon points="65,28 90,12 90,44 65,60" fill="#003366" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Front Face -->
-  <polygon points="5,28 65,28 65,60 5,60" fill="#004c80" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Top Face -->
-  <polygon points="5,28 30,12 90,12 65,28" fill="#007acc" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Cisco Multilayer 3D 4-Crossing Arrows -->
-  <g stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="#ffffff">
-    <!-- Diagonal 1 -->
-    <line x1="26" y1="23" x2="68" y2="17"/>
-    <polygon points="29,20 23,23 29,26"/>
-    <polygon points="65,14 71,17 65,20"/>
-    <!-- Diagonal 2 -->
-    <line x1="38" y1="16" x2="56" y2="24"/>
-    <polygon points="41,13 35,16 41,19"/>
-    <polygon points="53,21 59,24 53,27"/>
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-l3-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="iso-l3-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="iso-l3-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="84" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <!-- Multi-layer Modular 2U Chassis -->
+  <polygon points="60,20 98,40 60,60 22,40" fill="url(#iso-l3-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.7"/>
+  <polygon points="22,40 60,60 60,82 22,62" fill="url(#iso-l3-left)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="60,60 98,40 98,62 60,82" fill="url(#iso-l3-right)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Face: 4-Way Diagonal Cross Routing Matrix (L3 Switch Emblem) -->
+  <g stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="#ffffff">
+    <line x1="38" y1="36" x2="82" y2="44"/>
+    <polygon points="42,35 34,35 38,39"/>
+    <polygon points="78,41 86,45 82,47"/>
+    <line x1="72" y1="30" x2="48" y2="50"/>
+    <polygon points="74,34 76,27 69,30"/>
+    <polygon points="51,46 44,53 47,46"/>
+    <!-- Central Routing Engine Core Diamond -->
+    <polygon points="60,36 65,40 60,44 55,40" fill="#38bdf8" stroke="#ffffff" stroke-width="1"/>
   </g>
+  <!-- Front Panel: High-Density 100G QSFP28 Fiber Ports & Activity LEDs -->
+  <g fill="#0284c7" stroke="#38bdf8" stroke-width="0.8">
+    <polygon points="26,48 34,52 34,56 26,52"/>
+    <polygon points="37,54 45,58 45,62 37,58"/>
+    <polygon points="48,60 56,64 56,68 48,64"/>
+  </g>
+  <!-- Redundant Power & Sys Status LEDs -->
+  <circle cx="28" cy="58" r="1.5" fill="#22c55e"/>
+  <circle cx="32" cy="60" r="1.5" fill="#22c55e"/>
+  <circle cx="50" cy="74" r="1.5" fill="#38bdf8"/>
+  <circle cx="54" cy="76" r="1.5" fill="#a855f7"/>
 </svg>`,
-    description: { en: 'Cisco 3D multilayer routing core switch box with 3D crossing arrows', zh: '经典思科 3D 核心/三层多层路由交换机，顶部交叉立体箭头' }
+    description: { en: 'Modern 2.5D isometric multilayer core switch with 4-way diagonal routing matrix and QSFP ports', zh: '现代 2.5D 等轴测核心/三层交换机，带四向立体交叉路由矩阵与高速光口' }
   },
   {
     id: 'generic-compute-server',
     provider: 'generic',
     category: 'compute',
-    name: { en: '3D Tower & Rack Server', zh: '3D 机架/物理服务器' },
-    code: 'SRV-3D',
-    tags: ['server', 'cisco', '3d', 'host', 'baremetal', 'fuwuqi', '服务器', '3d服务器'],
+    name: { en: '2.5D Enterprise Server', zh: '2.5D 现代机架服务器' },
+    code: 'SRV-2.5D',
+    tags: ['server', '2.5d', 'isometric', 'host', 'compute', 'fuwuqi', '服务器', '机架服务器'],
+    equivalentGroup: 'compute-vm',
     isTintable: false,
-    viewBox: '0 0 85 70',
-    svgRaw: `<svg viewBox="0 0 85 70" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <!-- Right Side Face -->
-  <polygon points="55,20 80,6 80,48 55,62" fill="#2d3748" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Front Face -->
-  <polygon points="8,20 55,20 55,62 8,62" fill="#4a5568" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Top Face -->
-  <polygon points="8,20 33,6 80,6 55,20" fill="#718096" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Server Drive Bays & LEDs -->
-  <rect x="14" y="26" width="35" height="5" rx="1" fill="#1a202c" stroke="#a0aec0" stroke-width="0.8"/>
-  <rect x="14" y="34" width="35" height="5" rx="1" fill="#1a202c" stroke="#a0aec0" stroke-width="0.8"/>
-  <rect x="14" y="42" width="35" height="5" rx="1" fill="#1a202c" stroke="#a0aec0" stroke-width="0.8"/>
-  <!-- Power & Activity LEDs -->
-  <circle cx="18" cy="54" r="1.5" fill="#48bb78"/>
-  <circle cx="24" cy="54" r="1.5" fill="#4299e1"/>
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-srv-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="iso-srv-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="iso-srv-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="iso-srv-bay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <!-- Server Blade Chassis -->
+  <polygon points="60,22 98,42 60,62 22,42" fill="url(#iso-srv-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <polygon points="22,42 60,62 60,82 22,62" fill="url(#iso-srv-left)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="60,62 98,42 98,62 60,82" fill="url(#iso-srv-right)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Face: Tech Circuit Silkscreen Lines -->
+  <g stroke="#38bdf8" stroke-width="1" stroke-opacity="0.5" fill="none">
+    <path d="M42,36 L52,41 L52,48 L64,54"/>
+    <circle cx="42" cy="36" r="1.5" fill="#38bdf8"/>
+    <circle cx="64" cy="54" r="1.5" fill="#38bdf8"/>
+    <path d="M78,36 L68,41 L68,46"/>
+    <circle cx="78" cy="36" r="1.5" fill="#38bdf8"/>
+  </g>
+  <!-- Front Panel: 2.5D Hot-Swap NVMe Drive Bays -->
+  <g fill="url(#iso-srv-bay)" stroke="#475569" stroke-width="0.8">
+    <polygon points="26,48 38,54 38,59 26,53"/>
+    <polygon points="42,56 54,62 54,67 42,61"/>
+    <polygon points="26,55 38,61 38,66 26,60"/>
+    <polygon points="42,63 54,69 54,74 42,68"/>
+  </g>
+  <!-- Drive Activity LEDs (Green/Amber) -->
+  <circle cx="28" cy="50" r="1" fill="#22c55e"/>
+  <circle cx="44" cy="58" r="1" fill="#22c55e"/>
+  <circle cx="28" cy="57" r="1" fill="#facc15"/>
+  <circle cx="44" cy="65" r="1" fill="#22c55e"/>
+  <!-- Power Switch & Diagnostics -->
+  <circle cx="56" cy="77" r="2" fill="#38bdf8"/>
+  <circle cx="56" cy="77" r="3.2" fill="none" stroke="#38bdf8" stroke-width="0.8" opacity="0.6"/>
 </svg>`,
-    description: { en: 'Cisco 3D metallic enterprise rack/tower server host', zh: '经典 3D 金属灰企业级服务器主机，带磁盘阵列槽与运行指示灯' }
+    description: { en: 'Modern 2.5D isometric enterprise rack server with hot-swap NVMe bays and PCB traces', zh: '现代 2.5D 等轴测企业级机架服务器，带热插拔硬盘舱、电路蚀刻与状态指示灯' }
   },
   {
     id: 'generic-network-internet',
     provider: 'generic',
     category: 'network',
-    name: { en: '3D Volumetric Cloud / WAN', zh: '3D 质感云网 / 互联网' },
-    code: 'WAN-3D',
-    tags: ['cloud', 'internet', 'wan', '3d', 'cisco', 'gongwang', '云', '公网', '互联网'],
+    name: { en: '2.5D Cloud & Internet', zh: '2.5D 现代云网与广域网' },
+    code: 'WAN-2.5D',
+    tags: ['cloud', 'internet', 'wan', '2.5d', 'isometric', 'gongwang', '云', '公网', '互联网'],
+    equivalentGroup: 'network-cdn',
     isTintable: false,
-    viewBox: '0 0 100 65',
-    svgRaw: `<svg viewBox="0 0 100 65" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="cloudGrad" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="iso-wan-cloud" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="50%" stop-color="#0284c7"/>
-      <stop offset="100%" stop-color="#0369a1"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="iso-wan-base" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.1"/>
     </linearGradient>
   </defs>
-  <!-- 3D Shadow Layer -->
-  <path d="M22,46 C12,46 5,38 5,28 C5,20 11,14 18,12 C21,5 29,1 38,1 C47,1 55,6 59,13 C63,9 70,7 76,7 C88,7 97,16 97,27 C97,38 88,46 78,46 Z" fill="#0c4a6e" transform="translate(4, 6)"/>
-  <!-- Front Cloud Body -->
-  <path d="M22,46 C12,46 5,38 5,28 C5,20 11,14 18,12 C21,5 29,1 38,1 C47,1 55,6 59,13 C63,9 70,7 76,7 C88,7 97,16 97,27 C97,38 88,46 78,46 Z" fill="url(#cloudGrad)" stroke="#ffffff" stroke-width="1.5"/>
-  <!-- Highlighting gloss -->
-  <path d="M25,18 C28,10 33,6 40,6 C48,6 53,10 56,16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <!-- Ground Isometric Projected Ring -->
+  <ellipse cx="60" cy="80" rx="46" ry="15" fill="#0f172a" opacity="0.25"/>
+  <ellipse cx="60" cy="80" rx="42" ry="14" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.6"/>
+  <!-- Floating 2.5D Volumetric Cloud Mesh -->
+  <!-- Shadow/Under-cloud -->
+  <path d="M30,52 C20,52 14,44 14,35 C14,27 20,20 28,18 C31,10 40,5 50,5 C60,5 68,11 72,19 C77,15 84,13 90,13 C102,13 110,22 110,33 C110,44 100,52 90,52 Z" fill="#1e3a8a" opacity="0.4" transform="translate(0, 10)"/>
+  <!-- Main Cloud Body -->
+  <path d="M30,52 C20,52 14,44 14,35 C14,27 20,20 28,18 C31,10 40,5 50,5 C60,5 68,11 72,19 C77,15 84,13 90,13 C102,13 110,22 110,33 C110,44 100,52 90,52 Z" fill="url(#iso-wan-cloud)" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- Front Highlight Curve -->
+  <path d="M30,22 C34,12 42,8 50,8 C58,8 65,12 68,18" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <!-- Isometric Constellation Grid / Satellite Interconnect Lines -->
+  <g stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" fill="#ffffff">
+    <line x1="38" y1="36" x2="58" y2="30"/>
+    <line x1="58" y1="30" x2="80" y2="38"/>
+    <line x1="58" y1="30" x2="64" y2="46"/>
+    <circle cx="38" cy="36" r="2.5"/>
+    <circle cx="58" cy="30" r="3.2"/>
+    <circle cx="80" cy="38" r="2.5"/>
+    <circle cx="64" cy="46" r="2.2"/>
+  </g>
 </svg>`,
-    description: { en: 'Cisco 3D volumetric blue gradient public cloud and WAN network', zh: '经典思科 3D 渐变饱满云朵，代表公共互联网与广域网 WAN' }
+    description: { en: 'Modern 2.5D volumetric cloud with constellation data interconnect nodes', zh: '现代 2.5D 等轴测立体云朵与星型互联网络节点，代表公共云与广域网 WAN' }
   },
   {
     id: 'generic-db-relational',
     provider: 'generic',
     category: 'database',
-    name: { en: '3D Cylindrical Database Stack', zh: '3D 经典数据库 (SQL)' },
-    code: 'DB-3D',
-    tags: ['database', 'sql', 'cisco', '3d', 'cylinder', 'shujuku', '数据库', '3d数据库'],
+    name: { en: '2.5D Relational Database', zh: '2.5D 现代关系型数据库' },
+    code: 'DB-2.5D',
+    tags: ['database', 'sql', '2.5d', 'isometric', 'storage', 'shujuku', '数据库', '立体数据库'],
     equivalentGroup: 'db-relational',
     isTintable: false,
-    viewBox: '0 0 80 75',
-    svgRaw: `<svg viewBox="0 0 80 75" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-  <!-- Bottom Platter -->
-  <path d="M10,42 C10,42 10,54 10,54 C10,62 23,68 40,68 C57,68 70,62 70,54 C70,54 70,42 70,42" fill="#005299" stroke="#ffffff" stroke-width="1.2"/>
-  <ellipse cx="40" cy="42" rx="30" ry="10" fill="#0073cc" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Middle Platter -->
-  <path d="M10,26 C10,26 10,38 10,38 C10,46 23,52 40,52 C57,52 70,46 70,38 C70,38 70,26 70,26" fill="#005299" stroke="#ffffff" stroke-width="1.2"/>
-  <ellipse cx="40" cy="26" rx="30" ry="10" fill="#0080e6" stroke="#ffffff" stroke-width="1.2"/>
-  <!-- Top Platter -->
-  <path d="M10,10 C10,10 10,22 10,22 C10,30 23,36 40,36 C57,36 70,30 70,22 C70,22 70,10 70,10" fill="#0066b3" stroke="#ffffff" stroke-width="1.2"/>
-  <ellipse cx="40" cy="10" rx="30" ry="10" fill="#0099ff" stroke="#ffffff" stroke-width="1.5"/>
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-db-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="iso-db-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#082f49"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="86" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
+  <!-- Tier 3 (Bottom Disk) -->
+  <path d="M26,52 C26,65 41,75 60,75 C79,75 94,65 94,52 L94,64 C94,77 79,87 60,87 C41,87 26,77 26,64 Z" fill="url(#iso-db-side)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <ellipse cx="60" cy="52" rx="34" ry="12" fill="url(#iso-db-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <!-- Tier 2 (Middle Disk) -->
+  <path d="M26,35 C26,48 41,58 60,58 C79,58 94,48 94,35 L94,47 C94,60 79,70 60,70 C41,70 26,60 26,47 Z" fill="url(#iso-db-side)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <ellipse cx="60" cy="35" rx="34" ry="12" fill="url(#iso-db-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <!-- Tier 1 (Top Disk) -->
+  <path d="M26,18 C26,31 41,41 60,41 C79,41 94,31 94,18 L94,30 C94,43 79,53 60,53 C41,53 26,43 26,30 Z" fill="url(#iso-db-side)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <ellipse cx="60" cy="18" rx="34" ry="12" fill="url(#iso-db-top)" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- Glowing Circumference Data Rings -->
+  <ellipse cx="60" cy="18" rx="24" ry="8" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 3" opacity="0.8"/>
+  <ellipse cx="60" cy="18" rx="14" ry="4.5" fill="none" stroke="#ffffff" stroke-width="1.2"/>
+  <!-- Vertical Luminous Data Bus Beam & Indicator Dots -->
+  <line x1="38" y1="23" x2="38" y2="72" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="38" cy="23" r="2" fill="#22c55e"/>
+  <circle cx="38" cy="40" r="2" fill="#22c55e"/>
+  <circle cx="38" cy="57" r="2" fill="#22c55e"/>
 </svg>`,
-    description: { en: 'Cisco 3D multi-tiered database disk platter stack', zh: '经典思科 3D 蓝色多层磁盘存储与在线数据库' }
+    description: { en: 'Modern 2.5D isometric tiered database platter stack with laser data bus', zh: '现代 2.5D 等轴测分层数据库系统，带高速光纤读写总线与存储磁道' }
+  },
+  {
+    id: 'generic-network-loadbalancer',
+    provider: 'generic',
+    category: 'network',
+    name: { en: '2.5D Load Balancer (SLB)', zh: '2.5D 现代负载均衡 (SLB)' },
+    code: 'SLB-2.5D',
+    tags: ['loadbalancer', 'slb', 'alb', 'nlb', 'traffic', 'fuzaijunheng', '负载均衡'],
+    equivalentGroup: 'network-loadbalancer',
+    isTintable: false,
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-slb-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="iso-slb-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#581c87"/>
+      <stop offset="100%" stop-color="#3b0764"/>
+    </linearGradient>
+    <linearGradient id="iso-slb-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b0764"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <!-- Isometric Balancer Hub Chassis -->
+  <polygon points="60,24 98,44 60,64 22,44" fill="url(#iso-slb-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.7"/>
+  <polygon points="22,44 60,64 60,82 22,62" fill="url(#iso-slb-left)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="60,64 98,44 98,62 60,82" fill="url(#iso-slb-right)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Face: 1-to-3 Flow Traffic Splitting Distributor System -->
+  <g stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="#ffffff">
+    <!-- Inflow from left -->
+    <line x1="32" y1="44" x2="48" y2="44"/>
+    <circle cx="32" cy="44" r="2.5" fill="#38bdf8"/>
+    <!-- Central Distributor Hub Node -->
+    <circle cx="52" cy="44" r="3.5" fill="#facc15"/>
+    <!-- Outflow 1 (Upper Right) -->
+    <line x1="56" y1="42" x2="78" y2="34"/>
+    <polygon points="73,32 82,32 77,37"/>
+    <!-- Outflow 2 (Middle Right) -->
+    <line x1="56" y1="44" x2="84" y2="44"/>
+    <polygon points="79,41 87,44 79,47"/>
+    <!-- Outflow 3 (Lower Right) -->
+    <line x1="56" y1="46" x2="78" y2="54"/>
+    <polygon points="77,51 82,56 73,56"/>
+  </g>
+  <!-- Front Panel Status Matrix -->
+  <circle cx="32" cy="56" r="2" fill="#22c55e"/>
+  <circle cx="40" cy="60" r="2" fill="#22c55e"/>
+  <circle cx="48" cy="64" r="2" fill="#38bdf8"/>
+</svg>`,
+    description: { en: 'Modern 2.5D isometric load balancer node with 1-to-3 dynamic traffic distribution', zh: '现代 2.5D 等轴测应用负载均衡器，具备 1 对多智能分流引擎' }
+  },
+  {
+    id: 'generic-physical-rack',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '2.5D 42U Server Rack', zh: '2.5D 现代 42U 机柜' },
+    code: 'RACK-2.5D',
+    tags: ['rack', 'cabinet', 'datacenter', '42u', 'jigui', '机柜', '数据中心机柜'],
+    isTintable: false,
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-rk-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="iso-rk-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="iso-rk-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="88" rx="36" ry="10" fill="#0f172a" opacity="0.25"/>
+  <!-- Tall Isometric 42U Cabinet Shell -->
+  <polygon points="60,8 88,22 60,36 32,22" fill="url(#iso-rk-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <polygon points="32,22 60,36 60,90 32,76" fill="url(#iso-rk-left)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="60,36 88,22 88,76 60,90" fill="url(#iso-rk-right)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Exhaust Ventilation Fans -->
+  <ellipse cx="50" cy="20" rx="6" ry="3" fill="#0f172a" stroke="#64748b" stroke-width="0.8"/>
+  <ellipse cx="70" cy="24" rx="6" ry="3" fill="#0f172a" stroke="#64748b" stroke-width="0.8"/>
+  <!-- 4 Mounted Internal Server Units with Status Lights (Front Face) -->
+  <g stroke="#475569" stroke-width="0.8" fill="#0f172a">
+    <!-- Server 1 -->
+    <polygon points="35,35 57,46 57,54 35,43"/>
+    <circle cx="39" cy="40" r="1" fill="#22c55e"/>
+    <circle cx="43" cy="42" r="1" fill="#38bdf8"/>
+    <!-- Server 2 -->
+    <polygon points="35,46 57,57 57,65 35,54"/>
+    <circle cx="39" cy="51" r="1" fill="#22c55e"/>
+    <circle cx="43" cy="53" r="1" fill="#22c55e"/>
+    <!-- Server 3 -->
+    <polygon points="35,57 57,68 57,76 35,65"/>
+    <circle cx="39" cy="62" r="1" fill="#22c55e"/>
+    <circle cx="43" cy="64" r="1" fill="#facc15"/>
+    <!-- Server 4 (Bottom UPS / Switch) -->
+    <polygon points="35,68 57,79 57,87 35,76"/>
+    <circle cx="39" cy="73" r="1" fill="#38bdf8"/>
+    <circle cx="43" cy="75" r="1" fill="#38bdf8"/>
+  </g>
+  <!-- Tempered Glass Door Border Accent -->
+  <polygon points="33,24 59,37 59,88 33,75" fill="#38bdf8" fill-opacity="0.08" stroke="#38bdf8" stroke-width="0.8" stroke-opacity="0.5"/>
+</svg>`,
+    description: { en: 'Modern 2.5D isometric 42U data center server cabinet with glass door and rackmount servers', zh: '现代 2.5D 等轴测 42U 标准数据中心机柜，内置多台满载服务器与顶部排风单元' }
+  },
+  {
+    id: 'generic-network-ap',
+    provider: 'generic',
+    category: 'network',
+    name: { en: '2.5D Wireless AP', zh: '2.5D 现代企业级无线 AP' },
+    code: 'AP-2.5D',
+    tags: ['wifi', 'wireless', 'ap', 'access point', '2.5d', 'wuxian', '无线AP', '无线接入点'],
+    isTintable: false,
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-ap-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="50%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="iso-ap-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="80" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <!-- Radiating 2.5D Isometric Wi-Fi Wave Rings -->
+  <g fill="none" stroke="#06b6d4" stroke-width="1.8" stroke-linecap="round">
+    <path d="M22,30 C32,18 88,18 98,30" opacity="0.3"/>
+    <path d="M28,38 C36,28 84,28 92,38" opacity="0.6"/>
+    <path d="M36,46 C42,38 78,38 84,46" opacity="0.9"/>
+  </g>
+  <!-- Access Point Dome Base Body -->
+  <path d="M30,50 C30,64 43,74 60,74 C77,74 90,64 90,50 L90,58 C90,72 77,82 60,82 C43,82 30,72 30,58 Z" fill="url(#iso-ap-side)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Saucer Disc -->
+  <ellipse cx="60" cy="50" rx="30" ry="14" fill="url(#iso-ap-top)" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- Center Wi-Fi Glowing Ring & Status Indicator -->
+  <ellipse cx="60" cy="50" rx="12" ry="5.5" fill="#06b6d4" fill-opacity="0.2" stroke="#06b6d4" stroke-width="1.5"/>
+  <circle cx="60" cy="50" r="3" fill="#06b6d4"/>
+  <circle cx="60" cy="50" r="1.5" fill="#ffffff"/>
+</svg>`,
+    description: { en: 'Modern 2.5D isometric enterprise Wi-Fi 6/7 access point with radiating signal waves', zh: '现代 2.5D 等轴测企业级吸顶无线 AP，配环形指示灯与立体射频信号波' }
+  },
+  {
+    id: 'generic-physical-transceiver',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '2.5D Optical Transceiver (SFP+)', zh: '2.5D 现代光模块与光纤' },
+    code: 'SFP-2.5D',
+    tags: ['sfp', 'optical', 'transceiver', 'fiber', 'guangxian', '光模块', '光纤', 'LC光纤'],
+    isTintable: false,
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-sfp-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="50%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="iso-sfp-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="80" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
+  <!-- SFP Metallic Body -->
+  <polygon points="50,26 84,43 54,58 20,41" fill="url(#iso-sfp-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <polygon points="20,41 54,58 54,74 20,57" fill="url(#iso-sfp-side)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="54,58 84,43 84,59 54,74" fill="#0f172a" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Optical Transceiver Bale Clasp Latch (Cyan / Blue) -->
+  <polygon points="16,42 22,39 22,55 16,58" fill="#0ea5e9" stroke="#ffffff" stroke-width="0.8"/>
+  <path d="M16,42 L8,46 L8,62 L16,58" fill="#0284c7" stroke="#ffffff" stroke-width="0.8"/>
+  <!-- Duplex LC Optical Fiber Pair extending outward -->
+  <g stroke-linecap="round" fill="none">
+    <!-- Fiber Cable 1 (Orange Multi-mode) -->
+    <path d="M54,66 C68,73 80,70 96,65 C104,62 108,56 112,56" stroke="#f59e0b" stroke-width="3"/>
+    <!-- Fiber Cable 2 (Blue Single-mode / Return) -->
+    <path d="M60,63 C74,70 86,67 102,62 C110,59 114,53 118,53" stroke="#0ea5e9" stroke-width="3"/>
+    <!-- Laser Core Glow -->
+    <circle cx="54" cy="66" r="2" fill="#fde047"/>
+    <circle cx="60" cy="63" r="2" fill="#38bdf8"/>
+  </g>
+</svg>`,
+    description: { en: 'Modern 2.5D isometric SFP+ optical transceiver module and duplex LC fiber connector', zh: '现代 2.5D 等轴测 SFP+ 经典金属光模块，连接双芯 LC 光纤跳线' }
+  },
+  {
+    id: 'generic-physical-ups',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '2.5D Smart UPS Power', zh: '2.5D 现代在线式 UPS 电源' },
+    code: 'UPS-2.5D',
+    tags: ['ups', 'power', 'pdu', 'battery', 'backup', 'dianyuan', '电源', '不间断电源'],
+    isTintable: false,
+    viewBox: '0 0 120 100',
+    svgRaw: `<svg viewBox="0 0 120 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iso-ups-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="iso-ups-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="iso-ups-right" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="iso-ups-bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <!-- Ground Soft Shadow -->
+  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <!-- Heavy Duty UPS Chassis -->
+  <polygon points="60,22 98,42 60,62 22,42" fill="url(#iso-ups-top)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6"/>
+  <polygon points="22,42 60,62 60,82 22,62" fill="url(#iso-ups-left)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <polygon points="60,62 98,42 98,62 60,82" fill="url(#iso-ups-right)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.4"/>
+  <!-- Top Face: High-Voltage Lightning Energy Emblem -->
+  <g transform="translate(60, 42)">
+    <polygon points="1,-14 -7,-1 -1,-1 -4,14 7,1 1,1 5,-14" fill="url(#iso-ups-bolt)" stroke="#ffffff" stroke-width="1"/>
+  </g>
+  <!-- Front Panel: LCD Battery Gauge & In/Out Status -->
+  <!-- LCD Display Screen -->
+  <polygon points="26,50 38,56 38,62 26,56" fill="#022c22" stroke="#10b981" stroke-width="0.8"/>
+  <!-- Battery Charge Level Bars (Green 100%) -->
+  <line x1="28" y1="53" x2="28" y2="56" stroke="#22c55e" stroke-width="1.5"/>
+  <line x1="31" y1="55" x2="31" y2="58" stroke="#22c55e" stroke-width="1.5"/>
+  <line x1="34" y1="56" x2="34" y2="59" stroke="#22c55e" stroke-width="1.5"/>
+  <!-- AC Input Normal & Inverter Status LEDs -->
+  <circle cx="44" cy="62" r="1.5" fill="#22c55e"/>
+  <circle cx="48" cy="64" r="1.5" fill="#22c55e"/>
+  <circle cx="52" cy="66" r="1.5" fill="#38bdf8"/>
+</svg>`,
+    description: { en: 'Modern 2.5D isometric online UPS battery backup unit with LCD battery level meter', zh: '现代 2.5D 等轴测双变换在线式 UPS 电源，配液晶电量状态屏与运行指示' }
   },
 
   // ==================== 2. 亚马逊云官方原版 (AWS Official Architecture Icons) ====================
