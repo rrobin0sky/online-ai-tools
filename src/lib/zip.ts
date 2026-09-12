@@ -2,6 +2,8 @@ import JSZip from 'jszip';
 import { IconMeta } from '../types/icon';
 import { svgToPngBlob } from './clipboard';
 
+import { generateDrawioLibraryXml } from './drawio';
+
 export interface BatchExportOptions {
   icons: IconMeta[];
   themeColor: string;
@@ -47,6 +49,14 @@ export async function generateIconsZip(options: BatchExportOptions): Promise<Blo
     if (onProgress) {
       onProgress(processed, total);
     }
+  }
+
+  // Add Draw.io XML Stencil Library directly into the zip
+  try {
+    const drawioXml = generateDrawioLibraryXml(icons, { themeColor });
+    zip.file('drawio/ArchIcons-Drawio-Library.xml', drawioXml);
+  } catch (e) {
+    console.error('Failed to attach Draw.io library to zip:', e);
   }
 
   // Generate metadata README in the zip

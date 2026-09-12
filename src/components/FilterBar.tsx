@@ -16,6 +16,7 @@ interface FilterBarProps {
   totalCount: number;
   filteredCount: number;
   onOpenBatchExport: () => void;
+  onExportDrawio?: () => void;
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -29,6 +30,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   totalCount,
   filteredCount,
   onOpenBatchExport,
+  onExportDrawio,
 }) => {
   return (
     <div className="w-full space-y-4">
@@ -130,13 +132,26 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </span>
         </div>
 
-        <button
-          onClick={onOpenBatchExport}
-          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-300 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/80 font-bold text-xs transition-all shadow-sm"
-        >
-          <span>📦</span>
-          <span>{lang === 'zh' ? '打包下载 (ZIP)' : 'Batch Export (ZIP)'}</span>
-        </button>
+        <div className="flex items-center gap-2">
+          {onExportDrawio && (
+            <button
+              onClick={onExportDrawio}
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-indigo-300 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/80 font-bold text-xs transition-all shadow-xs"
+              title={lang === 'zh' ? '直接下载 Draw.io 图库文件 (.xml)，拖入 Draw.io 即可使用' : 'Export as Draw.io Stencil (.xml)'}
+            >
+              <span>📐</span>
+              <span>{lang === 'zh' ? 'Draw.io 库 (.xml)' : 'Draw.io Library'}</span>
+            </button>
+          )}
+
+          <button
+            onClick={onOpenBatchExport}
+            className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-300 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/80 font-bold text-xs transition-all shadow-xs"
+          >
+            <span>📦</span>
+            <span>{lang === 'zh' ? '打包与调色' : 'Batch & Palette'}</span>
+          </button>
+        </div>
       </div>
     </div>
   );

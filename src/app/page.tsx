@@ -7,10 +7,12 @@ import { FilterBar } from '../components/FilterBar';
 import { IconCard } from '../components/IconCard';
 import { IconModal } from '../components/IconModal';
 import { BatchExportModal } from '../components/BatchExportModal';
+import { FloatingHudToast, HudToastState } from '../components/FloatingHudToast';
 import { AdSenseSlot } from '../components/AdSenseSlot';
 import { ICONS, PROVIDERS, CATEGORIES } from '../data/icons';
 import { IconMeta, CloudProvider, IconCategory } from '../types/icon';
-import { Sparkles, Layers, Download, CheckCircle2, Shield, Share2, BookOpen, Image as ImageIcon } from 'lucide-react';
+import { downloadDrawioLibrary } from '../lib/drawio';
+import { Sparkles, Layers, Download, CheckCircle2, Shield, BookOpen, FileCode2, Terminal } from 'lucide-react';
 
 export default function HomePage() {
   const [lang, setLang] = useState<'zh' | 'en'>('zh');
@@ -20,6 +22,7 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<IconCategory | 'all'>('all');
   const [activeModalIcon, setActiveModalIcon] = useState<IconMeta | null>(null);
   const [isBatchExportOpen, setIsBatchExportOpen] = useState<boolean>(false);
+  const [hudToast, setHudToast] = useState<HudToastState | null>(null);
 
   // Initialize theme based on user preference
   useEffect(() => {
@@ -48,6 +51,29 @@ export default function HomePage() {
     setLang((prev) => (prev === 'zh' ? 'en' : 'zh'));
   };
 
+  const handleNotify = (
+    title: string,
+    subtitle?: string,
+    type: 'copy' | 'download' | 'code' | 'success' = 'copy'
+  ) => {
+    setHudToast({ show: true, title, subtitle, type });
+    setTimeout(() => {
+      setHudToast((prev) => (prev?.title === title ? null : prev));
+    }, 2400);
+  };
+
+  // Direct Draw.io stencil library export
+  const handleExportDrawio = () => {
+    downloadDrawioLibrary(filteredIcons, `ArchIcons-Drawio-Library.xml`, { lang });
+    handleNotify(
+      lang === 'zh' ? '✓ Draw.io 图库文件已生成下载' : '✓ Draw.io Library Exported',
+      lang === 'zh'
+        ? `已导出 ${filteredIcons.length} 个图标，可直接拖入 Draw.io 左侧图库`
+        : `${filteredIcons.length} icons exported. Drag into Draw.io to use!`,
+      'download'
+    );
+  };
+
   // Filter & search logic
   const filteredIcons = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -71,7 +97,7 @@ export default function HomePage() {
       const nameZh = icon.name.zh.toLowerCase();
       if (nameEn.includes(query) || nameZh.includes(query)) return true;
 
-      // Match code (e.g. EC2, S3, LB)
+      // Match code (e.g. EC2, S3, LB, NGFW, TGW)
       if (icon.code && icon.code.toLowerCase().includes(query)) return true;
 
       // Match tags
@@ -86,7 +112,10 @@ export default function HomePage() {
   }, [searchQuery, selectedProvider, selectedCategory]);
 
   return (
-    <div className="flex-1 flex flex-col bg-grid-pattern">
+    <div className="flex-1 flex flex-col bg-grid-pattern min-h-screen">
+      {/* Floating Apple HUD Toast */}
+      <FloatingHudToast toast={hudToast} />
+
       <Header
         lang={lang}
         onToggleLang={toggleLang}
@@ -101,15 +130,15 @@ export default function HomePage() {
             <Sparkles className="w-3.5 h-3.5 text-blue-500" />
             <span>
               {lang === 'zh'
-                ? '云与网络架构矢量图标库'
-                : 'Cloud & Network Architecture Icons'}
+                ? '专业架构师中立矢量图标库 & Draw.io 原生生态'
+                : 'Vendor-Neutral Architecture Icons & Draw.io Stencils'}
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
             {lang === 'zh' ? (
               <>
-                主流云厂商与<span className="text-blue-600 dark:text-blue-400">中立架构图标库</span>
+                主流云厂商与<span className="text-blue-600 dark:text-blue-400">中立架构拓扑图标库</span>
               </>
             ) : (
               <>
@@ -118,10 +147,10 @@ export default function HomePage() {
             )}
           </h1>
 
-          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
             {lang === 'zh'
-              ? '支持一键复制 SVG / PNG、多云等价对照、逻辑拓扑与物理设备双模式。'
-              : 'Instant SVG & PNG copy, cross-cloud mapping, and logical & physical dual-mode topology icons.'}
+              ? '双色调高质感中立设备、Draw.io 图库导出、画布环境模拟、Mermaid/PlantUML 代码即图，专为网络工程师与解决方案专家打造。'
+              : 'Dual-tone neutral devices, Draw.io stencils, canvas context simulator & Diagrams-as-Code.'}
           </p>
         </div>
 
@@ -138,6 +167,7 @@ export default function HomePage() {
             totalCount={ICONS.length}
             filteredCount={filteredIcons.length}
             onOpenBatchExport={() => setIsBatchExportOpen(true)}
+            onExportDrawio={handleExportDrawio}
           />
         </div>
 
@@ -153,20 +183,21 @@ export default function HomePage() {
                 icon={icon}
                 lang={lang}
                 onSelect={(selected) => setActiveModalIcon(selected)}
+                onNotify={handleNotify}
               />
             ))}
           </div>
         ) : (
           /* Empty Search State */
-          <div className="text-center py-16 px-4 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 bg-white/50 dark:bg-slate-900/30">
+          <div className="text-center py-16 px-4 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 bg-white/50 dark:bg-slate-900/30">
             <Layers className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-            <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200">
+            <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">
               {lang === 'zh' ? '未找到匹配的图标' : 'No matching icons found'}
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
               {lang === 'zh'
-                ? '尝试搜索更通用的关键词，如 "S3", "防火墙", "EC2", "LB", 或切换分类/厂商。'
-                : 'Try searching for general terms like "S3", "firewall", "EC2", "LB", or reset filters.'}
+                ? '尝试搜索更通用的关键词，如 "Spine", "TGW", "WAF", "S3", "防火墙", 或切换厂商。'
+                : 'Try searching for general terms like "Spine", "TGW", "WAF", "S3", "Firewall", or reset filters.'}
             </p>
             <button
               onClick={() => {
@@ -174,7 +205,7 @@ export default function HomePage() {
                 setSelectedProvider('all');
                 setSelectedCategory('all');
               }}
-              className="mt-4 px-4 py-2 text-xs font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+              className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm"
             >
               {lang === 'zh' ? '重置所有筛选' : 'Reset all filters'}
             </button>
@@ -183,38 +214,53 @@ export default function HomePage() {
 
         {/* Educational Content & Architecture Guidelines (Vital for Google AdSense Approval & SEO) */}
         <section className="mt-20 pt-12 border-t border-slate-200 dark:border-slate-800">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-2 mb-6">
               <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+              <h2 className="text-xl font-extrabold text-slate-900 dark:text-white">
                 {lang === 'zh'
-                  ? '架构师拓扑图绘制实用指南 (Best Practices)'
+                  ? '架构师拓扑图绘制实用指南 (Architecture Best Practices)'
                   : 'Architecture Diagram Best Practices & Draw.io Guide'}
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
-                <h3 className="font-semibold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                  {lang === 'zh' ? '如何直接粘贴进 Draw.io / Figma' : 'How to Paste into Draw.io & Figma'}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              {/* 1. Draw.io Library Stencil */}
+              <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-xs">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                  <FileCode2 className="w-4 h-4 text-indigo-500" />
+                  {lang === 'zh' ? '在 Draw.io 中永久常驻图库' : 'Permanent Draw.io Stencil Library'}
                 </h3>
                 <p>
                   {lang === 'zh'
-                    ? '在本站点击任何图标卡片底部的「SVG」按钮，矢量代码已直接存入你的剪贴板。打开 Draw.io 或 Figma 画布，直接按下 Ctrl+V (或 Cmd+V)，图标即可作为高质量矢量图元无损粘贴，任意缩放不失真。'
-                    : 'Click the "SVG" button on any card to copy clean vector code directly into your clipboard. Then switch to Draw.io, Figma or Lucidchart and hit Ctrl+V (Cmd+V) to paste lossless vector graphics directly.'}
+                    ? '点击顶部工具栏的「Draw.io 库 (.xml)」按钮，将生成的 XML 文件下载到本地。在 Draw.io 中打开菜单「文件 -> 打开图库 -> 从设备」，选择该文件，全套中立设备即可永久常驻在你的 Draw.io 左侧栏！'
+                    : 'Click "Draw.io Library (.xml)" on the toolbar to export the XML stencil. Then in Draw.io, navigate to "File -> Open Library from -> Device". All neutral icons will permanently stay in your sidebar!'}
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
-                <h3 className="font-semibold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-blue-500" />
-                  {lang === 'zh' ? '通用中立图标的优势' : 'Why Use Vendor-Neutral Icons'}
+              {/* 2. Direct Paste */}
+              <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-xs">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                  {lang === 'zh' ? '1-Click 粘贴进 Figma / PPT' : 'Paste into Figma & PPT'}
                 </h3>
                 <p>
                   {lang === 'zh'
-                    ? '企业实际网络通常由多家厂商（如思科、华为、F5、以及多家公有云）混合组成。使用本站提供的通用中立设备图标（路由器、交换机、防火墙、负载均衡），不仅可以随意在线自定义颜色，还能保证整个企业技术方案风格的庄重与统一。'
-                    : 'Real-world enterprise architectures often span multiple hardware vendors and clouds. Neutral icons keep topology diagrams visually consistent and allow you to freely customize colors for logical zoning (DMZ, Internal, Transit VPC).'}
+                    ? '点击卡片底部的「SVG」按钮，矢量代码已存入剪贴板。在 Draw.io、Figma 或 PPT 中按下 Ctrl+V (Cmd+V)，图标即可作为高质量矢量图元无损粘贴，任意缩放不失真。点击「PNG」可直接贴入微信或文档。'
+                    : 'Click the "SVG" button on any card to copy clean vector code. Then in Figma or PowerPoint, hit Ctrl+V (Cmd+V) to paste lossless vector graphics directly.'}
+                </p>
+              </div>
+
+              {/* 3. Diagrams as Code */}
+              <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-xs">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base mb-2 flex items-center gap-2">
+                  <Terminal className="w-4 h-4 text-blue-500" />
+                  {lang === 'zh' ? 'Diagrams-as-Code (代码即图)' : 'Diagrams as Code Support'}
+                </h3>
+                <p>
+                  {lang === 'zh'
+                    ? '点击进入任意图标详情，在代码即图板块可一键复制 Mermaid.js、PlantUML 或 D2 拓扑声明语法，轻松在 Notion、Obsidian、GitHub README 或技术博客中用 Markdown 直接渲染架构拓扑。'
+                    : 'Open any icon detail modal to grab one-click Mermaid.js, PlantUML or D2 topology snippets for seamless architecture drafting in Notion, Obsidian and GitHub Markdown.'}
                 </p>
               </div>
             </div>
@@ -228,6 +274,7 @@ export default function HomePage() {
         lang={lang}
         onClose={() => setActiveModalIcon(null)}
         onSelectIcon={(icon) => setActiveModalIcon(icon)}
+        onNotify={handleNotify}
       />
 
       {/* Modal for batch packaging and unified theme color export */}
@@ -237,6 +284,7 @@ export default function HomePage() {
         lang={lang}
         allIcons={ICONS}
         filteredIcons={filteredIcons}
+        onNotify={handleNotify}
       />
 
       <Footer lang={lang} />

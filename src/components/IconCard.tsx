@@ -11,6 +11,7 @@ interface IconCardProps {
   lang: 'en' | 'zh';
   selectedColor?: string;
   onSelect: (icon: IconMeta) => void;
+  onNotify?: (title: string, subtitle?: string, type?: 'copy' | 'download' | 'code' | 'success') => void;
 }
 
 export const IconCard: React.FC<IconCardProps> = ({
@@ -18,6 +19,7 @@ export const IconCard: React.FC<IconCardProps> = ({
   lang,
   selectedColor,
   onSelect,
+  onNotify,
 }) => {
   const [copiedType, setCopiedType] = useState<'svg' | 'png' | null>(null);
 
@@ -40,6 +42,13 @@ export const IconCard: React.FC<IconCardProps> = ({
     if (success) {
       setCopiedType('svg');
       setTimeout(() => setCopiedType(null), 1800);
+      if (onNotify) {
+        onNotify(
+          lang === 'zh' ? '✓ SVG 矢量代码已复制' : '✓ SVG Code Copied',
+          `${icon.name[lang]} - 贴入 Draw.io / Figma`,
+          'copy'
+        );
+      }
     }
   };
 
@@ -50,6 +59,13 @@ export const IconCard: React.FC<IconCardProps> = ({
     if (res.success) {
       setCopiedType('png');
       setTimeout(() => setCopiedType(null), 1800);
+      if (onNotify) {
+        onNotify(
+          lang === 'zh' ? '✓ PNG 图像已复制' : '✓ PNG Image Copied',
+          `${icon.name[lang]} - 直接贴入 PPT/文档`,
+          'copy'
+        );
+      }
     } else {
       // If clipboard permission is restricted, fallback to instant download
       try {
@@ -62,6 +78,13 @@ export const IconCard: React.FC<IconCardProps> = ({
         URL.revokeObjectURL(url);
         setCopiedType('png');
         setTimeout(() => setCopiedType(null), 1800);
+        if (onNotify) {
+          onNotify(
+            lang === 'zh' ? '✓ PNG 图像已下载' : '✓ PNG Image Downloaded',
+            `${icon.id}.png`,
+            'download'
+          );
+        }
       } catch (err) {
         console.error('PNG conversion failed:', err);
       }
@@ -71,7 +94,7 @@ export const IconCard: React.FC<IconCardProps> = ({
   return (
     <div
       onClick={() => onSelect(icon)}
-      className="group relative flex flex-col justify-between p-3.5 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-800/90 bg-white dark:bg-slate-900 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-200 cursor-pointer"
+      className="group relative flex flex-col justify-between p-3.5 sm:p-4 rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-slate-900/90 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer backdrop-blur-xs"
     >
       {/* Top row: Badges with high-contrast text */}
       <div className="flex items-center justify-between gap-1 mb-2">
@@ -90,9 +113,9 @@ export const IconCard: React.FC<IconCardProps> = ({
       </div>
 
       {/* Center Icon View */}
-      <div className="h-16 sm:h-20 w-full flex items-center justify-center my-1 group-hover:scale-105 transition-transform duration-200">
+      <div className="h-16 sm:h-20 w-full flex items-center justify-center my-1 group-hover:scale-110 transition-transform duration-250">
         <div
-          className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center drop-shadow-sm"
+          className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center drop-shadow-xs"
           style={icon.isTintable ? { color: activeColor } : undefined}
           dangerouslySetInnerHTML={{ __html: icon.svgRaw }}
         />
@@ -100,23 +123,23 @@ export const IconCard: React.FC<IconCardProps> = ({
 
       {/* Title & Info with crystal-clear high contrast */}
       <div className="mt-2 text-center">
-        <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate" title={icon.name[lang]}>
+        <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" title={icon.name[lang]}>
           {icon.name[lang]}
         </h3>
-        <p className="text-[11px] font-medium text-slate-600 dark:text-slate-300 truncate mt-0.5">
+        <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate mt-0.5">
           {icon.name[lang === 'zh' ? 'en' : 'zh']}
         </p>
       </div>
 
       {/* Dual Copy Action Buttons with high contrast */}
-      <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 grid grid-cols-2 gap-1.5 text-xs font-semibold">
+      <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800/80 grid grid-cols-2 gap-1.5 text-xs font-semibold">
         {/* SVG Copy */}
         <button
           onClick={handleCopySvg}
-          className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg border transition-all ${
+          className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-xl border transition-all ${
             copiedType === 'svg'
-              ? 'bg-emerald-600 border-emerald-600 text-white font-bold shadow-sm'
-              : 'border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 hover:border-slate-400'
+              ? 'bg-emerald-600 border-emerald-600 text-white font-bold shadow-xs'
+              : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-700'
           }`}
           title={lang === 'zh' ? '复制 SVG 矢量代码到剪贴板' : 'Copy SVG code'}
         >
@@ -127,10 +150,10 @@ export const IconCard: React.FC<IconCardProps> = ({
         {/* PNG Copy */}
         <button
           onClick={handleCopyPng}
-          className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-lg border transition-all ${
+          className={`flex items-center justify-center gap-1 py-1.5 px-1.5 rounded-xl border transition-all ${
             copiedType === 'png'
-              ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-sm'
-              : 'border-blue-300 dark:border-blue-900 bg-blue-50/70 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/80 hover:border-blue-400'
+              ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-xs'
+              : 'border-blue-200 dark:border-blue-900 bg-blue-50/70 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/80'
           }`}
           title={lang === 'zh' ? '直接复制透明 PNG 图片到剪贴板 (可直接贴入 PPT/Word/微信)' : 'Copy PNG image to clipboard'}
         >

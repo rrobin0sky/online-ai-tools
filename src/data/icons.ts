@@ -51,19 +51,19 @@ export const CATEGORIES: CategoryMeta[] = [
 ];
 
 export const ICONS: IconMeta[] = [
-  // ==================== 1. 通用网络与设备 (Generic Network) ====================
+  // ==================== 1. 通用核心网络设备 (Generic Core Network - Dual Tone) ====================
   {
     id: 'generic-network-firewall',
     provider: 'generic',
     category: 'network',
-    name: { en: 'Firewall', zh: '防火墙' },
+    name: { en: 'Network Firewall', zh: '网络防火墙' },
     code: 'FW',
     tags: ['firewall', 'security', 'waf', 'perimeter', 'fanghuoqiang', '安全', '硬件防火墙', '边界'],
     equivalentGroup: 'network-firewall',
     isTintable: true,
     defaultColor: '#ef4444',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" fill-opacity="0.14"/><path d="m9 12 2 2 4-4"/></svg>`,
     description: { en: 'Vendor-neutral boundary network firewall', zh: '厂商中立边界网络防火墙设备' }
   },
   {
@@ -77,22 +77,64 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#0ea5e9',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m16 8-4 4-4-4"/><path d="m8 16 4-4 4 4"/><path d="M12 4v16"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="currentColor" fill-opacity="0.12"/><path d="m16 8-4 4-4-4"/><path d="m8 16 4-4 4 4"/><path d="M12 4v16"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>`,
     description: { en: 'Standard multi-interface network router', zh: '标准多接口三层网络路由设备' }
+  },
+  {
+    id: 'generic-network-spine',
+    provider: 'generic',
+    category: 'network',
+    name: { en: 'Spine Fabric Switch', zh: 'Spine 脊交换机' },
+    code: 'Spine',
+    tags: ['spine', 'spine-leaf', 'fabric', 'backbone', 'switch', 'jijiaohuanji', '脊交换机', '数据中心核心'],
+    equivalentGroup: 'network-switch',
+    isTintable: true,
+    defaultColor: '#1d4ed8',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="9" x="2" y="7.5" rx="2" fill="currentColor" fill-opacity="0.15"/><path d="M6 16.5v4M10 16.5v4M14 16.5v4M18 16.5v4"/><path d="M8 7.5V3.5M16 7.5V3.5"/><circle cx="6" cy="12" r="1" fill="currentColor"/><circle cx="10" cy="12" r="1" fill="currentColor"/><circle cx="14" cy="12" r="1" fill="currentColor"/><circle cx="18" cy="12" r="1" fill="currentColor"/></svg>`,
+    description: { en: 'High-speed spine switch for non-blocking data center fabric', zh: '数据中心无阻塞 Spine-Leaf 架构核心脊交换节点' }
+  },
+  {
+    id: 'generic-network-leaf',
+    provider: 'generic',
+    category: 'network',
+    name: { en: 'Leaf / ToR Switch', zh: 'Leaf 叶交换机 / 柜顶交换机' },
+    code: 'Leaf',
+    tags: ['leaf', 'tor', 'top-of-rack', 'spine-leaf', 'access', 'yejiaohuanji', '叶交换机', '柜顶交换机'],
+    equivalentGroup: 'network-switch',
+    isTintable: true,
+    defaultColor: '#0284c7',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="8" rx="2" fill="currentColor" fill-opacity="0.15"/><line x1="6" x2="6" y1="4" y2="8"/><line x1="18" x2="18" y1="4" y2="8"/><path d="M5 16v3M8 16v3M11 16v3M13 16v3M16 16v3M19 16v3"/><circle cx="7" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="17" cy="12" r="1" fill="currentColor"/></svg>`,
+    description: { en: 'Top-of-Rack server access leaf switch connecting servers to spine fabric', zh: '数据中心柜顶或服务器接入层叶交换节点' }
   },
   {
     id: 'generic-network-switch-l2',
     provider: 'generic',
     category: 'network',
-    name: { en: 'Network Switch (L2)', zh: '网络交换机 (二层)' },
+    name: { en: 'Network Switch (L2)', zh: '二层网络交换机' },
     code: 'SW',
     tags: ['switch', 'lan', 'ethernet', 'l2', 'jiaohuanji', '交换机', '局域网'],
     equivalentGroup: 'network-switch',
     isTintable: true,
     defaultColor: '#3b82f6',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor"/><circle cx="10" cy="12" r="1" fill="currentColor"/><circle cx="14" cy="12" r="1" fill="currentColor"/><circle cx="18" cy="12" r="1" fill="currentColor"/></svg>`,
-    description: { en: 'Layer 2 ethernet access/distribution switch', zh: '二层接入或汇聚以太网交换机' }
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="8" rx="2" fill="currentColor" fill-opacity="0.12"/><circle cx="6" cy="12" r="1.2" fill="currentColor"/><circle cx="10" cy="12" r="1.2" fill="currentColor"/><circle cx="14" cy="12" r="1.2" fill="currentColor"/><circle cx="18" cy="12" r="1.2" fill="currentColor"/></svg>`,
+    description: { en: 'Layer 2 ethernet access switch', zh: '二层接入以太网交换机' }
+  },
+  {
+    id: 'generic-network-switch-core',
+    provider: 'generic',
+    category: 'network',
+    name: { en: 'Core Chassis Switch', zh: '机框式核心交换机' },
+    code: 'Core-SW',
+    tags: ['core switch', 'chassis', 'l3', 'hexin', '交换机', '核心交换机', '骨干网'],
+    equivalentGroup: 'network-switch',
+    isTintable: true,
+    defaultColor: '#1d4ed8',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2" fill="currentColor" fill-opacity="0.14"/><path d="M2 12h20"/><circle cx="6" cy="9" r="1" fill="currentColor"/><circle cx="10" cy="9" r="1" fill="currentColor"/><circle cx="14" cy="9" r="1" fill="currentColor"/><circle cx="18" cy="9" r="1" fill="currentColor"/><circle cx="6" cy="15" r="1" fill="currentColor"/><circle cx="10" cy="15" r="1" fill="currentColor"/><circle cx="14" cy="15" r="1" fill="currentColor"/><circle cx="18" cy="15" r="1" fill="currentColor"/></svg>`,
+    description: { en: 'High-density backbone core chassis switch', zh: '企业骨干网或数据中心高密机框式核心交换机' }
   },
   {
     id: 'generic-network-lb',
@@ -105,8 +147,36 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#8b5cf6',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="6" x="3" y="3" rx="1"/><path d="M7 9v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9"/><path d="M12 9v12"/><path d="m9 18 3 3 3-3"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="6" x="3" y="3" rx="1.5" fill="currentColor" fill-opacity="0.15"/><path d="M7 9v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9"/><path d="M12 9v12"/><path d="m9 18 3 3 3-3"/><circle cx="12" cy="6" r="1" fill="currentColor"/></svg>`,
     description: { en: 'Hardware or software Layer 4/7 traffic load balancer', zh: '四层/七层通用流量负载均衡器' }
+  },
+  {
+    id: 'generic-network-tgw',
+    provider: 'generic',
+    category: 'network',
+    name: { en: 'Transit Gateway / Hub', zh: '跨网集中中继路由 (TGW)' },
+    code: 'TGW',
+    tags: ['transit gateway', 'tgw', 'cen', 'hub', 'interconnect', 'zhongjiluyou', '中继路由', '集中网关', '云企业网'],
+    equivalentGroup: 'network-tgw',
+    isTintable: true,
+    defaultColor: '#7c3aed',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.25"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/><path d="m5 5 4.5 4.5M14.5 14.5 19 19M19 5l-4.5 4.5M9.5 14.5 5 19"/></svg>`,
+    description: { en: 'Central hub that connects multiple VPCs and on-premises networks', zh: '连接多 VPC、多数据中心与分支机构的集中中继路由中枢' }
+  },
+  {
+    id: 'generic-network-onramp',
+    provider: 'generic',
+    category: 'network',
+    name: { en: 'Dedicated Cloud Leased Line', zh: '混合云专线接入网关' },
+    code: 'On-Ramp',
+    tags: ['direct connect', 'expressroute', 'on-ramp', 'leased line', 'gaosutongdao', '专线接入', '物理专线', '混合云'],
+    equivalentGroup: 'network-directconnect',
+    isTintable: true,
+    defaultColor: '#0891b2',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" fill="currentColor" fill-opacity="0.14"/><path d="M13 11l-3 4h4l-2 5"/><line x1="2" x2="6" y1="19" y2="19" stroke-width="2.5"/><line x1="18" x2="22" y1="19" y2="19" stroke-width="2.5"/></svg>`,
+    description: { en: 'Dedicated high-speed physical leased line connection to cloud environments', zh: '企业本地机房直连公有云的高速低延迟物理专线接入网关' }
   },
   {
     id: 'generic-network-internet',
@@ -118,7 +188,7 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#0284c7',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.1"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
     description: { en: 'Public Internet or wide area external network', zh: '公共互联网或广域外部网络' }
   },
   {
@@ -132,11 +202,125 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#10b981',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="10" x="5" y="11" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="10" x="5" y="11" rx="2" fill="currentColor" fill-opacity="0.14"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>`,
     description: { en: 'Encrypted site-to-site or client VPN gateway', zh: '端到端或客户端加密 VPN 接入网关' }
   },
+  {
+    id: 'generic-network-sdwan',
+    provider: 'generic',
+    category: 'network',
+    name: { en: 'SD-WAN Edge Gateway', zh: 'SD-WAN 智能边缘网关' },
+    code: 'SD-WAN',
+    tags: ['sd-wan', 'sdwan', 'branch', 'edge', 'gateway', 'zhinengwangguan', '广域网'],
+    isTintable: true,
+    defaultColor: '#059669',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12-3 3 3 3"/><path d="m19 12 3 3-3 3"/><rect width="12" height="8" x="6" y="11" rx="1.5" fill="currentColor" fill-opacity="0.15"/><path d="M12 2v9"/><circle cx="12" cy="4" r="2" fill="currentColor" fill-opacity="0.3"/></svg>`,
+    description: { en: 'Software-defined wide area network edge router', zh: '软件定义广域网智能分支/边缘互联接入网关' }
+  },
+  {
+    id: 'generic-network-dns',
+    provider: 'generic',
+    category: 'network',
+    name: { en: 'DNS Resolver / Authority', zh: 'DNS 域名权威解析' },
+    code: 'DNS',
+    tags: ['dns', 'domain', 'resolver', 'route', 'mingchengjiexi', '域名解析'],
+    equivalentGroup: 'network-dns',
+    isTintable: true,
+    defaultColor: '#6366f1',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="currentColor" fill-opacity="0.1"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>`,
+    description: { en: 'Domain name resolution and authoritative traffic steering', zh: '域名权威解析与智能网络寻址服务' }
+  },
 
-  // ==================== 2. 通用计算与容器 (Generic Compute) ====================
+  // ==================== 2. 通用安全与身份设备 (Generic Security - Dual Tone) ====================
+  {
+    id: 'generic-security-ngfw',
+    provider: 'generic',
+    category: 'security',
+    name: { en: 'Next-Gen Firewall (NGFW)', zh: '下一代深度防火墙 (NGFW)' },
+    code: 'NGFW',
+    tags: ['ngfw', 'next-gen firewall', 'ips', 'application firewall', 'xiayidai', '下一代防火墙', '应用识别', '深度检测'],
+    equivalentGroup: 'network-firewall',
+    isTintable: true,
+    defaultColor: '#dc2626',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" fill-opacity="0.15"/><rect width="6" height="6" x="9" y="8" rx="1" fill="currentColor" fill-opacity="0.25"/><path d="M12 6v2M12 14v2M7 11h2M15 11h2"/></svg>`,
+    description: { en: 'Next-generation application-aware deep packet inspection firewall', zh: '具备深度应用层识别、入侵阻断与威胁防护的高性能安全网关' }
+  },
+  {
+    id: 'generic-security-waf',
+    provider: 'generic',
+    category: 'security',
+    name: { en: 'Web Application Firewall (WAF)', zh: 'Web 应用防护系统 (WAF)' },
+    code: 'WAF',
+    tags: ['waf', 'web firewall', 'owasp', 'ddos', 'l7 security', 'yingyongfanghuoqiang', '应用防火墙', '防爬', 'Web安全'],
+    isTintable: true,
+    defaultColor: '#ea580c',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-9.8 8" stroke-dasharray="2 2"/><path d="M2.2 14A10 10 0 0 0 12 22"/><path d="M20 12a10 10 0 0 0-8-10"/><path d="M12 2a15 15 0 0 0-3 10"/><path d="M20 13c0 4-3.5 7-8 9-4.5-2-8-5-8-9V8l8-4 8 4v5z" fill="currentColor" fill-opacity="0.18"/></svg>`,
+    description: { en: 'Web Application Firewall protecting HTTP/HTTPS services against web attacks', zh: '阻断 SQL 注入、XSS、Web 漏洞利用与恶意爬虫的第七层应用防护系统' }
+  },
+  {
+    id: 'generic-security-bastion',
+    provider: 'generic',
+    category: 'security',
+    name: { en: 'Bastion / Jump Server', zh: '运维堡垒机 / 审计跳板机' },
+    code: 'Bastion',
+    tags: ['bastion', 'jumpbox', 'ssh', 'audit', 'baoleiji', '堡垒机', '跳板机', '运维审计'],
+    equivalentGroup: 'security-bastion',
+    isTintable: true,
+    defaultColor: '#b91c1c',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" fill="currentColor" fill-opacity="0.14"/><rect width="6" height="5" x="9" y="10" rx="1" fill="currentColor" fill-opacity="0.25"/><circle cx="12" cy="12.5" r="0.7" fill="currentColor"/></svg>`,
+    description: { en: 'Secure administrative jump box and session recording gateway', zh: '企业安全运维管理控制与命令审计堡垒机' }
+  },
+  {
+    id: 'generic-security-kms',
+    provider: 'generic',
+    category: 'security',
+    name: { en: 'Key Management & HSM', zh: '密钥管理与硬件加密机 (KMS/HSM)' },
+    code: 'KMS',
+    tags: ['kms', 'hsm', 'key', 'vault', 'encryption', 'miyaoguanli', '密码机', '密钥管理', '硬件加密'],
+    equivalentGroup: 'security-kms',
+    isTintable: true,
+    defaultColor: '#475569',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="3" fill="currentColor" fill-opacity="0.12"/><circle cx="10" cy="12" r="3" fill="currentColor" fill-opacity="0.25"/><path d="m12.5 13.5 6-6M17 9.5l1.5 1.5M15 11.5l1.5 1.5"/></svg>`,
+    description: { en: 'Hardware security module and centralized cryptographic key management', zh: '金融级硬件加密机 (HSM) 与集中式加密密钥管理凭证系统' }
+  },
+
+  // ==================== 3. 通用集成、中间件与网关 (Generic Integration - Dual Tone) ====================
+  {
+    id: 'generic-integration-apigw',
+    provider: 'generic',
+    category: 'integration',
+    name: { en: 'API Gateway / Reverse Proxy', zh: '通用 API 网关 / 反向代理' },
+    code: 'API-GW',
+    tags: ['api gateway', 'envoy', 'kong', 'reverse proxy', 'apisix', 'wangguan', 'API网关', '服务路由'],
+    equivalentGroup: 'integration-apigw',
+    isTintable: true,
+    defaultColor: '#059669',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="3" fill="currentColor" fill-opacity="0.1"/><path d="M3 9h18M9 21V9"/><circle cx="15" cy="15" r="2" fill="currentColor" fill-opacity="0.3"/><path d="M15 17v2"/></svg>`,
+    description: { en: 'Centralized API traffic gateway, rate limiting and microservice routing', zh: '统一微服务流量入口、鉴权、限流与安全路由网关' }
+  },
+  {
+    id: 'generic-integration-mq',
+    provider: 'generic',
+    category: 'integration',
+    name: { en: 'Message Queue / Event Bus', zh: '消息队列 / 事件总线' },
+    code: 'MQ',
+    tags: ['message queue', 'mq', 'kafka', 'rabbitmq', 'sqs', 'event bus', 'xiaoxiduilie', '消息队列', '事件驱动', '异步解耦'],
+    equivalentGroup: 'integration-mq',
+    isTintable: true,
+    defaultColor: '#d97706',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 18h16"/><rect width="4" height="6" x="5" y="9" rx="1" fill="currentColor" fill-opacity="0.25"/><rect width="4" height="6" x="11" y="9" rx="1" fill="currentColor" fill-opacity="0.25"/><rect width="4" height="6" x="17" y="9" rx="1" fill="currentColor" fill-opacity="0.25"/><path d="m2 12 2-2 2 2"/></svg>`,
+    description: { en: 'High-throughput asynchronous message broker and streaming event queue', zh: '高吞吐异步削峰填谷分布式消息总线与事件流系统' }
+  },
+
+  // ==================== 4. 通用计算与容器 (Generic Compute - Dual Tone) ====================
   {
     id: 'generic-compute-server',
     provider: 'generic',
@@ -147,7 +331,7 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#475569',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/><line x1="10" x2="14" y1="6" y2="6"/><line x1="10" x2="14" y1="18" y2="18"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" fill="currentColor" fill-opacity="0.12"/><rect width="20" height="8" x="2" y="14" rx="2" fill="currentColor" fill-opacity="0.12"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/><line x1="10" x2="16" y1="6" y2="6"/><line x1="10" x2="16" y1="18" y2="18"/></svg>`,
     description: { en: 'Dedicated on-premise rack server node', zh: '机架式独立物理服务器设备' }
   },
   {
@@ -161,21 +345,21 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#0284c7',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h6"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor" fill-opacity="0.1"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h6"/><circle cx="17" cy="16" r="1" fill="currentColor"/></svg>`,
     description: { en: 'Generic virtualized compute guest machine', zh: '通用虚拟化计算实例/云主机' }
   },
   {
     id: 'generic-compute-container',
     provider: 'generic',
     category: 'compute',
-    name: { en: 'Container / Docker', zh: '容器 / Docker 实例' },
+    name: { en: 'Container / Docker Instance', zh: '容器 / Docker 实例' },
     code: 'CTR',
     tags: ['container', 'docker', 'pod', 'cgroups', 'rongqi', '容器', '微服务'],
     equivalentGroup: 'compute-container',
     isTintable: true,
     defaultColor: '#06b6d4',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-9 5-9-5V8l9-5 9 5v8z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-9 5-9-5V8l9-5 9 5v8z" fill="currentColor" fill-opacity="0.14"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
     description: { en: 'Isolated application container instance', zh: '应用容器化轻量运行实例' }
   },
   {
@@ -189,11 +373,11 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#f59e0b',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5h3L11 10h4l-5 12 2-7H8l3-13z"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5h3L11 10h4l-5 12 2-7H8l3-13z" fill="currentColor" fill-opacity="0.2"/></svg>`,
     description: { en: 'Event-driven serverless computing function', zh: '无服务器事件驱动按需计算函数' }
   },
 
-  // ==================== 3. 通用存储与数据库 (Generic Storage & DB) ====================
+  // ==================== 5. 通用存储与数据库 (Generic Storage & DB - Dual Tone) ====================
   {
     id: 'generic-storage-object',
     provider: 'generic',
@@ -205,7 +389,7 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#10b981',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7a7 7 0 0 0-14 0c0 3 2 5 2 9h10c0-4 2-6 2-9Z"/><path d="M9 16v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-3"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7a7 7 0 0 0-14 0c0 3 2 5 2 9h10c0-4 2-6 2-9Z" fill="currentColor" fill-opacity="0.14"/><path d="M9 16v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-3"/></svg>`,
     description: { en: 'Cloud-agnostic scalable object storage bucket', zh: '通用海量非结构化对象存储桶' }
   },
   {
@@ -219,7 +403,7 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#64748b',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><circle cx="16" cy="12" r="2"/><path d="M6 12h4"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2" fill="currentColor" fill-opacity="0.12"/><circle cx="16" cy="12" r="2" fill="currentColor"/><path d="M6 12h4"/></svg>`,
     description: { en: 'High-performance attached block disk volume', zh: '高性能挂载块存储磁盘卷' }
   },
   {
@@ -233,7 +417,7 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#2563eb',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" fill="currentColor" fill-opacity="0.2"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>`,
     description: { en: 'Standard relational ACID database cluster', zh: '标准关系型 SQL 事务数据库系统' }
   },
   {
@@ -247,11 +431,184 @@ export const ICONS: IconMeta[] = [
     isTintable: true,
     defaultColor: '#dc2626',
     viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" fill="currentColor" fill-opacity="0.18"/></svg>`,
     description: { en: 'Ultra-low latency memory data cache', zh: '超低延迟高并发内存键值缓存' }
   },
 
-  // ==================== 4. AWS 官方服务图标 (Amazon Web Services) ====================
+  // ==================== 6. 边界域与高可用设备 (Generic Boundaries & HA) ====================
+  {
+    id: 'generic-general-ha-cluster',
+    provider: 'generic',
+    category: 'general',
+    name: { en: 'Active-Standby / HA Cluster', zh: '高可用双活/主备集群' },
+    code: 'HA-Pair',
+    tags: ['ha', 'high availability', 'active-standby', 'dual-engine', 'cluster', 'gaokeyong', '高可用', '双机热备', '双活'],
+    isTintable: true,
+    defaultColor: '#0284c7',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="16" x="2" y="4" rx="2" fill="currentColor" fill-opacity="0.15"/><rect width="8" height="16" x="14" y="4" rx="2" fill="currentColor" fill-opacity="0.15"/><path d="M10 9h4M10 15h4" stroke-dasharray="1 1.5"/><circle cx="6" cy="8" r="1" fill="currentColor"/><circle cx="18" cy="8" r="1" fill="currentColor"/></svg>`,
+    description: { en: 'Dual-engine redundant active-standby or active-active cluster pair', zh: '双机主备或负载双活容灾高可用架构单元' }
+  },
+  {
+    id: 'generic-boundary-idc',
+    provider: 'generic',
+    category: 'general',
+    name: { en: 'On-Premise Datacenter (IDC)', zh: '本地私有数据中心 (IDC)' },
+    code: 'IDC',
+    tags: ['idc', 'datacenter', 'on-premise', 'rack', 'jifang', '本地机房', '数据中心'],
+    isTintable: true,
+    defaultColor: '#334155',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" fill="currentColor" fill-opacity="0.12"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/><circle cx="5" cy="8" r="0.7" fill="currentColor"/><circle cx="5" cy="12" r="0.7" fill="currentColor"/><circle cx="5" cy="16" r="0.7" fill="currentColor"/></svg>`,
+    description: { en: 'Traditional on-premise enterprise server room or datacenter', zh: '企业本地私有机房或托管数据中心' }
+  },
+  {
+    id: 'generic-client-pc',
+    provider: 'generic',
+    category: 'general',
+    name: { en: 'Client Workstation / PC', zh: '用户终端 PC / 工作站' },
+    code: 'Client',
+    tags: ['client', 'pc', 'desktop', 'workstation', 'user', 'kehuji', '终端', '办公机'],
+    isTintable: true,
+    defaultColor: '#475569',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2" fill="currentColor" fill-opacity="0.1"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>`,
+    description: { en: 'End-user desktop computer or admin workstation', zh: '最终用户桌面电脑或管理员运维工作站' }
+  },
+
+  // ==================== 7. 物理设备与综合布线 (Physical Devices & Cabling) ====================
+  {
+    id: 'generic-physical-patch-panel',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U 24-Port Patch Panel / ODF', zh: '1U 24口网络配线架 / 光纤熔纤盘' },
+    code: 'PatchPanel',
+    tags: ['patch panel', 'odf', 'cabling', 'keystone', 'rj45', 'peixianjia', '配线架', '熔纤盘', '综合布线'],
+    isTintable: true,
+    defaultColor: '#334155',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5" fill="currentColor" fill-opacity="0.12"/><rect x="3" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/><rect x="6" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/><rect x="9" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/><rect x="13" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/><rect x="16" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/><rect x="19" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/></svg>`,
+    description: { en: '19-inch 1U modular keystone RJ45 or fiber optic distribution patch frame', zh: '机房标准 19 英寸 1U 模块化综合布线网络与光纤跳线管理配线架' }
+  },
+  {
+    id: 'generic-physical-rack-42u',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '42U Server Rack Cabinet', zh: '42U 标准服务器机柜' },
+    code: '42U-Rack',
+    tags: ['rack', 'cabinet', '42u', 'idc', 'jigui', '机柜', '服务器机柜', '机房'],
+    isTintable: true,
+    defaultColor: '#1e293b',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="22" x="3" y="1" rx="2" fill="currentColor" fill-opacity="0.08"/><line x1="7" x2="7" y1="1" y2="23"/><line x1="17" x2="17" y1="1" y2="23"/><line x1="7" x2="17" y1="5" y2="5"/><line x1="7" x2="17" y1="9" y2="9"/><line x1="7" x2="17" y1="13" y2="13"/><line x1="7" x2="17" y1="17" y2="17"/><line x1="7" x2="17" y1="21" y2="21"/><circle cx="19.5" cy="12" r="0.75" fill="currentColor"/></svg>`,
+    description: { en: 'Standard 19-inch 42U server and network equipment rack enclosure', zh: '标准 19 英寸 42U 数据中心服务器与网络设备装配机柜' }
+  },
+  {
+    id: 'generic-physical-switch-24p',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U 24-Port Gigabit Switch', zh: '1U 24口千兆交换机' },
+    code: 'SW-24P',
+    tags: ['switch', '24 port', 'gigabit', '1u', '24kou', '24口交换机', '千兆交换机'],
+    isTintable: true,
+    defaultColor: '#0ea5e9',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5" fill="currentColor" fill-opacity="0.1"/><line x1="4" x2="20" y1="12" y2="12" stroke-dasharray="1 1"/><circle cx="3" cy="12" r="0.5" fill="currentColor"/><circle cx="21" cy="12" r="0.5" fill="currentColor"/></svg>`,
+    description: { en: 'Standard 1U rackmount 24-port RJ45 ethernet access switch', zh: '标准 1U 机架式 24 口 RJ45 以太网接入交换机' }
+  },
+  {
+    id: 'generic-physical-switch-48p',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U 48-Port Enterprise Switch', zh: '1U 48口企业级交换机' },
+    code: 'SW-48P',
+    tags: ['switch', '48 port', 'enterprise', '1u', '48kou', '48口交换机', '高密汇聚'],
+    isTintable: true,
+    defaultColor: '#2563eb',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5" fill="currentColor" fill-opacity="0.1"/><line x1="3.5" x2="20.5" y1="10.5" y2="10.5" stroke-dasharray="0.8 0.8"/><line x1="3.5" x2="20.5" y1="13.5" y2="13.5" stroke-dasharray="0.8 0.8"/><rect x="18" y="10" width="3" height="4" rx="0.5" fill="currentColor" fill-opacity="0.3"/></svg>`,
+    description: { en: 'High-density 1U 48-port RJ45 enterprise switch', zh: '高密度 1U 48 口以太网汇聚交换机' }
+  },
+  {
+    id: 'generic-physical-switch-poe',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '1U 24-Port PoE+ Power Switch', zh: '1U 24口 PoE+ 供电交换机' },
+    code: 'PoE-SW',
+    tags: ['poe', 'poe+', 'switch', 'power', 'power over ethernet', 'gongdian', 'PoE交换机', '监控AP供电'],
+    isTintable: true,
+    defaultColor: '#f59e0b',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="8" x="1" y="8" rx="1.5" fill="currentColor" fill-opacity="0.1"/><line x1="4" x2="16" y1="12" y2="12" stroke-dasharray="1 1"/><path d="M19.5 9.5 17.5 12h2l-1 2.5"/></svg>`,
+    description: { en: 'Power over Ethernet (PoE+) switch supplying power to IP cameras and APs', zh: '支持 802.3at/af 标准为 AP 和摄像头远程供电的网络交换机' }
+  },
+  {
+    id: 'generic-physical-ap-ceiling',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: 'Enterprise Ceiling Wireless AP', zh: '企业吸顶式无线 AP' },
+    code: 'AP',
+    tags: ['ap', 'wireless', 'wifi', 'wifi6', 'wlan', 'access point', 'xidingshi', '无线接入点', '吸顶AP'],
+    isTintable: true,
+    defaultColor: '#059669',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="currentColor" fill-opacity="0.1"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>`,
+    description: { en: 'Ceiling or wall-mounted Wi-Fi 6/7 enterprise indoor access point', zh: '吸顶或壁挂式室内 Wi-Fi 6/7 企业级无线无线接入点' }
+  },
+  {
+    id: 'generic-physical-sfp',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '10G SFP+ Optical Module', zh: '10G SFP+ 光纤收发模块' },
+    code: 'SFP+',
+    tags: ['sfp', 'sfp+', 'optical', 'transceiver', '10g', 'guangmokuai', '光模块', '万兆光纤'],
+    isTintable: true,
+    defaultColor: '#6366f1',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="8" x="3" y="8" rx="1" fill="currentColor" fill-opacity="0.12"/><rect width="3" height="4" x="4" y="10" rx="0.5" fill="currentColor"/><rect width="3" height="4" x="8" y="10" rx="0.5" fill="currentColor"/><path d="M18 10h2v4h-2"/><line x1="14" x2="14" y1="8" y2="16"/></svg>`,
+    description: { en: 'Hot-pluggable optical transceiver module with duplex LC interface', zh: '双工 LC 接口可热插拔千兆/万兆光纤收发一体模块' }
+  },
+  {
+    id: 'generic-physical-fiber',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: 'Optical Fiber Patch Cable', zh: 'LC-LC 双芯光纤跳线' },
+    code: 'Fiber',
+    tags: ['fiber', 'optical', 'patch cord', 'lc-lc', 'single mode', 'multi mode', 'guangxian', '光纤线', '跳线'],
+    isTintable: true,
+    defaultColor: '#ea580c',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19C7 19 8 5 12 5s5 14 8 14"/><circle cx="4" cy="19" r="1.5" fill="currentColor"/><circle cx="20" cy="19" r="1.5" fill="currentColor"/><rect x="2" y="17.5" width="4" height="3" rx="0.5" fill="currentColor"/><rect x="18" y="17.5" width="4" height="3" rx="0.5" fill="currentColor"/></svg>`,
+    description: { en: 'Duplex single-mode or multi-mode optical fiber patch cord', zh: '带 LC 接口的双芯单模(黄色)/多模(橙色)设备互联光纤跳线' }
+  },
+  {
+    id: 'generic-physical-pdu',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: 'Rackmount 1U PDU Power Unit', zh: '机柜 1U 防雷 PDU 电源排插' },
+    code: 'PDU',
+    tags: ['pdu', 'power', 'rack', 'socket', 'surge', 'dianyuan', '排插', '机柜供电', '防雷PDU'],
+    isTintable: true,
+    defaultColor: '#dc2626',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="6" x="1" y="9" rx="1" fill="currentColor" fill-opacity="0.1"/><circle cx="5" cy="12" r="1.2"/><circle cx="9" cy="12" r="1.2"/><circle cx="13" cy="12" r="1.2"/><circle cx="17" cy="12" r="1.2"/><rect x="19.5" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/></svg>`,
+    description: { en: 'Standard 1U rack-mountable power distribution unit', zh: '标准 1U 8位防雷抗浪涌机架式机柜专用电源分配单元' }
+  },
+  {
+    id: 'generic-physical-ups',
+    provider: 'generic',
+    category: 'physical',
+    name: { en: '2U Rackmount Online UPS Power', zh: '2U 机架式在线 UPS 不间断电源' },
+    code: 'UPS',
+    tags: ['ups', 'battery', 'backup power', 'online ups', 'bujianduan', '不间断电源', '备用电源', '机房后备'],
+    isTintable: true,
+    defaultColor: '#475569',
+    viewBox: '0 0 24 24',
+    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="1.5" fill="currentColor" fill-opacity="0.1"/><line x1="2" x2="22" y1="12" y2="12"/><rect x="5" y="8" width="4" height="2" rx="0.5" fill="currentColor"/><path d="M15 8l-2 4h3l-2 4"/><circle cx="18" cy="9" r="0.5" fill="currentColor"/></svg>`,
+    description: { en: 'Rackmount online dual-conversion uninterruptible emergency power supply', zh: '机房专用 2U 在线式双变换后备应急不间断稳压电源系统' }
+  },
+
+  // ==================== 8. AWS 官方服务图标 (Amazon Web Services) ====================
   {
     id: 'aws-compute-ec2',
     provider: 'aws',
@@ -322,8 +679,106 @@ export const ICONS: IconMeta[] = [
     officialDocUrl: 'https://aws.amazon.com/elasticloadbalancing/',
     description: { en: 'Automatically distribute incoming application traffic across targets', zh: '自动将传入的应用流量分配到多个目标' }
   },
+  {
+    id: 'aws-network-tgw',
+    provider: 'aws',
+    category: 'network',
+    name: { en: 'AWS Transit Gateway', zh: 'AWS Transit Gateway 中继传输网关' },
+    code: 'TGW',
+    tags: ['aws', 'tgw', 'transit gateway', 'cen', 'hub', 'interconnect', 'zhongjiwangguan'],
+    equivalentGroup: 'network-tgw',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#8B5CF6" fill-opacity="0.12"/><circle cx="32" cy="32" r="10" stroke="#8B5CF6" stroke-width="3" fill="#8B5CF6" fill-opacity="0.2"/><path d="M32 12V22M32 42V52M12 32H22M42 32H52" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/><path d="M18 18L25 25M39 39L46 46M46 18L39 25M25 39L18 46" stroke="#8B5CF6" stroke-width="2.5"/></svg>`,
+    officialDocUrl: 'https://aws.amazon.com/transit-gateway/',
+    description: { en: 'Connects Amazon VPCs and on-premises networks through a central hub', zh: '通过单一中央中心将 VPC、AWS 账户和本地网络互连' }
+  },
+  {
+    id: 'aws-network-dx',
+    provider: 'aws',
+    category: 'network',
+    name: { en: 'AWS Direct Connect', zh: 'AWS Direct Connect 专线直连' },
+    code: 'DX',
+    tags: ['aws', 'direct connect', 'dx', 'leased line', 'peering', 'zhilianzhuanxian'],
+    equivalentGroup: 'network-directconnect',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#8B5CF6" fill-opacity="0.12"/><path d="M16 32H48" stroke="#8B5CF6" stroke-width="4" stroke-linecap="round"/><path d="M24 24L16 32L24 40" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 24L48 32L40 40" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="4" fill="#8B5CF6"/></svg>`,
+    officialDocUrl: 'https://aws.amazon.com/directconnect/',
+    description: { en: 'Dedicated network connection from your premises to AWS', zh: '建立从内部部署机房到 AWS 的高速专用网络连接' }
+  },
+  {
+    id: 'aws-integration-sqs',
+    provider: 'aws',
+    category: 'integration',
+    name: { en: 'Amazon Simple Queue Service (SQS)', zh: 'Amazon SQS 消息队列' },
+    code: 'SQS',
+    tags: ['aws', 'sqs', 'message queue', 'messaging', 'decouple', 'xiaoxiduilie'],
+    equivalentGroup: 'integration-mq',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#F59E0B" fill-opacity="0.12"/><rect x="16" y="24" width="10" height="16" rx="2" stroke="#F59E0B" stroke-width="3" fill="#F59E0B" fill-opacity="0.2"/><rect x="30" y="24" width="10" height="16" rx="2" stroke="#F59E0B" stroke-width="3" fill="#F59E0B" fill-opacity="0.2"/><rect x="44" y="24" width="6" height="16" rx="2" stroke="#F59E0B" stroke-width="3"/></svg>`,
+    officialDocUrl: 'https://aws.amazon.com/sqs/',
+    description: { en: 'Fully managed message queues for microservices, distributed systems', zh: '用于解耦和扩展微服务、分布式系统的完全托管消息队列服务' }
+  },
+  {
+    id: 'aws-integration-apigw',
+    provider: 'aws',
+    category: 'integration',
+    name: { en: 'Amazon API Gateway', zh: 'Amazon API Gateway 网关' },
+    code: 'API-GW',
+    tags: ['aws', 'api gateway', 'rest', 'websocket', 'routing', 'wangguan'],
+    equivalentGroup: 'integration-apigw',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#10B981" fill-opacity="0.12"/><rect x="18" y="18" width="28" height="28" rx="4" stroke="#10B981" stroke-width="3"/><path d="M18 30H46M30 18V46" stroke="#10B981" stroke-width="2.5"/><circle cx="38" cy="38" r="3" fill="#10B981"/></svg>`,
+    officialDocUrl: 'https://aws.amazon.com/api-gateway/',
+    description: { en: 'Create, maintain, and secure APIs at any scale', zh: '轻松创建、发布、维护、监控和保护任意规模的 API' }
+  },
+  {
+    id: 'aws-security-kms',
+    provider: 'aws',
+    category: 'security',
+    name: { en: 'AWS Key Management Service (KMS)', zh: 'AWS KMS 密钥管理服务' },
+    code: 'KMS',
+    tags: ['aws', 'kms', 'encryption', 'key', 'security', 'miyaoguanli'],
+    equivalentGroup: 'security-kms',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#EF4444" fill-opacity="0.12"/><circle cx="28" cy="32" r="10" stroke="#EF4444" stroke-width="3"/><path d="M38 32H50M46 32V38M50 32V38" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/></svg>`,
+    officialDocUrl: 'https://aws.amazon.com/kms/',
+    description: { en: 'Create and control keys used to encrypt or digitally sign your data', zh: '创建和控制用于加密或对数据进行数字签名的加密密钥' }
+  },
+  {
+    id: 'aws-db-dynamodb',
+    provider: 'aws',
+    category: 'database',
+    name: { en: 'Amazon DynamoDB', zh: 'Amazon DynamoDB NoSQL 数据库' },
+    code: 'DynamoDB',
+    tags: ['aws', 'dynamodb', 'nosql', 'key-value', 'document', 'shujuku'],
+    equivalentGroup: 'db-nosql',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#3B82F6" fill-opacity="0.12"/><rect x="18" y="16" width="28" height="32" rx="4" stroke="#3B82F6" stroke-width="3"/><path d="M24 26H40M24 34H40M24 42H34" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+    officialDocUrl: 'https://aws.amazon.com/dynamodb/',
+    description: { en: 'Fast, flexible NoSQL database service', zh: '具备个位数毫秒级性能的快速灵活 NoSQL 数据库服务' }
+  },
+  {
+    id: 'aws-network-route53',
+    provider: 'aws',
+    category: 'network',
+    name: { en: 'Amazon Route 53', zh: 'Amazon Route 53 DNS 解析' },
+    code: 'R53',
+    tags: ['aws', 'route53', 'dns', 'domain', 'routing', 'luyou53'],
+    equivalentGroup: 'network-dns',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#8B5CF6" fill-opacity="0.12"/><circle cx="32" cy="32" r="16" stroke="#8B5CF6" stroke-width="3"/><path d="M32 16A16 16 0 0 1 40 32A16 16 0 0 1 32 48" stroke="#8B5CF6" stroke-width="2.5"/><path d="M16 32H48" stroke="#8B5CF6" stroke-width="2.5"/></svg>`,
+    officialDocUrl: 'https://aws.amazon.com/route53/',
+    description: { en: 'Highly available and scalable cloud DNS web service', zh: '高可用且高度可扩展的云域名系统 (DNS) 网络服务' }
+  },
 
-  // ==================== 5. Azure 微软云服务 (Microsoft Azure) ====================
+  // ==================== 9. Azure 微软云服务 (Microsoft Azure) ====================
   {
     id: 'azure-compute-vm',
     provider: 'azure',
@@ -348,9 +803,9 @@ export const ICONS: IconMeta[] = [
     equivalentGroup: 'storage-object',
     isTintable: false,
     viewBox: '0 0 64 64',
-    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#0089D6" fill-opacity="0.12"/><path d="M20 22C20 18.6863 25.3726 16 32 16C38.6274 16 44 18.6863 44 22V42C44 45.3137 38.6274 48 32 48C25.3726 48 20 45.3137 20 42V22Z" fill="#0089D6" fill-opacity="0.3" stroke="#0089D6" stroke-width="3"/><path d="M20 30C20 33.3137 25.3726 36 32 36C38.6274 36 44 33.3137 44 30" stroke="#0089D6" stroke-width="3"/></svg>`,
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#0089D6" fill-opacity="0.12"/><path d="M20 22C20 18.6863 25.3726 16 32 16C38.6274 16 44 18.6863 44 22V42C44 45.3137 38.6274 48 32 48C25.3726 48 20 45.3137 20 42V22Z" fill="#0089D6" fill-opacity="0.2" stroke="#0089D6" stroke-width="3"/><path d="M20 30C20 33.3137 25.3726 36 32 36C38.6274 36 44 33.3137 44 30" stroke="#0089D6" stroke-width="3"/></svg>`,
     officialDocUrl: 'https://azure.microsoft.com/products/storage/blobs/',
-    description: { en: 'Massively scalable and secure object storage for unstructured data', zh: '面向海量非结构化数据的安全且高扩展对象存储' }
+    description: { en: 'Massively scalable and secure object storage', zh: '面向海量非结构化数据的安全且高扩展对象存储' }
   },
   {
     id: 'azure-db-sql',
@@ -364,10 +819,10 @@ export const ICONS: IconMeta[] = [
     viewBox: '0 0 64 64',
     svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#0089D6" fill-opacity="0.12"/><ellipse cx="32" cy="20" rx="16" ry="6" stroke="#0089D6" stroke-width="3"/><path d="M16 20V44C16 47.3137 23.1634 50 32 50C40.8366 50 48 47.3137 48 44V20" stroke="#0089D6" stroke-width="3"/><path d="M16 32C16 35.3137 23.1634 38 32 38C40.8366 38 48 35.3137 48 32" stroke="#0089D6" stroke-width="3"/></svg>`,
     officialDocUrl: 'https://azure.microsoft.com/products/azure-sql/database/',
-    description: { en: 'Always up-to-date, fully managed relational database built for cloud', zh: '始终保持最新、专为云构建的完全托管型 SQL 数据库' }
+    description: { en: 'Always up-to-date, fully managed relational database', zh: '始终保持最新、专为云构建的完全托管型 SQL 数据库' }
   },
 
-  // ==================== 6. 阿里云 (Alibaba Cloud) ====================
+  // ==================== 10. 阿里云 (Alibaba Cloud) ====================
   {
     id: 'aliyun-compute-ecs',
     provider: 'aliyun',
@@ -380,7 +835,7 @@ export const ICONS: IconMeta[] = [
     viewBox: '0 0 64 64',
     svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#FF6A00" fill-opacity="0.12"/><path d="M18 24H46V40H18V24Z" stroke="#FF6A00" stroke-width="3" stroke-linejoin="round"/><path d="M26 40V46H38V40" stroke="#FF6A00" stroke-width="3"/><circle cx="24" cy="32" r="2" fill="#FF6A00"/><circle cx="32" cy="32" r="2" fill="#FF6A00"/></svg>`,
     officialDocUrl: 'https://www.aliyun.com/product/ecs',
-    description: { en: 'Safe, stable, and scalable computing capacity by Alibaba Cloud', zh: '阿里云安全稳定、弹性扩展的高性能计算服务' }
+    description: { en: 'Safe, stable, and scalable computing capacity', zh: '阿里云安全稳定、弹性扩展的高性能计算服务' }
   },
   {
     id: 'aliyun-storage-oss',
@@ -394,7 +849,7 @@ export const ICONS: IconMeta[] = [
     viewBox: '0 0 64 64',
     svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#FF6A00" fill-opacity="0.12"/><rect x="18" y="18" width="28" height="28" rx="6" stroke="#FF6A00" stroke-width="3"/><circle cx="32" cy="32" r="6" stroke="#FF6A00" stroke-width="3"/></svg>`,
     officialDocUrl: 'https://www.aliyun.com/product/oss',
-    description: { en: 'Massive, secure, low-cost and high-reliability cloud storage', zh: '海量、安全、低成本、高可靠的云存储服务' }
+    description: { en: 'Massive, secure, low-cost cloud storage', zh: '海量、安全、低成本、高可靠的云存储服务' }
   },
   {
     id: 'aliyun-db-rds',
@@ -410,8 +865,36 @@ export const ICONS: IconMeta[] = [
     officialDocUrl: 'https://www.aliyun.com/product/rds/mysql',
     description: { en: 'High-availability automated relational database service', zh: '完全托管、高可用高可靠的在线关系型数据库' }
   },
+  {
+    id: 'aliyun-network-slb',
+    provider: 'aliyun',
+    category: 'network',
+    name: { en: 'Server Load Balancer (SLB/ALB)', zh: '阿里云 SLB/ALB 负载均衡' },
+    code: 'SLB',
+    tags: ['aliyun', 'slb', 'alb', 'load balancer', 'fuzaijunheng', '分发'],
+    equivalentGroup: 'network-lb',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#FF6A00" fill-opacity="0.12"/><circle cx="32" cy="32" r="16" stroke="#FF6A00" stroke-width="3"/><path d="M24 32H40M32 24V40" stroke="#FF6A00" stroke-width="3" stroke-linecap="round"/></svg>`,
+    officialDocUrl: 'https://www.aliyun.com/product/slb',
+    description: { en: 'High-traffic layer 4 and layer 7 load balancing service', zh: '阿里云高性能四层与七层流量负载均衡服务' }
+  },
+  {
+    id: 'aliyun-network-cen',
+    provider: 'aliyun',
+    category: 'network',
+    name: { en: 'Cloud Enterprise Network (CEN)', zh: '阿里云云企业网 (CEN)' },
+    code: 'CEN',
+    tags: ['aliyun', 'cen', 'transit gateway', 'cross-region', 'yunqiyewang', '中继网络'],
+    equivalentGroup: 'network-tgw',
+    isTintable: false,
+    viewBox: '0 0 64 64',
+    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#FF6A00" fill-opacity="0.12"/><circle cx="32" cy="32" r="12" stroke="#FF6A00" stroke-width="3"/><path d="M20 20L44 44M44 20L20 44" stroke="#FF6A00" stroke-width="3"/></svg>`,
+    officialDocUrl: 'https://www.aliyun.com/product/cns',
+    description: { en: 'Enterprise-class network connecting VPCs across regions globally', zh: '提供全球多地域 VPC 间及 VPC 与本地数据中心的高速互通网络' }
+  },
 
-  // ==================== 7. Kubernetes / 云原生 (K8s & Cloud Native) ====================
+  // ==================== 11. Kubernetes / 云原生 (K8s & Cloud Native) ====================
   {
     id: 'k8s-compute-pod',
     provider: 'k8s',
@@ -440,133 +923,6 @@ export const ICONS: IconMeta[] = [
     officialDocUrl: 'https://kubernetes.io/docs/concepts/services-networking/service/',
     description: { en: 'Abstract way to expose an application running on Pods', zh: '将运行在一组 Pod 上的应用公开为网络服务的抽象' }
   },
-
-  // ==================== 8. 扩展通用中立设备 (Expanded Neutral Devices) ====================
-  {
-    id: 'generic-network-switch-core',
-    provider: 'generic',
-    category: 'network',
-    name: { en: 'Core Chassis Switch', zh: '核心/机框式交换机' },
-    code: 'Core-SW',
-    tags: ['core switch', 'chassis', 'l3', 'hexin', '交换机', '核心交换机', '骨干网'],
-    equivalentGroup: 'network-switch',
-    isTintable: true,
-    defaultColor: '#1d4ed8',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M2 12h20"/><circle cx="6" cy="9" r="1" fill="currentColor"/><circle cx="10" cy="9" r="1" fill="currentColor"/><circle cx="14" cy="9" r="1" fill="currentColor"/><circle cx="18" cy="9" r="1" fill="currentColor"/><circle cx="6" cy="15" r="1" fill="currentColor"/><circle cx="10" cy="15" r="1" fill="currentColor"/><circle cx="14" cy="15" r="1" fill="currentColor"/><circle cx="18" cy="15" r="1" fill="currentColor"/></svg>`,
-    description: { en: 'High-density backbone core chassis switch', zh: '企业骨干网或数据中心高密机框式核心交换机' }
-  },
-  {
-    id: 'generic-network-sdwan',
-    provider: 'generic',
-    category: 'network',
-    name: { en: 'SD-WAN Edge Gateway', zh: 'SD-WAN 智能边缘网关' },
-    code: 'SD-WAN',
-    tags: ['sd-wan', 'sdwan', 'branch', 'edge', 'gateway', 'zhinengwangguan', '广域网'],
-    isTintable: true,
-    defaultColor: '#059669',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12-3 3 3 3"/><path d="m19 12 3 3-3 3"/><rect width="12" height="8" x="6" y="11" rx="1.5"/><path d="M12 2v9"/><circle cx="12" cy="4" r="2"/></svg>`,
-    description: { en: 'Software-defined wide area network edge router', zh: '软件定义广域网智能分支/边缘互联接入网关' }
-  },
-  {
-    id: 'generic-security-bastion',
-    provider: 'generic',
-    category: 'security',
-    name: { en: 'Bastion / Jump Server', zh: '运维堡垒机 / 审计跳板机' },
-    code: 'Bastion',
-    tags: ['bastion', 'jumpbox', 'ssh', 'audit', 'baoleiji', '堡垒机', '跳板机', '运维审计'],
-    equivalentGroup: 'security-bastion',
-    isTintable: true,
-    defaultColor: '#b91c1c',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/><rect width="6" height="5" x="9" y="10" rx="1"/><circle cx="12" cy="12.5" r="0.5" fill="currentColor"/></svg>`,
-    description: { en: 'Secure administrative jump box and session recording gateway', zh: '企业安全运维管理控制与命令审计堡垒机' }
-  },
-  {
-    id: 'generic-network-dns',
-    provider: 'generic',
-    category: 'network',
-    name: { en: 'DNS Resolver / Authority', zh: 'DNS 域名解析服务' },
-    code: 'DNS',
-    tags: ['dns', 'domain', 'resolver', 'route', 'mingchengjiexi', '域名解析'],
-    equivalentGroup: 'network-dns',
-    isTintable: true,
-    defaultColor: '#6366f1',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>`,
-    description: { en: 'Domain name resolution and authoritative traffic steering', zh: '域名权威解析与智能网络寻址服务' }
-  },
-  {
-    id: 'generic-boundary-idc',
-    provider: 'generic',
-    category: 'general',
-    name: { en: 'On-Premise Datacenter (IDC)', zh: '本地私有数据中心 (IDC)' },
-    code: 'IDC',
-    tags: ['idc', 'datacenter', 'on-premise', 'rack', 'jifang', '本地机房', '数据中心'],
-    isTintable: true,
-    defaultColor: '#334155',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/><circle cx="5" cy="8" r="0.5" fill="currentColor"/><circle cx="5" cy="12" r="0.5" fill="currentColor"/><circle cx="5" cy="16" r="0.5" fill="currentColor"/></svg>`,
-    description: { en: 'Traditional on-premise enterprise server room or datacenter', zh: '企业本地私有机房或托管数据中心' }
-  },
-  {
-    id: 'generic-client-pc',
-    provider: 'generic',
-    category: 'general',
-    name: { en: 'Client Workstation / PC', zh: '用户终端 PC / 工作站' },
-    code: 'Client',
-    tags: ['client', 'pc', 'desktop', 'workstation', 'user', 'kehuji', '终端', '办公机'],
-    isTintable: true,
-    defaultColor: '#475569',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>`,
-    description: { en: 'End-user desktop computer or admin workstation', zh: '最终用户桌面电脑或管理员运维工作站' }
-  },
-
-  // ==================== 9. 扩展云厂商与开源生态 (Expanded Cloud & OpenSource) ====================
-  {
-    id: 'aws-db-dynamodb',
-    provider: 'aws',
-    category: 'database',
-    name: { en: 'Amazon DynamoDB', zh: 'Amazon DynamoDB NoSQL 数据库' },
-    code: 'DynamoDB',
-    tags: ['aws', 'dynamodb', 'nosql', 'key-value', 'document', 'shujuku'],
-    equivalentGroup: 'db-nosql',
-    isTintable: false,
-    viewBox: '0 0 64 64',
-    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#3B82F6" fill-opacity="0.12"/><rect x="18" y="16" width="28" height="32" rx="4" stroke="#3B82F6" stroke-width="3"/><path d="M24 26H40M24 34H40M24 42H34" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/></svg>`,
-    officialDocUrl: 'https://aws.amazon.com/dynamodb/',
-    description: { en: 'Fast, flexible NoSQL database service for single-digit millisecond performance', zh: '具备个位数毫秒级性能的快速灵活 NoSQL 数据库服务' }
-  },
-  {
-    id: 'aws-network-route53',
-    provider: 'aws',
-    category: 'network',
-    name: { en: 'Amazon Route 53', zh: 'Amazon Route 53 DNS 解析' },
-    code: 'R53',
-    tags: ['aws', 'route53', 'dns', 'domain', 'routing', 'luyou53'],
-    equivalentGroup: 'network-dns',
-    isTintable: false,
-    viewBox: '0 0 64 64',
-    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#8B5CF6" fill-opacity="0.12"/><circle cx="32" cy="32" r="16" stroke="#8B5CF6" stroke-width="3"/><path d="M32 16A16 16 0 0 1 40 32A16 16 0 0 1 32 48" stroke="#8B5CF6" stroke-width="2.5"/><path d="M16 32H48" stroke="#8B5CF6" stroke-width="2.5"/></svg>`,
-    officialDocUrl: 'https://aws.amazon.com/route53/',
-    description: { en: 'Highly available and scalable cloud Domain Name System (DNS) web service', zh: '高可用且高度可扩展的云域名系统 (DNS) 网络服务' }
-  },
-  {
-    id: 'aliyun-network-slb',
-    provider: 'aliyun',
-    category: 'network',
-    name: { en: 'Server Load Balancer (SLB/ALB)', zh: '阿里云 SLB/ALB 负载均衡' },
-    code: 'SLB',
-    tags: ['aliyun', 'slb', 'alb', 'load balancer', 'fuzaijunheng', '分发'],
-    equivalentGroup: 'network-lb',
-    isTintable: false,
-    viewBox: '0 0 64 64',
-    svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#FF6A00" fill-opacity="0.12"/><circle cx="32" cy="32" r="16" stroke="#FF6A00" stroke-width="3"/><path d="M24 32H40M32 24V40" stroke="#FF6A00" stroke-width="3" stroke-linecap="round"/></svg>`,
-    officialDocUrl: 'https://www.aliyun.com/product/slb',
-    description: { en: 'High-traffic layer 4 and layer 7 load balancing service by Alibaba Cloud', zh: '阿里云高性能四层与七层流量负载均衡服务' }
-  },
   {
     id: 'k8s-compute-docker',
     provider: 'k8s',
@@ -594,139 +950,5 @@ export const ICONS: IconMeta[] = [
     svgRaw: `<svg viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="12" fill="#EF4444" fill-opacity="0.12"/><path d="M18 24L32 16L46 24L32 32L18 24Z" stroke="#EF4444" stroke-width="3" stroke-linejoin="round"/><path d="M18 32L32 40L46 32" stroke="#EF4444" stroke-width="3" stroke-linejoin="round"/><path d="M18 40L32 48L46 40" stroke="#EF4444" stroke-width="3" stroke-linejoin="round"/></svg>`,
     officialDocUrl: 'https://redis.io/',
     description: { en: 'Ultra-fast in-memory key-value data structure store', zh: '高性能开源分布式内存键值数据存储与缓存' }
-  },
-
-  // ==================== 10. 物理设备与综合布线 (Physical Devices & Cabling) ====================
-  {
-    id: 'generic-physical-rack-42u',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: '42U Server Rack Cabinet', zh: '42U 标准服务器机柜' },
-    code: '42U-Rack',
-    tags: ['rack', 'cabinet', '42u', 'idc', 'jigui', '机柜', '服务器机柜', '机房'],
-    isTintable: true,
-    defaultColor: '#1e293b',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="22" x="3" y="1" rx="2"/><line x1="7" x2="7" y1="1" y2="23"/><line x1="17" x2="17" y1="1" y2="23"/><line x1="7" x2="17" y1="5" y2="5"/><line x1="7" x2="17" y1="9" y2="9"/><line x1="7" x2="17" y1="13" y2="13"/><line x1="7" x2="17" y1="17" y2="17"/><line x1="7" x2="17" y1="21" y2="21"/><circle cx="19.5" cy="12" r="0.75" fill="currentColor"/></svg>`,
-    description: { en: 'Standard 19-inch 42U server and network equipment rack enclosure', zh: '标准 19 英寸 42U 数据中心服务器与网络设备装配机柜' }
-  },
-  {
-    id: 'generic-physical-switch-24p',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: '1U 24-Port Gigabit Switch', zh: '1U 24口千兆交换机' },
-    code: 'SW-24P',
-    tags: ['switch', '24 port', 'gigabit', '1u', '24kou', '24口交换机', '千兆交换机'],
-    isTintable: true,
-    defaultColor: '#0ea5e9',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5"/><line x1="4" x2="20" y1="12" y2="12" stroke-dasharray="1 1"/><circle cx="3" cy="12" r="0.5" fill="currentColor"/><circle cx="21" cy="12" r="0.5" fill="currentColor"/></svg>`,
-    description: { en: 'Standard 1U rackmount 24-port RJ45 ethernet access switch', zh: '标准 1U 机架式 24 口 RJ45 以太网接入交换机' }
-  },
-  {
-    id: 'generic-physical-switch-48p',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: '1U 48-Port Enterprise Switch', zh: '1U 48口企业级交换机' },
-    code: 'SW-48P',
-    tags: ['switch', '48 port', 'enterprise', '1u', '48kou', '48口交换机', '高密汇聚'],
-    isTintable: true,
-    defaultColor: '#2563eb',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5"/><line x1="3.5" x2="20.5" y1="10.5" y2="10.5" stroke-dasharray="0.8 0.8"/><line x1="3.5" x2="20.5" y1="13.5" y2="13.5" stroke-dasharray="0.8 0.8"/><rect x="18" y="10" width="3" height="4" rx="0.5"/></svg>`,
-    description: { en: 'High-density 1U 48-port RJ45 plus 4 SFP+ uplink ports enterprise switch', zh: '高密度 1U 48 口以太网并带 4 路上行万兆光口的汇聚交换机' }
-  },
-  {
-    id: 'generic-physical-switch-poe',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: '1U 24-Port PoE+ Power Switch', zh: '1U 24口 PoE+ 供电交换机' },
-    code: 'PoE-SW',
-    tags: ['poe', 'poe+', 'switch', 'power', 'power over ethernet', 'gongdian', 'PoE交换机', '监控AP供电'],
-    isTintable: true,
-    defaultColor: '#f59e0b',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="8" x="1" y="8" rx="1.5"/><line x1="4" x2="16" y1="12" y2="12" stroke-dasharray="1 1"/><path d="M19.5 9.5 17.5 12h2l-1 2.5"/></svg>`,
-    description: { en: 'Power over Ethernet (PoE+) switch supplying power to IP cameras and APs', zh: '支持 802.3at/af 标准为 AP 和摄像头远程供电的网络交换机' }
-  },
-  {
-    id: 'generic-physical-switch-nonpoe',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: '1U Non-PoE Standard Switch', zh: '1U 24口非 PoE 交换机' },
-    code: 'Non-PoE',
-    tags: ['non-poe', 'switch', 'feipoe', '普通交换机', '数据接入'],
-    isTintable: true,
-    defaultColor: '#64748b',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="7" x="1" y="8.5" rx="1.5"/><line x1="4" x2="18" y1="12" y2="12" stroke-dasharray="1 1"/><line x1="18.5" x2="20.5" y1="10.5" y2="13.5"/></svg>`,
-    description: { en: 'Standard non-powered data switching device for regular workstations', zh: '纯数据传输无供电功能的标准网络接入交换设备' }
-  },
-  {
-    id: 'generic-physical-ap-ceiling',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: 'Enterprise Ceiling Wireless AP', zh: '企业吸顶式无线 AP' },
-    code: 'AP',
-    tags: ['ap', 'wireless', 'wifi', 'wifi6', 'wlan', 'access point', 'xidingshi', '无线接入点', '吸顶AP'],
-    isTintable: true,
-    defaultColor: '#059669',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>`,
-    description: { en: 'Ceiling or wall-mounted Wi-Fi 6/7 enterprise indoor access point', zh: '吸顶或壁挂式室内 Wi-Fi 6/7 企业级无线无线接入点' }
-  },
-  {
-    id: 'generic-physical-sfp',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: '10G SFP+ Optical Module', zh: '10G SFP+ 光纤收发模块' },
-    code: 'SFP+',
-    tags: ['sfp', 'sfp+', 'optical', 'transceiver', '10g', 'guangmokuai', '光模块', '万兆光纤'],
-    isTintable: true,
-    defaultColor: '#6366f1',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="8" x="3" y="8" rx="1"/><rect width="3" height="4" x="4" y="10" rx="0.5"/><rect width="3" height="4" x="8" y="10" rx="0.5"/><path d="M18 10h2v4h-2"/><line x1="14" x2="14" y1="8" y2="16"/></svg>`,
-    description: { en: 'Hot-pluggable optical transceiver module with duplex LC interface', zh: '双工 LC 接口可热插拔千兆/万兆光纤收发一体模块' }
-  },
-  {
-    id: 'generic-physical-fiber',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: 'Optical Fiber Patch Cable', zh: 'LC-LC 双芯光纤跳线' },
-    code: 'Fiber',
-    tags: ['fiber', 'optical', 'patch cord', 'lc-lc', 'single mode', 'multi mode', 'guangxian', '光纤线', '跳线'],
-    isTintable: true,
-    defaultColor: '#ea580c',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19C7 19 8 5 12 5s5 14 8 14"/><circle cx="4" cy="19" r="1.5" fill="currentColor"/><circle cx="20" cy="19" r="1.5" fill="currentColor"/><rect x="2" y="17.5" width="4" height="3" rx="0.5"/><rect x="18" y="17.5" width="4" height="3" rx="0.5"/></svg>`,
-    description: { en: 'Duplex single-mode or multi-mode optical fiber patch cord with LC connectors', zh: '带 LC 接口的双芯单模(黄色)/多模(橙色)设备互联光纤跳线' }
-  },
-  {
-    id: 'generic-physical-pdu',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: 'Rackmount 1U PDU Power Unit', zh: '机柜 1U 防雷 PDU 电源排插' },
-    code: 'PDU',
-    tags: ['pdu', 'power', 'rack', 'socket', 'surge', 'dianyuan', '排插', '机柜供电', '防雷PDU'],
-    isTintable: true,
-    defaultColor: '#dc2626',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="6" x="1" y="9" rx="1"/><circle cx="5" cy="12" r="1.2"/><circle cx="9" cy="12" r="1.2"/><circle cx="13" cy="12" r="1.2"/><circle cx="17" cy="12" r="1.2"/><rect x="19.5" y="10.5" width="2" height="3" rx="0.5" fill="currentColor"/></svg>`,
-    description: { en: 'Standard 1U rack-mountable power distribution unit with surge protection', zh: '标准 1U 8位防雷抗浪涌机架式机柜专用电源分配单元' }
-  },
-  {
-    id: 'generic-physical-ups',
-    provider: 'generic',
-    category: 'physical',
-    name: { en: '2U Rackmount Online UPS Power', zh: '2U 机架式在线 UPS 不间断电源' },
-    code: 'UPS',
-    tags: ['ups', 'battery', 'backup power', 'online ups', 'bujianduan', '不间断电源', '备用电源', '机房后备'],
-    isTintable: true,
-    defaultColor: '#475569',
-    viewBox: '0 0 24 24',
-    svgRaw: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="1.5"/><line x1="2" x2="22" y1="12" y2="12"/><rect x="5" y="8" width="4" height="2" rx="0.5"/><path d="M15 8l-2 4h3l-2 4"/><circle cx="18" cy="9" r="0.5" fill="currentColor"/></svg>`,
-    description: { en: 'Rackmount online dual-conversion uninterruptible emergency power supply', zh: '机房专用 2U 在线式双变换后备应急不间断稳压电源系统' }
   }
 ];
-
-
