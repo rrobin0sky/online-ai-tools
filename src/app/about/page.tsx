@@ -16,7 +16,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-grid-pattern min-h-screen">
+    <div className="flex-1 flex flex-col bg-white dark:bg-[#09090b] min-h-screen text-slate-900 dark:text-white transition-colors">
       <Header
         lang={lang}
         onToggleLang={() => setLang(lang === 'zh' ? 'en' : 'zh')}
