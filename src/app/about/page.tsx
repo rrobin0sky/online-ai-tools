@@ -10,9 +10,41 @@ export default function AboutPage() {
   const [lang, setLang] = useState<'zh' | 'en'>('zh');
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('archicons_theme_mode');
+      const isDark = savedTheme
+        ? savedTheme === 'dark'
+        : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(isDark);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, []);
+
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
+    setDarkMode((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.classList.add('dark');
+        try {
+          localStorage.setItem('archicons_theme_mode', 'dark');
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        document.documentElement.classList.remove('dark');
+        try {
+          localStorage.setItem('archicons_theme_mode', 'light');
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      return next;
+    });
   };
 
   return (

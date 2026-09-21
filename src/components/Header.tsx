@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Star, Moon, Sun, Globe } from 'lucide-react';
 import { PalettePopover } from './PalettePopover';
@@ -28,18 +28,36 @@ export const Header: React.FC<HeaderProps> = ({
   showOnlyFavorites = false,
   onToggleShowOnlyFavorites,
 }) => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  // Scroll detection for dynamic backdrop & border
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 12);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-[#09090b]/90 backdrop-blur-md border-b border-slate-200 dark:border-zinc-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-4">
+    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-200 ${
+        isScrolled
+          ? 'bg-white/85 dark:bg-[#09090b]/85 backdrop-blur-md shadow-xs border-b border-slate-200/80 dark:border-zinc-800/80'
+          : 'bg-transparent border-b border-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-13 sm:h-[52px] flex items-center justify-between gap-4">
         {/* 1. Left: Pure Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black transition-transform group-hover:scale-105 active:scale-95 shadow-xs">
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0 group">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black transition-transform group-hover:scale-105 active:scale-95 shadow-xs">
             {/* 30° Isometric Cube & Topology Node SVG */}
             <svg
               viewBox="0 0 32 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="w-4 h-4 sm:w-5 sm:h-5 stroke-current"
+              className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-current"
             >
               <path
                 d="M16 4L26 9.77V21.32L16 27.09L6 21.32V9.77L16 4Z"
@@ -55,17 +73,17 @@ export const Header: React.FC<HeaderProps> = ({
             </svg>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white">
+            <span className="font-extrabold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white">
               ArchIcons
             </span>
-            <span className="text-[11px] font-medium text-slate-400 dark:text-zinc-500 hidden sm:inline">
+            <span className="text-[10px] font-medium text-slate-400 dark:text-zinc-500 hidden sm:inline">
               拓扑矢量图库
             </span>
           </div>
         </Link>
 
         {/* 2. Right: Utility Tools (Palette, Lang, Dark/Light, Favorites) */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1 sm:gap-1.5">
           {/* Button 1: Palette Popover */}
           {onThemeColorChange && (
             <PalettePopover
@@ -79,7 +97,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onToggleLang}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
             title={lang === 'zh' ? '切换语言 (Switch to English)' : 'Switch Language (切换中文)'}
           >
             <Globe className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" />
@@ -90,13 +108,13 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onToggleDarkMode}
-            className="p-2 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
+            className="p-1.5 sm:p-2 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
             title={darkMode ? (lang === 'zh' ? '切换为亮色模式' : 'Light Mode') : (lang === 'zh' ? '切换为暗色模式' : 'Dark Mode')}
           >
             {darkMode ? (
-              <Sun className="w-4 h-4 text-amber-400" />
+              <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
             ) : (
-              <Moon className="w-4 h-4 text-slate-700" />
+              <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-700" />
             )}
           </button>
 
@@ -105,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={onToggleShowOnlyFavorites}
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-bold active:scale-95 transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-xs font-bold active:scale-95 transition-all ${
                 showOnlyFavorites
                   ? 'border-amber-500 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
                   : 'border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800'

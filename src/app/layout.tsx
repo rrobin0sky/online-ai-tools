@@ -2,27 +2,30 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'ArchIcons - Cloud Architecture & Generic Network Topology Icons Library',
-  description: 'Download and copy official cloud architecture icons (AWS, Azure, GCP, Alibaba Cloud, Kubernetes) and vendor-neutral network topology symbols in SVG and PNG.',
+  title: 'ArchIcons - 网络拓扑与云架构矢量设备图标库',
+  description: '专为网络工程师、系统架构师打造的高清矢量架构拓扑设备图标库。支持 2.5D 等轴测、2D 逻辑拓扑与云架构服务，一键复制 SVG 源码与 PNG。',
   keywords: [
-    'cloud architecture icons',
-    'aws icons svg',
-    'azure architecture icons',
-    'alibaba cloud icons',
-    'network topology symbols',
-    'drawio icons library',
-    'excalidraw cloud icons',
-    '云厂商架构图标库',
     '拓扑图图标',
+    '网络设备图标',
+    '2.5D等轴测图标',
+    'Cisco图标',
+    '华为拓扑图标',
+    'aws icons svg',
+    'drawio icons library',
     '架构师工具箱',
   ],
-  authors: [{ name: 'tools.bin0sky.tech' }],
-  metadataBase: new URL('https://tools.bin0sky.tech'),
+  authors: [{ name: 'bin0sky.tech' }],
+  metadataBase: new URL('https://bin0sky.tech'),
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
-    title: 'ArchIcons - Cloud & Network Architecture Icons Library',
-    description: 'Free vector architecture icons for cloud engineers and architects. Instant SVG copy & PNG download.',
-    url: 'https://tools.bin0sky.tech',
-    siteName: 'ArchIcons Toolbox',
+    title: 'ArchIcons - 拓扑设备矢量图标库',
+    description: '高清矢量架构拓扑设备图标库，支持一键复制 SVG / PNG 与 Draw.io 导出。',
+    url: 'https://bin0sky.tech',
+    siteName: 'ArchIcons',
     type: 'website',
   },
 };
@@ -33,11 +36,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#2563eb" />
-        {/* Placeholder for Google AdSense Client Script */}
-        {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> */}
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        {/* Anti-Flicker Theme Initialization Script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var saved=localStorage.getItem('archicons_theme_mode');var isDark=saved?saved==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(isDark){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})()`,
+          }}
+        />
       </head>
       <body className="antialiased bg-slate-50 dark:bg-slate-950 min-h-screen flex flex-col font-sans transition-colors">
         {children}
