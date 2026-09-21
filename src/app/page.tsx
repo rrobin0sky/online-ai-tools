@@ -196,7 +196,7 @@ export default function HomePage() {
       {/* Floating Apple HUD Toast Notification */}
       <FloatingHudToast toast={hudToast} />
 
-      {/* Top Sticky Header with utility buttons */}
+      {/* Top Sticky Header with integrated Style Mode Pills & utility buttons */}
       <Header
         lang={lang}
         onToggleLang={toggleLang}
@@ -207,16 +207,17 @@ export default function HomePage() {
         favoritesCount={favorites.length}
         showOnlyFavorites={showOnlyFavorites}
         onToggleShowOnlyFavorites={() => setShowOnlyFavorites((prev) => !prev)}
+        selectedStyle={selectedStyle}
+        onStyleChange={setSelectedStyle}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
-        {/* Main Filter & Scope Controls */}
-        <div className="mb-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-16">
+        {/* Compact Single-Row Unified Toolbar */}
+        <div className="mb-3 sm:mb-4">
           <FilterBar
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             selectedStyle={selectedStyle}
-            onStyleChange={setSelectedStyle}
             selectedProvider={selectedProvider}
             onProviderChange={setSelectedProvider}
             selectedCategory={selectedCategory}

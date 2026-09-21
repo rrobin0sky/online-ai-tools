@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Star, Moon, Sun, Globe } from 'lucide-react';
 import { PalettePopover } from './PalettePopover';
+import { IconStyle } from '../types/icon';
+import { STYLES } from '../data/icons';
 
 interface HeaderProps {
   lang: 'en' | 'zh';
@@ -15,6 +17,9 @@ interface HeaderProps {
   favoritesCount?: number;
   showOnlyFavorites?: boolean;
   onToggleShowOnlyFavorites?: () => void;
+  // Style switcher integrated in header
+  selectedStyle?: IconStyle | 'all';
+  onStyleChange?: (style: IconStyle | 'all') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -27,6 +32,8 @@ export const Header: React.FC<HeaderProps> = ({
   favoritesCount = 0,
   showOnlyFavorites = false,
   onToggleShowOnlyFavorites,
+  selectedStyle = 'all',
+  onStyleChange,
 }) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
@@ -44,11 +51,11 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-200 ${
         isScrolled
-          ? 'bg-white/85 dark:bg-[#09090b]/85 backdrop-blur-md shadow-xs border-b border-slate-200/80 dark:border-zinc-800/80'
+          ? 'bg-white/90 dark:bg-[#09090b]/90 backdrop-blur-md shadow-xs border-b border-slate-200/80 dark:border-zinc-800/80'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-13 sm:h-[52px] flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-13 sm:h-[52px] flex items-center justify-between gap-2 sm:gap-4">
         {/* 1. Left: Pure Brand Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0 group">
           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black transition-transform group-hover:scale-105 active:scale-95 shadow-xs">
@@ -72,18 +79,56 @@ export const Header: React.FC<HeaderProps> = ({
               <circle cx="16" cy="15.54" r="2.2" fill="currentColor" />
             </svg>
           </div>
-          <div className="flex items-baseline gap-2">
+          <div className="flex items-baseline gap-1.5">
             <span className="font-extrabold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white">
               ArchIcons
-            </span>
-            <span className="text-[10px] font-medium text-slate-400 dark:text-zinc-500 hidden sm:inline">
-              拓扑矢量图库
             </span>
           </div>
         </Link>
 
-        {/* 2. Right: Utility Tools (Palette, Lang, Dark/Light, Favorites) */}
-        <div className="flex items-center gap-1 sm:gap-1.5">
+        {/* 2. Middle: Integrated Top Style Mode Segmented Pill Control */}
+        {onStyleChange && (
+          <div className="flex items-center justify-center overflow-x-auto scrollbar-none py-1">
+            <div className="inline-flex p-0.5 sm:p-1 rounded-xl bg-slate-100/90 dark:bg-zinc-900/90 border border-slate-200/90 dark:border-zinc-800 shadow-inner">
+              <button
+                type="button"
+                onClick={() => onStyleChange('all')}
+                className={`px-2 sm:px-3 py-1 rounded-lg text-xs font-extrabold whitespace-nowrap transition-all ${
+                  selectedStyle === 'all'
+                    ? 'bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-xs'
+                    : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                {lang === 'zh' ? '全部' : 'All'}
+              </button>
+
+              {STYLES.map((style) => {
+                const isSelected = selectedStyle === style.id;
+                // Short name for mobile
+                const displayName = style.name[lang];
+
+                return (
+                  <button
+                    key={style.id}
+                    type="button"
+                    onClick={() => onStyleChange(style.id)}
+                    className={`px-2 sm:px-3 py-1 rounded-lg text-xs font-extrabold whitespace-nowrap transition-all ${
+                      isSelected
+                        ? 'bg-blue-600 text-white shadow-xs'
+                        : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                    title={style.description[lang]}
+                  >
+                    {displayName}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* 3. Right: Utility Tools (Palette, Lang, Dark/Light, Favorites) */}
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
           {/* Button 1: Palette Popover */}
           {onThemeColorChange && (
             <PalettePopover
@@ -97,7 +142,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onToggleLang}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
+            className="flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs font-bold text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-95 transition-all"
             title={lang === 'zh' ? '切换语言 (Switch to English)' : 'Switch Language (切换中文)'}
           >
             <Globe className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" />
@@ -123,7 +168,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={onToggleShowOnlyFavorites}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-xs font-bold active:scale-95 transition-all ${
+              className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-xl border text-xs font-bold active:scale-95 transition-all ${
                 showOnlyFavorites
                   ? 'border-amber-500 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
                   : 'border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800'
