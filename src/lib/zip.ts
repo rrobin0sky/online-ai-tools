@@ -65,7 +65,7 @@ export async function generateIconsZip(options: BatchExportOptions): Promise<Blo
 - Semantic Accents: ${preserveAccents ? 'Enabled' : 'Monochrome'}
 - Format: ${format}
 - Generated at: ${new Date().toISOString()}
-- Website: https://bin0sky.tech
+- Website: https://icon.bin0sky.tech
 
 Built with modern 30° isometric projection for network pre-sales engineers and solution architects.
 Free for technical proposal PPTs, bidding documents, and system architecture design.

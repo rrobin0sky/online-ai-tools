@@ -11,7 +11,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left: Copyright & Legal Navigation Links */}
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1 text-slate-600 dark:text-zinc-400 font-medium">
-          <span>&copy; {new Date().getFullYear()} bin0sky.tech</span>
+          <span>&copy; {new Date().getFullYear()} icon.bin0sky.tech</span>
           <span className="text-slate-300 dark:text-zinc-700">·</span>
           <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
             {lang === 'zh' ? '关于与设计指南' : 'About & Guidelines'}

@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     'drawio icons library',
     '架构师工具箱',
   ],
-  authors: [{ name: 'bin0sky.tech' }],
-  metadataBase: new URL('https://bin0sky.tech'),
+  authors: [{ name: 'icon.bin0sky.tech' }],
+  metadataBase: new URL('https://icon.bin0sky.tech'),
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.svg',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ArchIcons - 拓扑设备矢量图标库',
     description: '高清矢量架构拓扑设备图标库，支持一键复制 SVG / PNG 与 Draw.io 导出。',
-    url: 'https://bin0sky.tech',
+    url: 'https://icon.bin0sky.tech',
     siteName: 'ArchIcons',
     type: 'website',
   },

@@ -46,7 +46,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2">1. Overview</h2>
               <p>
-                At ArchIcons (accessible from bin0sky.tech), one of our main priorities is the privacy of our visitors.
+                At ArchIcons (accessible from icon.bin0sky.tech), one of our main priorities is the privacy of our visitors.
                 This Privacy Policy document outlines the types of information that is collected and recorded by ArchIcons and how we use it.
               </p>
             </section>
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2">4. Google DoubleClick DART Cookie & Third-Party Advertising</h2>
               <p>
-                Google is one of our third-party vendors. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to bin0sky.tech and other sites on the internet.
+                Google is one of our third-party vendors. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to icon.bin0sky.tech and other sites on the internet.
                 Visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL:
                 <a
                   href="https://policies.google.com/technologies/ads"

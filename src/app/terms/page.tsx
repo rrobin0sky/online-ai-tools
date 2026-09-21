@@ -46,7 +46,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2">1. Terms</h2>
               <p>
-                By accessing this website, accessible from bin0sky.tech, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws.
+                By accessing this website, accessible from icon.bin0sky.tech, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws.
               </p>
             </section>
 

@@ -1,7 +1,7 @@
 # ArchIcons - 网络售前工程师 2.5D 拓扑设备图标库
 
 > 专为网络工程师、售前方案专家与系统架构师打造的 30° 等轴测 2.5D 矢量设备图标库。
-> 官方域名：[bin0sky.tech](https://bin0sky.tech)
+> 官方域名：[icon.bin0sky.tech](https://icon.bin0sky.tech)
 
 ---
 
@@ -53,7 +53,7 @@ npm run build
 本项目配置为静态输出 (`output: 'export'`)，配合 `wrangler.json`：
 1. 提交代码并推送到 GitHub `main` 分支。
 2. Cloudflare Pages 自动监听并执行 `npm run build`，部署至 `out/` 目录。
-3. 全球 CDN 实时生效，绑定域名 `bin0sky.tech`。
+3. 全球 CDN 实时生效，绑定域名 `icon.bin0sky.tech`。
 
 ---
 
