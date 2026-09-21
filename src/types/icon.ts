@@ -1,17 +1,22 @@
+export type IconStyle = 'isometric' | 'flat' | 'cloud' | 'frontpanel';
+
 export type CloudProvider = 
-  | 'generic'       // 通用中立 2.5D
-  | 'physical'      // 物理硬件设备
-  | 'cloud'         // 云上虚拟化
+  | 'generic'       // 通用中立
+  | 'physical'      // 物理通用（兼容）
+  | 'cloud'         // 云通用（兼容）
+  | 'cisco'         // 思科 Cisco
+  | 'huawei'        // 华为 / 信创
+  | 'h3c'           // 新华三 H3C
+  | 'fortinet'      // 飞塔 Fortinet
   | 'aws'           // Amazon Web Services
   | 'azure'         // Microsoft Azure
   | 'gcp'           // Google Cloud Platform
   | 'aliyun'        // 阿里云
   | 'tencent'       // 腾讯云
-  | 'huawei'        // 华为云
   | 'k8s';          // 云原生 CNCF / Kubernetes
 
 export type IconCategory = 
-  | 'physical'      // 物理网络设备
+  | 'physical'      // 物理硬件设备
   | 'cloud'         // 云上与虚拟化设备
   | 'security'      // 网络安全设备
   | 'network'       // 路由与交换
@@ -23,8 +28,11 @@ export type IconCategory =
   | 'general';      // 终端与周边
 
 export interface IconMeta {
-  /** 唯一标识符，如 'generic-network-firewall' */
+  /** 唯一标识符，如 'cisco-router' 或 'core-switch-chassis' */
   id: string;
+
+  /** 图标风格体系，默认为 isometric */
+  style?: IconStyle;
 
   /** 所属厂商或通用中立 */
   provider: CloudProvider;
@@ -35,7 +43,7 @@ export interface IconMeta {
   /** 设备类型划分：物理设备还是云上设备 */
   deviceType?: 'physical' | 'cloud';
 
-  /** 多语言名称 */
+  /** 多语言规范名称（纯净版，不包含无意义的前缀） */
   name: {
     en: string;
     zh: string;
@@ -47,16 +55,16 @@ export interface IconMeta {
   /** 搜索关键词（支持中英双语、常见缩写、拼音），方便前端秒级模糊搜索 */
   tags: string[];
 
-  /** 跨云等价物概念组 ID */
+  /** 跨厂商/跨云等价物概念组 ID，例如 'core-sw', 'firewall', 'router', 'slb', 'ecs' */
   equivalentGroup?: string;
 
-  /** 内联 2.5D SVG 矢量模板内容字符串 */
+  /** 内联 SVG 矢量模板内容字符串 */
   svgRaw: string;
 
-  /** 默认 viewBox，例如 '0 0 120 100' */
+  /** 默认 viewBox，例如 '0 0 120 100' 或 '0 0 64 64' */
   viewBox?: string;
 
-  /** 是否为支持自由换色的 2.5D 设备图标 */
+  /** 是否支持自由换色（通常中立设备和 2.5D 设备支持） */
   isTintable?: boolean;
 
   /** 推荐的默认色彩 */
@@ -81,6 +89,21 @@ export interface ProviderMeta {
   color: string;
   badgeBg: string;
   iconCount?: number;
+  /** 支持该厂商的风格列表，不填则为全支持 */
+  supportedStyles?: IconStyle[];
+}
+
+export interface StyleMeta {
+  id: IconStyle;
+  name: {
+    en: string;
+    zh: string;
+  };
+  badge: string;
+  description: {
+    en: string;
+    zh: string;
+  };
 }
 
 export interface CategoryMeta {

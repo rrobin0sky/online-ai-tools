@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, Copy, Check, Image as ImageIcon, Download } from 'lucide-react';
+import { X, Copy, Check, Image as ImageIcon } from 'lucide-react';
 import { IconMeta } from '../types/icon';
 import { copyPngToClipboard, copySvgToClipboard, svgToPngBlob } from '../lib/clipboard';
 import { applyThemeToSvg } from '../lib/colorEngine';
+import { PROVIDERS, ICONS } from '../data/icons';
 
 interface IconModalProps {
   icon: IconMeta | null;
@@ -22,6 +23,7 @@ export const IconModal: React.FC<IconModalProps> = ({
   themeColor = '#0284c7',
   preserveAccents = true,
   onClose,
+  onSelectIcon,
   onNotify,
 }) => {
   const [copiedType, setCopiedType] = useState<'svg' | 'png' | null>(null);
@@ -41,14 +43,22 @@ export const IconModal: React.FC<IconModalProps> = ({
 
   if (!icon) return null;
 
-  const finalSvg = applyThemeToSvg(icon.svgRaw, themeColor, preserveAccents);
+  const finalSvg = icon.isTintable !== false
+    ? applyThemeToSvg(icon.svgRaw, themeColor, preserveAccents)
+    : icon.svgRaw;
 
-  // Clean name without redundant "2.5D" prefix
+  // Clean name without any redundant "2.5D" prefix
   const cleanName = (name: string) => name.replace(/^2\.5D\s*/i, '').trim();
   const displayName = cleanName(icon.name[lang]);
   const subDescription =
     icon.description?.[lang] ||
     cleanName(icon.name[lang === 'zh' ? 'en' : 'zh']);
+
+  const providerMeta = PROVIDERS.find((p) => p.id === icon.provider) || PROVIDERS[0];
+
+  const equivalentIcons = icon.equivalentGroup
+    ? ICONS.filter((other) => other.id !== icon.id && other.equivalentGroup === icon.equivalentGroup)
+    : [];
 
   const notify = (title: string, subtitle?: string, type: 'copy' | 'download' | 'code' | 'success' = 'copy') => {
     if (onNotify) {
@@ -127,15 +137,18 @@ export const IconModal: React.FC<IconModalProps> = ({
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#121214] border border-slate-200/80 dark:border-zinc-800 shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-150 text-slate-900 dark:text-white"
       >
-        {/* Top bar: Code Badge & Apple-style Circular Close Button */}
-        <div className="flex items-center justify-between mb-4">
-          {icon.code ? (
-            <span className="text-xs font-mono font-bold tracking-wider px-2 py-0.5 rounded-md border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-500 dark:text-zinc-400">
-              {icon.code}
+        {/* Top bar: Vendor Badge & Apple-style Circular Close Button */}
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-zinc-800 text-slate-800 dark:text-zinc-200">
+              {providerMeta.name[lang]}
             </span>
-          ) : (
-            <span />
-          )}
+            {icon.code && (
+              <span className="text-xs font-mono font-bold tracking-wider px-2 py-0.5 rounded-md border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-500 dark:text-zinc-400">
+                {icon.code}
+              </span>
+            )}
+          </div>
 
           <button
             type="button"
@@ -156,7 +169,7 @@ export const IconModal: React.FC<IconModalProps> = ({
         </div>
 
         {/* Apple Typography: Clean Title & Subtitle */}
-        <div className="text-center mt-3 mb-6">
+        <div className="text-center mt-2 mb-4">
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             {displayName}
           </h2>
@@ -164,6 +177,30 @@ export const IconModal: React.FC<IconModalProps> = ({
             {subDescription}
           </p>
         </div>
+
+        {/* Cross-vendor equivalent switcher in modal if available */}
+        {equivalentIcons.length > 0 && onSelectIcon && (
+          <div className="mb-5 p-2.5 rounded-2xl bg-slate-50 dark:bg-zinc-900/80 border border-slate-200/80 dark:border-zinc-800/80 flex flex-col gap-1.5">
+            <span className="text-[11px] font-bold text-slate-400 dark:text-zinc-500 text-center">
+              {lang === 'zh' ? '查看同类其他厂商版本：' : 'Switch to equivalent vendor:'}
+            </span>
+            <div className="flex items-center justify-center gap-1.5 flex-wrap">
+              {equivalentIcons.map((eq) => {
+                const eqProvider = PROVIDERS.find((p) => p.id === eq.provider) || PROVIDERS[0];
+                return (
+                  <button
+                    key={eq.id}
+                    type="button"
+                    onClick={() => onSelectIcon(eq)}
+                    className="text-xs font-bold px-2.5 py-1 rounded-xl bg-white dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-zinc-700 hover:border-blue-500 hover:text-blue-600 transition-all shadow-2xs"
+                  >
+                    {eqProvider.name[lang]} - {cleanName(eq.name[lang])}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Primary Action Buttons: High-contrast Apple-style Pill Actions */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">

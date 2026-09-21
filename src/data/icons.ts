@@ -1,45 +1,123 @@
-import { IconMeta, ProviderMeta, CategoryMeta } from '../types/icon';
+import { IconMeta, ProviderMeta, CategoryMeta, StyleMeta } from '../types/icon';
+
+export const STYLES: StyleMeta[] = [
+  {
+    id: 'isometric',
+    name: { en: '2.5D Isometric', zh: '2.5D 等轴测' },
+    badge: '💎 售前方案立体',
+    description: {
+      en: '30° isometric projection for high-impact presales proposals, PPT, and system overviews.',
+      zh: '统一 30° 等轴测立体模数，专为技术标书、售前方案、汇报演示 PPT 打造。'
+    }
+  },
+  {
+    id: 'flat',
+    name: { en: '2D Modern Flat', zh: '2D 逻辑拓扑' },
+    badge: '📐 逻辑拓扑规范',
+    description: {
+      en: 'Modern flat vector icons for CCIE, L2/L3 topology designs, and clean protocol planning.',
+      zh: '现代 2D 扁平矢量标准，专为二/三层网络规划、路由协议走向及严谨工程图打造。'
+    }
+  },
+  {
+    id: 'cloud',
+    name: { en: 'Cloud Architecture', zh: '云架构服务' },
+    badge: '☁️ 现代云服务',
+    description: {
+      en: 'Cloud service components and icons for AWS, Alibaba Cloud, and Kubernetes environments.',
+      zh: '公有云与云原生服务架构符号，涵盖 AWS、阿里云及 Kubernetes 生态体系。'
+    }
+  }
+];
 
 export const PROVIDERS: ProviderMeta[] = [
   {
     id: 'generic',
-    name: { en: 'All 2.5D Devices', zh: '全部 2.5D 设备' },
+    name: { en: 'Generic / Neutral', zh: '通用中立' },
     color: '#0284c7',
     badgeBg: 'bg-sky-100 text-sky-950 border-sky-300 dark:bg-sky-500/20 dark:text-sky-200 dark:border-sky-500/40 font-bold',
+    supportedStyles: ['isometric', 'flat', 'cloud']
   },
   {
-    id: 'physical',
-    name: { en: 'Physical On-Premises', zh: '物理网络设备' },
+    id: 'cisco',
+    name: { en: 'Cisco Systems', zh: '思科 Cisco' },
+    color: '#049fd9',
+    badgeBg: 'bg-cyan-100 text-cyan-950 border-cyan-300 dark:bg-cyan-500/20 dark:text-cyan-200 dark:border-cyan-500/40 font-bold',
+    supportedStyles: ['flat']
+  },
+  {
+    id: 'huawei',
+    name: { en: 'Huawei / Gov', zh: '华为 / 信创' },
+    color: '#dc2626',
+    badgeBg: 'bg-red-100 text-red-950 border-red-300 dark:bg-red-500/20 dark:text-red-200 dark:border-red-500/40 font-bold',
+    supportedStyles: ['isometric', 'flat']
+  },
+  {
+    id: 'h3c',
+    name: { en: 'H3C', zh: '新华三 H3C' },
     color: '#2563eb',
     badgeBg: 'bg-blue-100 text-blue-950 border-blue-300 dark:bg-blue-500/20 dark:text-blue-200 dark:border-blue-500/40 font-bold',
+    supportedStyles: ['flat']
   },
   {
-    id: 'cloud',
-    name: { en: 'Cloud & Virtualized', zh: '云上与虚拟化设备' },
-    color: '#7c3aed',
-    badgeBg: 'bg-purple-100 text-purple-950 border-purple-300 dark:bg-purple-500/20 dark:text-purple-200 dark:border-purple-500/40 font-bold',
+    id: 'fortinet',
+    name: { en: 'Fortinet', zh: '飞塔 Fortinet' },
+    color: '#e11d48',
+    badgeBg: 'bg-rose-100 text-rose-950 border-rose-300 dark:bg-rose-500/20 dark:text-rose-200 dark:border-rose-500/40 font-bold',
+    supportedStyles: ['flat']
   },
+  {
+    id: 'aws',
+    name: { en: 'Amazon AWS', zh: '亚马逊 AWS' },
+    color: '#ff9900',
+    badgeBg: 'bg-amber-100 text-amber-950 border-amber-300 dark:bg-amber-500/20 dark:text-amber-200 dark:border-amber-500/40 font-bold',
+    supportedStyles: ['cloud', 'isometric']
+  },
+  {
+    id: 'aliyun',
+    name: { en: 'Alibaba Cloud', zh: '阿里云' },
+    color: '#ff6a00',
+    badgeBg: 'bg-orange-100 text-orange-950 border-orange-300 dark:bg-orange-500/20 dark:text-orange-200 dark:border-orange-500/40 font-bold',
+    supportedStyles: ['cloud', 'isometric']
+  },
+  {
+    id: 'azure',
+    name: { en: 'Microsoft Azure', zh: '微软 Azure' },
+    color: '#0078d4',
+    badgeBg: 'bg-sky-100 text-sky-950 border-sky-300 dark:bg-sky-500/20 dark:text-sky-200 dark:border-sky-500/40 font-bold',
+    supportedStyles: ['cloud']
+  },
+  {
+    id: 'k8s',
+    name: { en: 'Kubernetes / CNCF', zh: 'K8s / 云原生' },
+    color: '#326ce5',
+    badgeBg: 'bg-indigo-100 text-indigo-950 border-indigo-300 dark:bg-indigo-500/20 dark:text-indigo-200 dark:border-indigo-500/40 font-bold',
+    supportedStyles: ['cloud', 'isometric']
+  }
 ];
 
 export const CATEGORIES: CategoryMeta[] = [
-  { id: 'physical', name: { en: 'Physical Hardware', zh: '物理网络设备' }, iconName: 'Server' },
-  { id: 'cloud', name: { en: 'Cloud & Virtual', zh: '云上网络与计算' }, iconName: 'Cloud' },
-  { id: 'security', name: { en: 'Security & Gateway', zh: '安全与防护' }, iconName: 'Shield' },
   { id: 'network', name: { en: 'Routing & Switching', zh: '路由与交换' }, iconName: 'Network' },
+  { id: 'security', name: { en: 'Security & Gateway', zh: '安全与防护' }, iconName: 'Shield' },
   { id: 'compute', name: { en: 'Compute & Host', zh: '计算与主机' }, iconName: 'Cpu' },
   { id: 'storage', name: { en: 'Storage & DB', zh: '存储与数据库' }, iconName: 'HardDrive' },
+  { id: 'cloud', name: { en: 'Cloud & Network', zh: '云上网络' }, iconName: 'Cloud' },
+  { id: 'physical', name: { en: 'Physical & Facility', zh: '机房与外设' }, iconName: 'Server' }
 ];
 
+
 export const ICONS: IconMeta[] = [
-  // =========================================================================
+// =========================================================================
   // 1. 物理网络与基础设施 (Physical On-Premises Network Devices - 12款最常用)
   // =========================================================================
   {
     id: 'core-switch-chassis',
-    provider: 'physical',
+    equivalentGroup: 'core-switch',
+    provider: 'generic',
+    style: 'isometric',
     category: 'physical',
     deviceType: 'physical',
-    name: { en: '2.5D Chassis Core Switch', zh: '2.5D 核心交换机 (框式)' },
+    name: { en: 'Chassis Core Switch', zh: '核心交换机 (框式)' },
     code: 'CORE-SW',
     tags: ['core switch', 'chassis', 'l3 switch', 'hexin', 'jiaohuanji', '核心交换机', '框式交换机', '三层交换机', '华为CE12800', '思科Nexus'],
     isTintable: true,
@@ -101,10 +179,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'access-switch-l2',
-    provider: 'physical',
+    equivalentGroup: 'l2-switch',
+    provider: 'generic',
+    style: 'isometric',
     category: 'physical',
     deviceType: 'physical',
-    name: { en: '2.5D Access Switch (1U)', zh: '2.5D 接入/汇聚交换机 (1U)' },
+    name: { en: 'Access Switch (1U)', zh: '接入/汇聚交换机 (1U)' },
     code: 'ACCESS-SW',
     tags: ['switch', 'access switch', 'l2', 'poe', '1u', 'jieru', 'jiaohuanji', '接入交换机', '二层交换机', 'PoE交换机', '24口交换机'],
     isTintable: true,
@@ -160,10 +240,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'enterprise-router-l3',
-    provider: 'physical',
+    equivalentGroup: 'router',
+    provider: 'generic',
+    style: 'isometric',
     category: 'physical',
     deviceType: 'physical',
-    name: { en: '2.5D Enterprise Router', zh: '2.5D 企业级三层路由器' },
+    name: { en: 'Enterprise Router', zh: '企业级三层路由器' },
     code: 'RT-L3',
     tags: ['router', 'enterprise router', 'l3', 'wan', 'gateway', 'luyouqi', '路由器', '企业路由器', '出口网关', '三层路由'],
     isTintable: true,
@@ -209,10 +291,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'firewall-ngfw',
-    provider: 'physical',
+    equivalentGroup: 'firewall',
+    provider: 'generic',
+    style: 'isometric',
     category: 'security',
     deviceType: 'physical',
-    name: { en: '2.5D Next-Gen Firewall (NGFW)', zh: '2.5D 下一代防火墙 (NGFW)' },
+    name: { en: 'Next-Gen Firewall (NGFW)', zh: '下一代防火墙 (NGFW)' },
     code: 'NGFW',
     tags: ['firewall', 'ngfw', 'security', 'ips', 'ids', 'fanghuoqiang', '防火墙', '下一代防火墙', '深信服', '天融信', '奇安信'],
     isTintable: true,
@@ -264,10 +348,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'waf-gateway',
-    provider: 'physical',
+    equivalentGroup: 'waf',
+    provider: 'generic',
+    style: 'isometric',
     category: 'security',
     deviceType: 'physical',
-    name: { en: '2.5D Web App Firewall (WAF)', zh: '2.5D Web 应用防火墙 (WAF)' },
+    name: { en: 'Web App Firewall (WAF)', zh: 'Web 应用防火墙 (WAF)' },
     code: 'WAF',
     tags: ['waf', 'web application firewall', 'security', 'http', 'https', 'web防火墙', '应用防火墙', '安恒', '绿盟'],
     isTintable: true,
@@ -313,10 +399,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'bastion-host',
-    provider: 'physical',
+    equivalentGroup: 'bastion',
+    provider: 'generic',
+    style: 'isometric',
     category: 'security',
     deviceType: 'physical',
-    name: { en: '2.5D Bastion Host (Jump Server)', zh: '2.5D 运维堡垒机 / 跳板机' },
+    name: { en: 'Bastion Host (Jump Server)', zh: '运维堡垒机 / 跳板机' },
     code: 'BASTION',
     tags: ['bastion', 'jump server', 'ssh', 'rdp', 'audit', 'baoleiji', '堡垒机', '运维审计', '跳板机', '齐治', '安恒'],
     isTintable: true,
@@ -365,10 +453,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'rack-server-2u',
-    provider: 'physical',
+    equivalentGroup: 'server',
+    provider: 'generic',
+    style: 'isometric',
     category: 'compute',
     deviceType: 'physical',
-    name: { en: '2.5D Enterprise Server (2U)', zh: '2.5D 企业机架服务器 (2U)' },
+    name: { en: 'Enterprise Server (2U)', zh: '企业机架服务器 (2U)' },
     code: 'SRV-2U',
     tags: ['server', 'compute', 'host', '2u', 'nvme', 'fuwuqi', '服务器', '机架服务器', '戴尔PowerEdge', '华为FusionServer', '浪潮'],
     isTintable: true,
@@ -421,10 +511,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'storage-san-nas',
-    provider: 'physical',
+    equivalentGroup: 'storage',
+    provider: 'generic',
+    style: 'isometric',
     category: 'storage',
     deviceType: 'physical',
-    name: { en: '2.5D Centralized Storage (SAN/NAS)', zh: '2.5D 集中式存储 / SAN 阵列' },
+    name: { en: 'Centralized Storage (SAN/NAS)', zh: '集中式存储 / SAN 阵列' },
     code: 'SAN-NAS',
     tags: ['storage', 'san', 'nas', 'disk array', 'raid', 'chucun', '存储', '集中式存储', '磁盘阵列', '华为OceanStor', 'EMC'],
     isTintable: true,
@@ -474,10 +566,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'hardware-load-balancer',
-    provider: 'physical',
+    equivalentGroup: 'load-balancer',
+    provider: 'generic',
+    style: 'isometric',
     category: 'network',
     deviceType: 'physical',
-    name: { en: '2.5D Hardware Load Balancer', zh: '2.5D 硬件负载均衡网关' },
+    name: { en: 'Hardware Load Balancer', zh: '硬件负载均衡网关' },
     code: 'HW-LB',
     tags: ['load balancer', 'slb', 'f5', 'a10', 'traffic', 'fuzaijunheng', '负载均衡', '硬件负载均衡', '应用交付'],
     isTintable: true,
@@ -524,10 +618,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'wireless-ap-wifi',
-    provider: 'physical',
+    equivalentGroup: 'ap',
+    provider: 'generic',
+    style: 'isometric',
     category: 'network',
     deviceType: 'physical',
-    name: { en: '2.5D Wireless AP (Wi-Fi 6/7)', zh: '2.5D 企业级无线 AP' },
+    name: { en: 'Wireless AP (Wi-Fi 6/7)', zh: '企业级无线 AP' },
     code: 'AP-WIFI',
     tags: ['ap', 'wireless', 'wifi', 'wlan', 'access point', 'wuxian', '无线AP', '无线路由器', 'Wi-Fi 7', '吸顶AP'],
     isTintable: true,
@@ -564,10 +660,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'datacenter-rack-42u',
-    provider: 'physical',
+    equivalentGroup: 'rack',
+    provider: 'generic',
+    style: 'isometric',
     category: 'physical',
     deviceType: 'physical',
-    name: { en: '2.5D 42U Server Rack', zh: '2.5D 现代 42U 机房机柜' },
+    name: { en: '42U Server Rack', zh: '现代 42U 机房机柜' },
     code: 'RACK-42U',
     tags: ['rack', 'cabinet', 'datacenter', '42u', 'jigui', '机柜', '服务器机柜', '机房机架', '数据中心'],
     isTintable: true,
@@ -617,10 +715,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'optical-sfp-transceiver',
-    provider: 'physical',
+    equivalentGroup: 'sfp',
+    provider: 'generic',
+    style: 'isometric',
     category: 'physical',
     deviceType: 'physical',
-    name: { en: '2.5D Optical Module (SFP+) & Fiber', zh: '2.5D 光模块与光纤跳线' },
+    name: { en: 'Optical Module (SFP+) & Fiber', zh: '光模块与光纤跳线' },
     code: 'SFP-FIBER',
     tags: ['sfp', 'optical', 'transceiver', 'fiber', 'lc', 'guangxian', '光模块', '光纤', 'LC跳线', '万兆光口'],
     isTintable: true,
@@ -660,10 +760,12 @@ export const ICONS: IconMeta[] = [
   // =========================================================================
   {
     id: 'cloud-vpc-zone',
-    provider: 'cloud',
+    equivalentGroup: 'vpc',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Cloud VPC & WAN Base', zh: '2.5D 公有云底座 / 互联网' },
+    name: { en: 'Cloud VPC & WAN Base', zh: '公有云底座 / 互联网' },
     code: 'VPC-WAN',
     tags: ['cloud', 'vpc', 'wan', 'internet', 'network', 'yun', '公有云', '私有云', '互联网', 'VPC底座'],
     isTintable: true,
@@ -698,10 +800,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-vm-ecs',
-    provider: 'cloud',
+    equivalentGroup: 'ecs',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Cloud VM (ECS / CVM)', zh: '2.5D 云服务器 / ECS 虚拟机' },
+    name: { en: 'Cloud VM (ECS / CVM)', zh: '云服务器 / ECS 虚拟机' },
     code: 'VM-ECS',
     tags: ['vm', 'ecs', 'cvm', 'cloud compute', 'virtual machine', 'xuniji', '云服务器', '虚拟机', '阿里云ECS', 'AWS EC2'],
     isTintable: true,
@@ -744,10 +848,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-slb',
-    provider: 'cloud',
+    equivalentGroup: 'load-balancer',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Cloud Load Balancer (SLB)', zh: '2.5D 云负载均衡 (SLB / ALB)' },
+    name: { en: 'Cloud Load Balancer (SLB)', zh: '云负载均衡 (SLB / ALB)' },
     code: 'CLOUD-SLB',
     tags: ['cloud slb', 'alb', 'nlb', 'loadbalancer', 'yun fuzaijunheng', '云负载均衡', '应用型负载均衡', '网络负载均衡'],
     isTintable: true,
@@ -789,10 +895,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-rds',
-    provider: 'cloud',
+    equivalentGroup: 'database',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Cloud Database (RDS)', zh: '2.5D 云关系型数据库 (RDS)' },
+    name: { en: 'Cloud Database (RDS)', zh: '云关系型数据库 (RDS)' },
     code: 'RDS',
     tags: ['rds', 'database', 'mysql', 'postgresql', 'shujuku', '云数据库', '关系型数据库', '高可用数据库'],
     isTintable: true,
@@ -830,10 +938,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-oss-s3',
-    provider: 'cloud',
+    equivalentGroup: 'storage',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Object Storage (OSS / S3)', zh: '2.5D 对象存储 (OSS / S3)' },
+    name: { en: 'Object Storage (OSS / S3)', zh: '对象存储 (OSS / S3)' },
     code: 'OSS-S3',
     tags: ['oss', 's3', 'bucket', 'object storage', 'blob', 'duixiangchucun', '对象存储', '存储桶', '阿里云OSS', 'AWS S3'],
     isTintable: true,
@@ -869,10 +979,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-security-group',
-    provider: 'cloud',
+    equivalentGroup: 'firewall',
+    provider: 'generic',
+    style: 'isometric',
     category: 'security',
     deviceType: 'cloud',
-    name: { en: '2.5D Cloud Security Group / vFW', zh: '2.5D 云安全组 / 虚拟防火墙' },
+    name: { en: 'Cloud Security Group / vFW', zh: '云安全组 / 虚拟防火墙' },
     code: 'SEC-GRP',
     tags: ['security group', 'vfw', 'firewall', 'cloud security', 'anquanzu', '安全组', '虚拟防火墙', '访问控制', 'ACL'],
     isTintable: true,
@@ -908,10 +1020,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-vpn-gateway',
-    provider: 'cloud',
+    equivalentGroup: 'vpn',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D VPN / IPsec Gateway', zh: '2.5D VPN 专线网关 / SD-WAN' },
+    name: { en: 'VPN / IPsec Gateway', zh: 'VPN 专线网关 / SD-WAN' },
     code: 'VPN-GW',
     tags: ['vpn', 'ipsec', 'sd-wan', 'tunnel', 'gateway', 'wangguan', 'VPN网关', 'IPsec隧道', 'SD-WAN POP', '跨域互联'],
     isTintable: true,
@@ -951,10 +1065,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-k8s-pod',
-    provider: 'cloud',
+    equivalentGroup: 'k8s-pod',
+    provider: 'k8s',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Container Pod / Kubernetes', zh: '2.5D 容器集群 / K8s Pod' },
+    name: { en: 'Container Pod / Kubernetes', zh: '容器集群 / K8s Pod' },
     code: 'K8S-POD',
     tags: ['k8s', 'kubernetes', 'container', 'pod', 'docker', 'rongqi', '容器', 'Pod节点', 'K8s集群', '云原生'],
     isTintable: true,
@@ -994,10 +1110,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-vswitch',
-    provider: 'cloud',
+    equivalentGroup: 'l2-switch',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Virtual Switch (vSwitch)', zh: '2.5D 虚拟交换机 (vSwitch)' },
+    name: { en: 'Virtual Switch (vSwitch)', zh: '虚拟交换机 (vSwitch)' },
     code: 'vSW',
     tags: ['vswitch', 'sdn', 'virtual switch', 'ovs', 'xunijiaohuanji', '虚拟交换机', 'SDN交换机', 'Open vSwitch'],
     isTintable: true,
@@ -1033,10 +1151,12 @@ export const ICONS: IconMeta[] = [
   },
   {
     id: 'cloud-nat-gateway',
-    provider: 'cloud',
+    equivalentGroup: 'router',
+    provider: 'generic',
+    style: 'isometric',
     category: 'cloud',
     deviceType: 'cloud',
-    name: { en: '2.5D Cloud NAT Gateway', zh: '2.5D 云 NAT 网关' },
+    name: { en: 'Cloud NAT Gateway', zh: '云 NAT 网关' },
     code: 'NAT-GW',
     tags: ['nat', 'snat', 'dnat', 'gateway', 'cloud nat', 'dizhitongzhuan', 'NAT网关', '地址转换', '公网出口'],
     isTintable: true,
@@ -1070,5 +1190,445 @@ export const ICONS: IconMeta[] = [
   <circle cx="38" cy="58" r="1.5" fill="%%ACCENT_GREEN%%"/>
 </svg>`,
     description: { en: 'Modern 2.5D isometric NAT gateway with address translation converging flows', zh: '现代 2.5D 等轴测云 NAT 网关，展现私网向公网聚合转换的经典流向' }
+  },
+
+  // =========================================================================
+  // 3. 2D 现代逻辑拓扑标准库 (Modern Flat L2/L3 Topology - Cisco / 华为 / 通用)
+  // =========================================================================
+  {
+    id: 'flat-cisco-router',
+    style: 'flat',
+    provider: 'cisco',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'Cisco Router (L3)', zh: '思科三层路由器 (经典圆筒)' },
+    code: 'CISCO-RTR',
+    tags: ['cisco', 'router', 'l3', 'luqi', 'luyouqi', '思科', '路由器', '三层路由', 'CCIE'],
+    equivalentGroup: 'router',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="cisco-rtr-fill" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="%%TOP_LIGHT%%"/>
+      <stop offset="70%" stop-color="%%LEFT_FACE%%"/>
+      <stop offset="100%" stop-color="%%BOTTOM_DARK%%"/>
+    </radialGradient>
+    <filter id="cisco-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="%%BOTTOM_DARK%%" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <ellipse cx="40" cy="40" rx="36" ry="34" fill="url(#cisco-rtr-fill)" filter="url(#cisco-shadow)" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Cisco Standard 4 Arrows -->
+  <g fill="#ffffff" stroke="none">
+    <!-- Top-Left arrow (pointing inward) -->
+    <path d="M 22 28 L 34 32 L 31 35 L 36 40 L 33 43 L 28 38 L 25 41 Z"/>
+    <!-- Top-Right arrow (pointing outward) -->
+    <path d="M 58 28 L 55 41 L 52 38 L 47 43 L 44 40 L 49 35 L 46 32 Z"/>
+    <!-- Bottom-Left arrow (pointing outward) -->
+    <path d="M 22 52 L 25 39 L 28 42 L 33 37 L 36 40 L 31 45 L 34 48 Z"/>
+    <!-- Bottom-Right arrow (pointing inward) -->
+    <path d="M 58 52 L 46 48 L 49 45 L 44 40 L 47 37 L 52 42 L 55 39 Z"/>
+  </g>
+  <circle cx="40" cy="40" r="3" fill="#ffffff" opacity="0.9"/>
+</svg>`
+  },
+  {
+    id: 'flat-cisco-l2-switch',
+    style: 'flat',
+    provider: 'cisco',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'Cisco L2 Switch', zh: '思科二层交换机 (工作组)' },
+    code: 'CISCO-L2',
+    tags: ['cisco', 'switch', 'l2', 'jiaohuanji', '思科', '交换机', '二层交换机', '接入交换机'],
+    equivalentGroup: 'l2-switch',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cisco-sw-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="%%TOP_LIGHT%%"/>
+      <stop offset="100%" stop-color="%%LEFT_FACE%%"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="18" width="68" height="44" rx="8" fill="url(#cisco-sw-grad)" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Cisco L2 Dual Parallel Opposite Arrows -->
+  <g fill="#ffffff">
+    <!-- Top arrow: Left to Right -->
+    <path d="M 18 32 L 52 32 L 52 27 L 62 35 L 52 43 L 52 38 L 18 38 Z"/>
+    <!-- Bottom arrow: Right to Left -->
+    <path d="M 62 48 L 28 48 L 28 43 L 18 51 L 28 59 L 28 54 L 62 54 Z"/>
+  </g>
+</svg>`
+  },
+  {
+    id: 'flat-cisco-l3-switch',
+    style: 'flat',
+    provider: 'cisco',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'Cisco Multi-Layer Switch (L3)', zh: '思科三层核心交换机' },
+    code: 'CISCO-MLS',
+    tags: ['cisco', 'mls', 'l3 switch', 'core switch', '思科', '三层交换机', '核心交换机', '多层交换机'],
+    equivalentGroup: 'core-switch',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cisco-mls-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="%%TOP_LIGHT%%"/>
+      <stop offset="100%" stop-color="%%LEFT_FACE%%"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="10" width="68" height="60" rx="10" fill="url(#cisco-mls-grad)" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Cisco Multi-layer Cross 4 Arrows -->
+  <g fill="#ffffff">
+    <!-- Up arrow -->
+    <path d="M 40 18 L 47 28 L 43 28 L 43 36 L 37 36 L 37 28 L 33 28 Z"/>
+    <!-- Down arrow -->
+    <path d="M 40 62 L 33 52 L 37 52 L 37 44 L 43 44 L 43 52 L 47 52 Z"/>
+    <!-- Left arrow -->
+    <path d="M 18 40 L 28 33 L 28 37 L 36 37 L 36 43 L 28 43 L 28 47 Z"/>
+    <!-- Right arrow -->
+    <path d="M 62 40 L 52 47 L 52 43 L 44 43 L 44 37 L 52 37 L 52 33 Z"/>
+  </g>
+  <circle cx="40" cy="40" r="4" fill="#ffffff" opacity="0.95"/>
+</svg>`
+  },
+  {
+    id: 'flat-cisco-firewall',
+    style: 'flat',
+    provider: 'cisco',
+    category: 'security',
+    deviceType: 'physical',
+    name: { en: 'Cisco Firewall (ASA/FTD)', zh: '思科经典红砖防火墙' },
+    code: 'CISCO-FW',
+    tags: ['cisco', 'firewall', 'asa', 'ftd', 'fanghuoqiang', '思科', '防火墙', '红砖墙'],
+    equivalentGroup: 'firewall',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fw-brick-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="16" width="64" height="48" rx="6" fill="url(#fw-brick-grad)" stroke="#7f1d1d" stroke-width="2"/>
+  <!-- Classic Brick Lines -->
+  <path d="M 8 32 L 72 32 M 8 48 L 72 48" stroke="#ffffff" stroke-width="2" opacity="0.85"/>
+  <path d="M 28 16 L 28 32 M 52 16 L 52 32 M 18 32 L 18 48 M 40 32 L 40 48 M 62 32 L 62 48 M 30 48 L 30 64 M 54 48 L 54 64" stroke="#ffffff" stroke-width="2" opacity="0.85"/>
+  <!-- Flame / Security Badge -->
+  <circle cx="60" cy="22" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+</svg>`
+  },
+  {
+    id: 'flat-huawei-switch',
+    style: 'flat',
+    provider: 'huawei',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'Huawei CloudEngine Switch', zh: '华为三层核心交换机' },
+    code: 'HW-CE',
+    tags: ['huawei', 'cloudengine', 'switch', 'core switch', '华为', '交换机', '核心交换机', 'CE12800', '信创'],
+    equivalentGroup: 'core-switch',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="16" width="64" height="48" rx="8" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Modern Geometric Arrows -->
+  <path d="M 20 28 L 34 28 L 30 24 M 34 28 L 30 32" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 60 52 L 46 52 L 50 48 M 46 52 L 50 56" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 24 50 L 56 30" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="3 3"/>
+  <circle cx="24" cy="50" r="3.5" fill="%%ACCENT_GREEN%%"/>
+  <circle cx="56" cy="30" r="3.5" fill="%%ACCENT_CYAN%%"/>
+  <!-- Status Indicator Dots -->
+  <circle cx="16" cy="22" r="2" fill="%%ACCENT_GREEN%%"/>
+  <circle cx="22" cy="22" r="2" fill="%%ACCENT_AMBER%%"/>
+</svg>`
+  },
+  {
+    id: 'flat-huawei-firewall',
+    style: 'flat',
+    provider: 'huawei',
+    category: 'security',
+    deviceType: 'physical',
+    name: { en: 'Huawei USG NGFW', zh: '华为下一代防火墙 (USG)' },
+    code: 'HW-USG',
+    tags: ['huawei', 'usg', 'ngfw', 'firewall', '华为', '防火墙', '下一代防火墙', 'USG6000', '信创安全'],
+    equivalentGroup: 'firewall',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hw-shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+  </defs>
+  <!-- Security Shield shape -->
+  <path d="M 40 8 L 66 18 C 66 45 40 68 40 72 C 40 68 14 45 14 18 Z" fill="url(#hw-shield-grad)" stroke="#ffffff" stroke-width="2"/>
+  <!-- Lock Core -->
+  <rect x="30" y="34" width="20" height="18" rx="4" fill="#ffffff"/>
+  <path d="M 34 34 L 34 26 C 34 22 46 22 46 26 L 46 34" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="40" cy="42" r="2.5" fill="#991b1b"/>
+</svg>`
+  },
+  {
+    id: 'flat-fortinet-firewall',
+    style: 'flat',
+    provider: 'fortinet',
+    category: 'security',
+    deviceType: 'physical',
+    name: { en: 'Fortinet FortiGate NGFW', zh: '飞塔 FortiGate 防火墙' },
+    code: 'FG-NGFW',
+    tags: ['fortinet', 'fortigate', 'ngfw', 'firewall', '飞塔', '防火墙', '安全网关'],
+    equivalentGroup: 'firewall',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="14" width="64" height="52" rx="8" fill="#ee1c25" stroke="#be1219" stroke-width="2"/>
+  <!-- Fortinet Iconic 4-block Red Matrix -->
+  <g fill="#ffffff">
+    <rect x="18" y="24" width="18" height="14" rx="3"/>
+    <rect x="44" y="24" width="18" height="14" rx="3"/>
+    <rect x="18" y="42" width="18" height="14" rx="3"/>
+    <rect x="44" y="42" width="18" height="14" rx="3"/>
+  </g>
+  <circle cx="36" cy="40" r="4" fill="#111827"/>
+  <circle cx="44" cy="40" r="4" fill="#111827"/>
+</svg>`
+  },
+  {
+    id: 'flat-generic-waf',
+    style: 'flat',
+    provider: 'generic',
+    category: 'security',
+    deviceType: 'physical',
+    name: { en: 'Web App Firewall (WAF)', zh: '应用防护墙 (WAF)' },
+    code: 'WAF',
+    tags: ['waf', 'web application firewall', 'security', 'fanghuoqiang', '应用防火墙', 'Web防护'],
+    equivalentGroup: 'waf',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="14" width="60" height="52" rx="8" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Globe / Web symbol + Shield -->
+  <circle cx="40" cy="40" r="18" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <ellipse cx="40" cy="40" rx="8" ry="18" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <line x1="22" y1="40" x2="58" y2="40" stroke="#ffffff" stroke-width="2"/>
+  <!-- Red Shield on corner -->
+  <path d="M 52 44 L 66 48 C 66 60 52 68 52 68 C 52 68 38 60 38 48 Z" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+</svg>`
+  },
+  {
+    id: 'flat-generic-ap',
+    style: 'flat',
+    provider: 'generic',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'Wireless Access Point (AP)', zh: '无线接入点 (AP)' },
+    code: 'AP',
+    tags: ['ap', 'wireless', 'wifi', 'wlan', '无线AP', '无线接入点', '吸顶AP', 'WiFi6'],
+    equivalentGroup: 'ap',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="44" r="28" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- WiFi Radiation Arcs -->
+  <path d="M 22 28 A 22 22 0 0 1 58 28" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 28 35 A 15 15 0 0 1 52 35" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 34 42 A 8 8 0 0 1 46 42" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="40" cy="50" r="3.5" fill="%%ACCENT_GREEN%%"/>
+</svg>`
+  },
+  {
+    id: 'flat-generic-server',
+    style: 'flat',
+    provider: 'generic',
+    category: 'compute',
+    deviceType: 'physical',
+    name: { en: 'Rack Server / Host', zh: '机架式服务器 / 主机' },
+    code: 'SERVER',
+    tags: ['server', 'host', 'compute', 'fuwuqi', '服务器', '计算节点', '主机', '物理机'],
+    equivalentGroup: 'server',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="22" width="64" height="36" rx="6" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Drive Bays and Status LEDs -->
+  <rect x="14" y="28" width="12" height="10" rx="2" fill="#1e293b"/>
+  <rect x="29" y="28" width="12" height="10" rx="2" fill="#1e293b"/>
+  <rect x="44" y="28" width="12" height="10" rx="2" fill="#1e293b"/>
+  <line x1="14" y1="46" x2="48" y2="46" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="61" cy="31" r="2.5" fill="%%ACCENT_GREEN%%"/>
+  <circle cx="61" cy="38" r="2.5" fill="%%ACCENT_CYAN%%"/>
+  <circle cx="61" cy="45" r="2.5" fill="%%ACCENT_AMBER%%"/>
+</svg>`
+  },
+
+
+  // =========================================================================
+  // 4. 云架构与云原生服务标准库 (Cloud Architecture - AWS / 阿里云 / K8s)
+  // =========================================================================
+  {
+    id: 'cloud-aws-vpc-arch',
+    style: 'cloud',
+    provider: 'aws',
+    category: 'cloud',
+    deviceType: 'cloud',
+    name: { en: 'AWS Virtual Private Cloud', zh: 'AWS 虚拟私有云 (VPC)' },
+    code: 'AWS-VPC',
+    tags: ['aws', 'vpc', 'cloud', 'network', 'subnets', '亚马逊', '虚拟私有云', '私网'],
+    equivalentGroup: 'vpc',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="8" fill="#8c4fff" fill-opacity="0.12" stroke="#8c4fff" stroke-width="2.5" stroke-dasharray="4 4"/>
+  <!-- AWS Cloud Shield Outline -->
+  <rect x="20" y="20" width="40" height="40" rx="6" fill="#8c4fff" stroke="#ffffff" stroke-width="2"/>
+  <path d="M 28 40 L 52 40 M 40 28 L 40 52" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="40" cy="40" r="4" fill="#ff9900"/>
+</svg>`
+  },
+  {
+    id: 'cloud-aws-ec2-arch',
+    style: 'cloud',
+    provider: 'aws',
+    category: 'compute',
+    deviceType: 'cloud',
+    name: { en: 'AWS EC2 Elastic Compute', zh: 'AWS EC2 弹性计算实例' },
+    code: 'AWS-EC2',
+    tags: ['aws', 'ec2', 'vm', 'instance', 'compute', '亚马逊', '云主机', '弹性计算'],
+    equivalentGroup: 'ecs',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="10" fill="#ec7211" stroke="#cc5f08" stroke-width="2"/>
+  <!-- EC2 Processor Grid -->
+  <rect x="24" y="24" width="32" height="32" rx="4" fill="#ffffff"/>
+  <rect x="28" y="28" width="24" height="24" rx="2" fill="#ec7211"/>
+  <!-- Pins -->
+  <line x1="18" y1="32" x2="24" y2="32" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="18" y1="40" x2="24" y2="40" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="18" y1="48" x2="24" y2="48" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="56" y1="32" x2="62" y2="32" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="56" y1="40" x2="62" y2="40" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="56" y1="48" x2="62" y2="48" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+</svg>`
+  },
+  {
+    id: 'cloud-aws-s3-arch',
+    style: 'cloud',
+    provider: 'aws',
+    category: 'storage',
+    deviceType: 'cloud',
+    name: { en: 'AWS S3 Simple Storage', zh: 'AWS S3 对象存储桶' },
+    code: 'AWS-S3',
+    tags: ['aws', 's3', 'storage', 'bucket', 'oss', '亚马逊', '对象存储', '存储桶'],
+    equivalentGroup: 'storage',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="10" fill="#3f8624" stroke="#2f661a" stroke-width="2"/>
+  <!-- S3 Bucket Cylinder -->
+  <path d="M 22 28 C 22 24 58 24 58 28 L 54 52 C 54 56 26 56 26 52 Z" fill="#ffffff"/>
+  <ellipse cx="40" cy="28" rx="18" ry="5" fill="#2f661a"/>
+  <ellipse cx="40" cy="27" rx="17" ry="4" fill="#ffffff"/>
+  <path d="M 26 38 C 30 42 50 42 54 38" fill="none" stroke="#3f8624" stroke-width="2"/>
+</svg>`
+  },
+  {
+    id: 'cloud-aliyun-ecs-arch',
+    style: 'cloud',
+    provider: 'aliyun',
+    category: 'compute',
+    deviceType: 'cloud',
+    name: { en: 'Alibaba Cloud ECS', zh: '阿里云 ECS 弹性计算' },
+    code: 'ALI-ECS',
+    tags: ['aliyun', 'ecs', 'cloud', 'vm', 'compute', '阿里云', '云服务器', '弹性计算'],
+    equivalentGroup: 'ecs',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="12" fill="#ff6a00" stroke="#d95a00" stroke-width="2"/>
+  <!-- Hexagon Computing Core -->
+  <polygon points="40,20 58,30 58,50 40,60 22,50 22,30" fill="#ffffff"/>
+  <polygon points="40,25 53,32 53,48 40,55 27,48 27,32" fill="#ff6a00"/>
+  <circle cx="40" cy="40" r="5" fill="#ffffff"/>
+</svg>`
+  },
+  {
+    id: 'cloud-aliyun-oss-arch',
+    style: 'cloud',
+    provider: 'aliyun',
+    category: 'storage',
+    deviceType: 'cloud',
+    name: { en: 'Alibaba Cloud OSS', zh: '阿里云 OSS 对象存储' },
+    code: 'ALI-OSS',
+    tags: ['aliyun', 'oss', 'storage', 'bucket', 's3', '阿里云', '对象存储', '海量存储'],
+    equivalentGroup: 'storage',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="12" fill="#0080ff" stroke="#0066cc" stroke-width="2"/>
+  <!-- Layered Data Blocks -->
+  <rect x="22" y="24" width="36" height="8" rx="2" fill="#ffffff"/>
+  <rect x="22" y="36" width="36" height="8" rx="2" fill="#ffffff" opacity="0.9"/>
+  <rect x="22" y="48" width="36" height="8" rx="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="52" cy="28" r="2" fill="#0080ff"/>
+  <circle cx="52" cy="40" r="2" fill="#0080ff"/>
+  <circle cx="52" cy="52" r="2" fill="#0080ff"/>
+</svg>`
+  },
+  {
+    id: 'cloud-k8s-pod-arch',
+    style: 'cloud',
+    provider: 'k8s',
+    category: 'compute',
+    deviceType: 'cloud',
+    name: { en: 'Kubernetes Pod (Helm Wheel)', zh: 'Kubernetes Pod 原生舵轮' },
+    code: 'K8S-POD',
+    tags: ['k8s', 'kubernetes', 'pod', 'cncf', 'container', 'docker', '容器', '云原生', '舵轮'],
+    equivalentGroup: 'k8s-pod',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="32" fill="#326ce5" stroke="#1d4ed8" stroke-width="2"/>
+  <!-- K8s Wheel Spokes -->
+  <circle cx="40" cy="40" r="10" fill="#ffffff"/>
+  <circle cx="40" cy="40" r="5" fill="#326ce5"/>
+  <g stroke="#ffffff" stroke-width="3.5" stroke-linecap="round">
+    <line x1="40" y1="16" x2="40" y2="30"/>
+    <line x1="40" y1="50" x2="40" y2="64"/>
+    <line x1="16" y1="40" x2="30" y2="40"/>
+    <line x1="50" y1="40" x2="64" y2="40"/>
+    <line x1="23" y1="23" x2="33" y2="33"/>
+    <line x1="47" y1="47" x2="57" y2="57"/>
+    <line x1="23" y1="57" x2="33" y2="47"/>
+    <line x1="47" y1="33" x2="57" y2="23"/>
+  </g>
+</svg>`
+  },
+  {
+    id: 'cloud-k8s-service-arch',
+    style: 'cloud',
+    provider: 'k8s',
+    category: 'network',
+    deviceType: 'cloud',
+    name: { en: 'Kubernetes Service (SVC)', zh: 'Kubernetes Service 负载服务' },
+    code: 'K8S-SVC',
+    tags: ['k8s', 'svc', 'service', 'clusterip', 'nodeport', 'kubernetes', '服务网格', '云原生网络'],
+    equivalentGroup: 'load-balancer',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="40,12 66,26 66,54 40,68 14,54 14,26" fill="#326ce5" stroke="#1e40af" stroke-width="2"/>
+  <!-- Service Routing Arrows -->
+  <circle cx="40" cy="40" r="7" fill="#ffffff"/>
+  <path d="M 28 32 L 35 37 M 52 32 L 45 37 M 40 56 L 40 48" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+</svg>`
   }
+
 ];

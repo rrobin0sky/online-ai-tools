@@ -5,6 +5,7 @@ import { Copy, Check, Image as ImageIcon, Star } from 'lucide-react';
 import { IconMeta } from '../types/icon';
 import { copyPngToClipboard, copySvgToClipboard, svgToPngBlob } from '../lib/clipboard';
 import { applyThemeToSvg } from '../lib/colorEngine';
+import { PROVIDERS, ICONS } from '../data/icons';
 
 interface IconCardProps {
   icon: IconMeta;
@@ -14,6 +15,7 @@ interface IconCardProps {
   isFavorite: boolean;
   onToggleFavorite: (iconId: string) => void;
   onSelect: (icon: IconMeta) => void;
+  onSwitchIcon?: (newIcon: IconMeta) => void;
   onNotify?: (title: string, subtitle?: string, type?: 'copy' | 'download' | 'code' | 'success') => void;
 }
 
@@ -25,16 +27,32 @@ export const IconCard: React.FC<IconCardProps> = ({
   isFavorite,
   onToggleFavorite,
   onSelect,
+  onSwitchIcon,
   onNotify,
 }) => {
   const [copiedType, setCopiedType] = useState<'svg' | 'png' | null>(null);
 
-  // Compute final themed 2.5D SVG with isometric lighting
-  const finalSvg = applyThemeToSvg(icon.svgRaw, themeColor, preserveAccents);
+  // Compute final themed SVG
+  const finalSvg = icon.isTintable !== false
+    ? applyThemeToSvg(icon.svgRaw, themeColor, preserveAccents)
+    : icon.svgRaw;
 
-  // Clean name without redundant "2.5D" prefix
+  // Clean name without any redundant "2.5D" prefix
   const cleanName = (name: string) => name.replace(/^2\.5D\s*/i, '').trim();
   const displayName = cleanName(icon.name[lang]);
+
+  // Provider metadata
+  const providerMeta = PROVIDERS.find((p) => p.id === icon.provider) || PROVIDERS[0];
+
+  // Find equivalent icons in the same style or same group if available
+  const equivalentIcons = icon.equivalentGroup
+    ? ICONS.filter(
+        (other) =>
+          other.id !== icon.id &&
+          other.equivalentGroup === icon.equivalentGroup &&
+          (other.style === icon.style || !other.style)
+      )
+    : [];
 
   const handleCopySvg = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -95,15 +113,19 @@ export const IconCard: React.FC<IconCardProps> = ({
       onClick={() => onSelect(icon)}
       className="group relative flex flex-col justify-between p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-[#09090b] hover:border-slate-900 dark:hover:border-zinc-500 hover:shadow-lg transition-all duration-200 cursor-pointer active:scale-[0.98]"
     >
-      {/* Top row: Favorite Star button */}
+      {/* Top row: Vendor Badge & Favorite Star button */}
       <div className="flex items-center justify-between h-5">
-        {icon.code ? (
-          <span className="text-[10px] font-mono font-bold text-slate-500 dark:text-zinc-400">
-            {icon.code}
+        <div className="flex items-center gap-1.5 overflow-hidden">
+          {/* Subtle Vendor Chip */}
+          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 truncate">
+            {providerMeta.name[lang]}
           </span>
-        ) : (
-          <span />
-        )}
+          {icon.code && (
+            <span className="text-[10px] font-mono font-bold text-slate-400 dark:text-zinc-500 hidden sm:inline truncate">
+              {icon.code}
+            </span>
+          )}
+        </div>
 
         <button
           type="button"
@@ -133,7 +155,7 @@ export const IconCard: React.FC<IconCardProps> = ({
       </div>
 
       {/* Clean Title */}
-      <div className="text-center my-1.5">
+      <div className="text-center my-1">
         <h3
           className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate"
           title={displayName}
@@ -142,8 +164,34 @@ export const IconCard: React.FC<IconCardProps> = ({
         </h3>
       </div>
 
+      {/* Optional Cross-Vendor Equivalents Switcher */}
+      {equivalentIcons.length > 0 && onSwitchIcon && (
+        <div
+          className="flex items-center justify-center gap-1 my-1 py-0.5"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <span className="text-[9px] text-slate-400 dark:text-zinc-500 mr-0.5">
+            {lang === 'zh' ? '等价:' : 'Equiv:'}
+          </span>
+          {equivalentIcons.slice(0, 3).map((eq) => {
+            const eqProvider = PROVIDERS.find((p) => p.id === eq.provider) || PROVIDERS[0];
+            return (
+              <button
+                key={eq.id}
+                type="button"
+                onClick={() => onSwitchIcon(eq)}
+                className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-400 hover:bg-blue-100 hover:text-blue-700 dark:hover:bg-blue-950 dark:hover:text-blue-300 transition-colors"
+                title={`${cleanName(eq.name[lang])} (${eqProvider.name[lang]})`}
+              >
+                {eqProvider.name[lang]}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Dual Copy Action Buttons: Minimal and high-contrast */}
-      <div className="mt-2.5 pt-2.5 border-t border-slate-100 dark:border-zinc-800 grid grid-cols-2 gap-1.5 text-xs font-semibold">
+      <div className="mt-2 pt-2 border-t border-slate-100 dark:border-zinc-800 grid grid-cols-2 gap-1.5 text-xs font-semibold">
         {/* SVG Copy */}
         <button
           type="button"
