@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { Search, X, Check } from 'lucide-react';
 import { CloudProvider, IconCategory, IconStyle } from '../types/icon';
 import { PROVIDERS, CATEGORIES, STYLES } from '../data/icons';
@@ -36,6 +36,22 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onOpenBatchExport,
   onExportDrawio,
 }) => {
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Global shortcut ⌘K or / to focus search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      } else if (e.key === '/' && document.activeElement !== searchInputRef.current) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
   // Dynamically compute available providers based on selected style
   const availableProviders = useMemo(() => {
     if (selectedStyle === 'all') return PROVIDERS;
@@ -97,6 +113,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           <Search className="w-5 h-5" />
         </div>
         <input
+          ref={searchInputRef}
           type="text"
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
@@ -105,15 +122,21 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               ? '搜索核心设备与厂商：Cisco、华为USG、核心交换机、VPC、S3、防火墙、K8s...'
               : 'Search devices & vendors: Cisco, Huawei USG, Core Switch, VPC, S3, Firewall, K8s...'
           }
-          className="w-full pl-11 pr-10 py-3 rounded-2xl border border-slate-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm transition-all font-medium"
+          className="w-full pl-11 pr-14 py-3 rounded-2xl border border-slate-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm text-sm transition-all font-medium"
         />
-        {searchQuery && (
+        {searchQuery ? (
           <button
             onClick={() => onSearchChange('')}
             className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-700 dark:hover:text-zinc-200"
           >
             <X className="w-4 h-4" />
           </button>
+        ) : (
+          <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
+            <span className="px-1.5 py-0.5 rounded border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-800/80 text-[10px] font-mono font-semibold text-slate-400 dark:text-zinc-500">
+              ⌘K
+            </span>
+          </div>
         )}
       </div>
 

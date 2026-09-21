@@ -181,16 +181,12 @@ export default function HomePage() {
       {/* Floating Apple HUD Toast Notification */}
       <FloatingHudToast toast={hudToast} />
 
-      {/* Top Sticky Header with search, dark mode, language and favorites */}
+      {/* Top Sticky Header with utility buttons */}
       <Header
         lang={lang}
         onToggleLang={toggleLang}
         darkMode={darkMode}
         onToggleDarkMode={toggleDarkMode}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
         themeColor={themeColor}
         onThemeColorChange={setThemeColor}
         favoritesCount={favorites.length}
@@ -310,57 +306,6 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Educational Content & Usage Guide */}
-        <section className="mt-20 pt-10 border-t border-slate-100 dark:border-zinc-800">
-          <div className="max-w-5xl mx-auto">
-            <div className="flex items-center gap-2 mb-6">
-              <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
-                {lang === 'zh'
-                  ? '网络拓扑与架构图设计全景指南'
-                  : 'Architecture & Network Topology Design Guide'}
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600 dark:text-zinc-400">
-              <div className="p-4 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/40 space-y-2">
-                <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold">
-                  <Sparkles className="w-4 h-4 text-amber-500" />
-                  <span>{lang === 'zh' ? '💎 2.5D 等轴测 (售前方案)' : '💎 2.5D Isometric'}</span>
-                </div>
-                <p className="leading-relaxed">
-                  {lang === 'zh'
-                    ? '统一 30° 立体机架视角，具有极强的空间视觉冲击力。专为售前技术标书、方案建议书（RFP）、高管汇报演示 PPT 打造。'
-                    : 'Unified 30-degree isometric projection designed for executive PPT presentations and technical tenders.'}
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/40 space-y-2">
-                <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold">
-                  <FileCode2 className="w-4 h-4 text-blue-500" />
-                  <span>{lang === 'zh' ? '📐 2D 逻辑拓扑 (L2/L3规划)' : '📐 2D Modern Flat'}</span>
-                </div>
-                <p className="leading-relaxed">
-                  {lang === 'zh'
-                    ? '规范的现代扁平 2D 矢量标准（涵盖 Cisco CCIE 与华为标准规范）。适合大型复杂网络规划、路由协议走向与链路分析。'
-                    : 'Industry standard 2D flat vector icons for L2/L3 topology designs, protocol flows, and clean routing maps.'}
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/40 space-y-2">
-                <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                  <span>{lang === 'zh' ? '☁️ 云服务架构 (公有云/云原生)' : '☁️ Cloud Architecture'}</span>
-                </div>
-                <p className="leading-relaxed">
-                  {lang === 'zh'
-                    ? '公有云与云原生架构标准组件（AWS、阿里云、Kubernetes 等），强调数据流与服务拓扑，完美支持混合云场景。'
-                    : 'Standard cloud service icons for AWS, Alibaba Cloud, and Kubernetes hybrid infrastructure designs.'}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* Detail Modal */}

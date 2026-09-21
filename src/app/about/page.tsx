@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
-import { ArrowLeft, CheckCircle, ShieldCheck, Mail, Globe, Layers } from 'lucide-react';
+import { ArrowLeft, CheckCircle, ShieldCheck, Mail, Sparkles, FileCode2, CheckCircle2, Layers } from 'lucide-react';
 
 export default function AboutPage() {
   const [lang, setLang] = useState<'zh' | 'en'>('zh');
@@ -24,82 +24,117 @@ export default function AboutPage() {
         onToggleDarkMode={toggleDarkMode}
       />
 
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline mb-8"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           {lang === 'zh' ? '返回图标库' : 'Back to Icons Library'}
         </Link>
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
-          {lang === 'zh' ? '关于 ArchIcons 工具箱' : 'About ArchIcons Toolbox'}
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-3">
+          {lang === 'zh' ? '关于 ArchIcons 与设计指南' : 'About ArchIcons & Architecture Design Guide'}
         </h1>
-        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
+        <p className="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed mb-8">
           {lang === 'zh'
-            ? 'ArchIcons 是由独立云架构师与开源爱好者维护的高质量架构矢量图标库与设计辅助工具箱。'
-            : 'ArchIcons is a free, high-performance architecture icon directory and toolset built for software engineers, cloud architects, and sysadmins.'}
+            ? 'ArchIcons 是专为网络工程师、系统架构师和开发者打造的高清矢量架构拓扑图标库与设计辅助工具箱。'
+            : 'ArchIcons is a high-performance vector architecture icon directory built for software engineers, cloud architects, and sysadmins.'}
         </p>
 
-        <div className="space-y-8 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-          <section className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+        <div className="space-y-8 text-sm text-slate-700 dark:text-zinc-300 leading-relaxed">
+          {/* 1. Topology & Architecture Design Guide */}
+          <section className="p-6 rounded-2xl bg-slate-50/70 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800 space-y-4">
+            <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Layers className="w-5 h-5 text-blue-500" />
-              {lang === 'zh' ? '我们的初衷 (Our Mission)' : 'Our Mission'}
+              {lang === 'zh' ? '网络拓扑与架构图三大设计范式' : 'Three Major Topology Design Paradigms'}
             </h2>
-            <p>
-              {lang === 'zh'
-                ? '在绘制企业级系统拓扑图、技术方案 PPT 或架构白皮书时，架构师经常面临官方图标搜集繁琐、格式混乱（低清 PNG、未清洗 SVG）、缺乏统一中立设备符号、多云服务对应困难等痛点。ArchIcons 旨在提供最干净、轻量、无需登录即可一键取用的架构矢量图标方案。'
-                : 'Designing high-quality system architecture diagrams often requires searching scattered official portals, dealing with poorly formatted assets, and struggling to find consistent vendor-neutral icons. ArchIcons bridges this gap with an ultra-fast, clean, and 100% free vector repository.'}
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-800/80 border border-slate-200/80 dark:border-zinc-700/80 space-y-2">
+                <div className="flex items-center gap-1.5 text-slate-900 dark:text-white font-bold text-xs">
+                  <Sparkles className="w-4 h-4 text-amber-500" />
+                  <span>{lang === 'zh' ? '💎 2.5D 等轴测 (售前方案)' : '2.5D Isometric'}</span>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-zinc-400 leading-normal">
+                  {lang === 'zh'
+                    ? '统一 30° 立体机架视角，极具空间冲击力。专为售前技术标书、方案建议书（RFP）与高管汇报 PPT 打造。'
+                    : 'Unified 30-degree isometric projection designed for executive PPT presentations and technical tenders.'}
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-800/80 border border-slate-200/80 dark:border-zinc-700/80 space-y-2">
+                <div className="flex items-center gap-1.5 text-slate-900 dark:text-white font-bold text-xs">
+                  <FileCode2 className="w-4 h-4 text-blue-500" />
+                  <span>{lang === 'zh' ? '📐 2D 逻辑拓扑 (L2/L3规划)' : '2D Modern Flat'}</span>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-zinc-400 leading-normal">
+                  {lang === 'zh'
+                    ? '规范的现代扁平 2D 矢量标准（涵盖 Cisco CCIE 与华为标准规范）。适合大型复杂网络规划与路由协议走向分析。'
+                    : 'Industry standard 2D flat vector icons for L2/L3 topology designs, protocol flows, and routing maps.'}
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-800/80 border border-slate-200/80 dark:border-zinc-700/80 space-y-2">
+                <div className="flex items-center gap-1.5 text-slate-900 dark:text-white font-bold text-xs">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                  <span>{lang === 'zh' ? '☁️ 云服务架构 (公有云/云原生)' : 'Cloud Architecture'}</span>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-zinc-400 leading-normal">
+                  {lang === 'zh'
+                    ? '公有云与云原生架构标准组件（AWS、阿里云、Kubernetes 等），强调服务拓扑与微服务调用，完美支持混合云场景。'
+                    : 'Standard cloud service icons for AWS, Alibaba Cloud, and Kubernetes hybrid infrastructure designs.'}
+                </p>
+              </div>
+            </div>
           </section>
 
-          <section className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+          {/* 2. Core Mission */}
+          <section className="p-6 rounded-2xl bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800">
+            <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-emerald-500" />
-              {lang === 'zh' ? '三大核心特色' : 'Core Features'}
+              {lang === 'zh' ? '三大核心体验' : 'Core Features'}
             </h2>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5 text-xs sm:text-sm">
               <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
                 <span>
-                  <strong>{lang === 'zh' ? '一键复制 SVG 源码：' : '1-Click SVG Copy: '}</strong>
+                  <strong>{lang === 'zh' ? '1-Click 复制 SVG 源码：' : '1-Click SVG Copy: '}</strong>
                   {lang === 'zh'
-                    ? '无需保存文件到磁盘，点击直接复制代码，Ctrl+V 粘贴进 Draw.io、Figma、Excalidraw。'
-                    : 'No tedious file downloads needed. Copy clean SVG code with a single click and paste directly into diagram tools.'}
+                    ? '无需保存本地文件，点击即可在剪贴板中获取干净矢量代码，直接粘贴进 Draw.io、Figma、PPT。'
+                    : 'Copy clean SVG code with a single click and paste directly into diagram tools.'}
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
                 <span>
-                  <strong>{lang === 'zh' ? '独创跨云等价物映射：' : 'Cross-Cloud Equivalence: '}</strong>
+                  <strong>{lang === 'zh' ? '跨厂商等价物秒切：' : 'Cross-Vendor Equivalence: '}</strong>
                   {lang === 'zh'
-                    ? '比如查看 AWS S3 时，自动为您推荐 Azure Blob、阿里云 OSS 及通用对象存储，多云方案设计更游刃有余。'
-                    : 'Instantly view counterpart services across AWS, Azure, GCP, and Alibaba Cloud for smooth multi-cloud migration diagrams.'}
+                    ? '查看通用防火墙或存储时，支持原地切换华为、飞塔、AWS、阿里云等同类设备版本，方案选型一目了然。'
+                    : 'Instantly view counterpart services across Cisco, Huawei, AWS, and Alibaba Cloud.'}
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-500 mt-1 shrink-0" />
+                <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
                 <span>
-                  <strong>{lang === 'zh' ? '中立设备自由换色：' : 'Customizable Neutral Palette: '}</strong>
+                  <strong>{lang === 'zh' ? '全局动态光影调色盘：' : 'Dynamic Palette Engine: '}</strong>
                   {lang === 'zh'
-                    ? '通用路由器、交换机、防火墙支持在线实时改色与按需尺寸导出 PNG。'
-                    : 'Customize colors on generic network symbols and export high-resolution PNGs tailored to your diagram style.'}
+                    ? '中立设备支持商务蓝、信创红、极客青等行业主题实时改色，自动生成顶面、侧面与阴影。'
+                    : 'Customize colors on neutral symbols with real-time isometric lighting.'}
                 </span>
               </li>
             </ul>
           </section>
 
-          <section className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+          {/* 3. Contact */}
+          <section className="p-6 rounded-2xl bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800">
+            <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
               <Mail className="w-5 h-5 text-blue-500" />
-              {lang === 'zh' ? '联系我们与建议' : 'Contact & Suggestions'}
+              {lang === 'zh' ? '意见反馈与交流' : 'Contact & Suggestions'}
             </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-zinc-400">
               {lang === 'zh'
-                ? '若您希望增加特定云厂商的最新服务图标，或对网站工具有任何优化建议，欢迎访问 bin0sky.tech 或通过邮件与我们交流。'
-                : 'Have questions, feedback, or icon requests? Reach out to us via bin0sky.tech.'}
+                ? '如果您需要增加特定厂商的设备图标或对排版有优化建议，欢迎通过 GitHub Issue 或邮件与我们交流。'
+                : 'For custom equipment icon requests or layout improvements, feel free to open a GitHub issue or contact us.'}
             </p>
           </section>
         </div>
