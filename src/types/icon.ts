@@ -4,6 +4,7 @@ export type CloudProvider =
   | 'generic'       // 通用中立
   | 'physical'      // 物理通用（兼容）
   | 'cloud'         // 云通用（兼容）
+  | 'isp'           // 运营商 ISP (电信/联通/移动)
   | 'cisco'         // 思科 Cisco
   | 'huawei'        // 华为 / 信创
   | 'h3c'           // 新华三 H3C

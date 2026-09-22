@@ -32,6 +32,13 @@ export const STYLES: StyleMeta[] = [
 
 export const PROVIDERS: ProviderMeta[] = [
   {
+    id: 'isp',
+    name: { en: 'ISP / Telecom', zh: '电信运营商 ISP' },
+    color: '#005baa',
+    badgeBg: 'bg-blue-100 text-blue-950 border-blue-300 dark:bg-blue-500/20 dark:text-blue-200 dark:border-blue-500/40 font-bold',
+    supportedStyles: ['isometric', 'flat', 'cloud']
+  },
+  {
     id: 'generic',
     name: { en: 'Generic / Neutral', zh: '通用中立' },
     color: '#0284c7',
@@ -2846,6 +2853,482 @@ export const ICONS: IconMeta[] = [
   <circle cx="40" cy="64" r="1.5" fill="%%ACCENT_GREEN%%"/>
   <circle cx="46" cy="67" r="1.5" fill="%%ACCENT_GREEN%%"/>
   <circle cx="52" cy="70" r="1.5" fill="%%ACCENT_GREEN%%"/>
+</svg>`
+  },
+
+  // =========================================================================
+  // 8. 运营商ISP、站点建筑、终端用户与VPN通道 (20款高频工程刚需)
+  // =========================================================================
+  {
+    id: 'isp-china-telecom',
+    style: 'flat',
+    provider: 'isp',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'China Telecom (ISP)', zh: '中国电信 (ISP 运营商出口)' },
+    code: 'ISP-CT',
+    tags: ['telecom', 'china telecom', 'isp', 'carrier', 'dianxin', '中国电信', '电信宽带', '电信专线', '公网出口', '双线BGP'],
+    equivalentGroup: 'isp-carrier',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="34" fill="#005baa" stroke="#00417a" stroke-width="2"/>
+  <!-- China Telecom Iconic Dynamic Calligraphy Loops -->
+  <path d="M 22 46 C 22 28 38 22 48 24 C 58 26 58 34 50 36 C 38 38 30 46 36 56 C 42 64 56 60 60 52" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="28" cy="48" r="3" fill="#ffffff"/>
+  <circle cx="56" cy="30" r="2.5" fill="#ffffff"/>
+</svg>`
+  },
+  {
+    id: 'isp-china-unicom',
+    style: 'flat',
+    provider: 'isp',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'China Unicom (ISP)', zh: '中国联通 (ISP 运营商出口)' },
+    code: 'ISP-CU',
+    tags: ['unicom', 'china unicom', 'isp', 'carrier', 'liantong', '中国联通', '联通宽带', '联通专线', '公网出口', 'MSTP'],
+    equivalentGroup: 'isp-carrier',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="34" fill="#e60012" stroke="#b8000e" stroke-width="2"/>
+  <!-- China Unicom Endless Knot Matrix -->
+  <g fill="none" stroke="#ffffff" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 28 30 L 40 18 L 52 30 L 40 42 Z"/>
+    <path d="M 28 50 L 40 38 L 52 50 L 40 62 Z"/>
+    <path d="M 18 40 L 30 28 L 42 40 L 30 52 Z"/>
+    <path d="M 38 40 L 50 28 L 62 40 L 50 52 Z"/>
+  </g>
+</svg>`
+  },
+  {
+    id: 'isp-china-mobile',
+    style: 'flat',
+    provider: 'isp',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'China Mobile (ISP)', zh: '中国移动 (ISP 运营商出口)' },
+    code: 'ISP-CM',
+    tags: ['mobile', 'china mobile', 'isp', 'carrier', 'yidong', '中国移动', '移动宽带', '移动专线', '5G专网', 'CMNET'],
+    equivalentGroup: 'isp-carrier',
+    isTintable: false,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="34" fill="#0085d0" stroke="#00669e" stroke-width="2"/>
+  <!-- China Mobile Dual Connecting Arcs -->
+  <path d="M 22 42 A 18 18 0 0 1 54 26" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M 58 38 A 18 18 0 0 1 26 54" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="40" cy="40" r="5" fill="#7ac143"/>
+</svg>`
+  },
+  {
+    id: 'net-internet-cloud',
+    style: 'flat',
+    provider: 'generic',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'Internet Public Cloud', zh: 'Internet 互联网公网云团' },
+    code: 'INTERNET',
+    tags: ['internet', 'cloud', 'public', 'wan', 'hulianwang', '互联网', '公网', '广域网', '外网出口'],
+    equivalentGroup: 'isp-carrier',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="inet-cloud-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="%%TOP_LIGHT%%"/>
+      <stop offset="100%" stop-color="%%LEFT_FACE%%"/>
+    </linearGradient>
+  </defs>
+  <!-- Fluffy Network Cloud Base -->
+  <path d="M 26 56 C 18 56 12 50 12 42 C 12 35 17 30 24 29 C 26 20 34 14 44 14 C 54 14 62 21 64 30 C 70 31 76 36 76 43 C 76 50 70 56 62 56 Z" fill="url(#inet-cloud-grad)" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Internal Global Network Grid Lines -->
+  <g fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.85">
+    <ellipse cx="42" cy="38" rx="18" ry="12"/>
+    <line x1="24" y1="38" x2="60" y2="38"/>
+    <line x1="42" y1="26" x2="42" y2="50"/>
+  </g>
+  <circle cx="42" cy="38" r="3" fill="%%ACCENT_CYAN%%"/>
+</svg>`
+  },
+  {
+    id: 'net-leased-line-fiber',
+    style: 'flat',
+    provider: 'generic',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'Dark Fiber / Leased Line', zh: '点对点裸光纤 / 传输专线' },
+    code: 'FIBER-LINE',
+    tags: ['fiber', 'leased line', 'mstp', 'dark fiber', 'guangxian', '裸光纤', '拉纤', '专线互联', '点对点'],
+    equivalentGroup: 'router',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="24" width="64" height="32" rx="6" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Optical pulse trajectory -->
+  <path d="M 16 40 L 28 40 L 34 32 L 42 48 L 48 32 L 54 40 L 64 40" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="16" cy="40" r="3.5" fill="#f59e0b"/>
+  <circle cx="64" cy="40" r="3.5" fill="#22c55e"/>
+</svg>`
+  },
+  {
+    id: 'site-hq-building',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Headquarters Building (HQ)', zh: '企业集团总部大楼 (HQ)' },
+    code: 'HQ-SITE',
+    tags: ['hq', 'headquarters', 'building', 'campus', 'zongbu', '总部', '集团大楼', '主园区', '主站'],
+    equivalentGroup: 'building-site',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Skyscraper 1 (Main Tower) -->
+  <rect x="16" y="16" width="30" height="52" rx="3" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Skyscraper 2 (Secondary Tower) -->
+  <rect x="42" y="28" width="24" height="40" rx="3" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Windows Matrix Tower 1 -->
+  <g fill="#ffffff" opacity="0.85">
+    <rect x="22" y="22" width="5" height="5" rx="1"/>
+    <rect x="33" y="22" width="5" height="5" rx="1"/>
+    <rect x="22" y="31" width="5" height="5" rx="1"/>
+    <rect x="33" y="31" width="5" height="5" rx="1"/>
+    <rect x="22" y="40" width="5" height="5" rx="1"/>
+    <rect x="33" y="40" width="5" height="5" rx="1"/>
+    <rect x="22" y="49" width="5" height="5" rx="1"/>
+    <rect x="33" y="49" width="5" height="5" rx="1"/>
+    <!-- Windows Tower 2 -->
+    <rect x="50" y="34" width="4" height="4" rx="1"/>
+    <rect x="58" y="34" width="4" height="4" rx="1"/>
+    <rect x="50" y="42" width="4" height="4" rx="1"/>
+    <rect x="58" y="42" width="4" height="4" rx="1"/>
+    <rect x="50" y="50" width="4" height="4" rx="1"/>
+    <rect x="58" y="50" width="4" height="4" rx="1"/>
+  </g>
+  <!-- Flag / Spire -->
+  <line x1="31" y1="8" x2="31" y2="16" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <circle cx="31" cy="8" r="2" fill="%%ACCENT_RED%%"/>
+</svg>`
+  },
+  {
+    id: 'site-branch-office',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Branch Office Site', zh: '分支机构 / 办事处 (Branch)' },
+    code: 'BRANCH-SITE',
+    tags: ['branch', 'office', 'site', 'fenzhi', '分支机构', '办事处', '分公司', '门店', '网点'],
+    equivalentGroup: 'building-site',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mid-rise office building -->
+  <rect x="18" y="24" width="44" height="44" rx="4" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Entrance door & Awning -->
+  <rect x="34" y="52" width="12" height="16" rx="2" fill="%%BOTTOM_DARK%%"/>
+  <rect x="32" y="50" width="16" height="3" fill="%%ACCENT_CYAN%%"/>
+  <!-- Windows -->
+  <g fill="#ffffff" opacity="0.9">
+    <rect x="24" y="30" width="7" height="6" rx="1"/>
+    <rect x="36" y="30" width="7" height="6" rx="1"/>
+    <rect x="48" y="30" width="7" height="6" rx="1"/>
+    <rect x="24" y="40" width="7" height="6" rx="1"/>
+    <rect x="36" y="40" width="7" height="6" rx="1"/>
+    <rect x="48" y="40" width="7" height="6" rx="1"/>
+  </g>
+</svg>`
+  },
+  {
+    id: 'site-idc-datacenter',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Datacenter Facility (IDC)', zh: 'IDC 数据中心机房楼' },
+    code: 'IDC-FACILITY',
+    tags: ['idc', 'datacenter', 'facility', 'jifang', '数据中心', '机房楼', '灾备中心', '托管IDC'],
+    equivalentGroup: 'building-site',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="14" y="18" width="52" height="50" rx="6" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Server Rack Columns inside IDC Facility -->
+  <rect x="22" y="26" width="10" height="34" rx="2" fill="%%LEFT_FACE%%"/>
+  <rect x="35" y="26" width="10" height="34" rx="2" fill="%%LEFT_FACE%%"/>
+  <rect x="48" y="26" width="10" height="34" rx="2" fill="%%LEFT_FACE%%"/>
+  <!-- Green Status LEDs -->
+  <circle cx="27" cy="32" r="1.5" fill="%%ACCENT_GREEN%%"/>
+  <circle cx="27" cy="38" r="1.5" fill="%%ACCENT_GREEN%%"/>
+  <circle cx="40" cy="32" r="1.5" fill="%%ACCENT_GREEN%%"/>
+  <circle cx="40" cy="38" r="1.5" fill="%%ACCENT_CYAN%%"/>
+  <circle cx="53" cy="32" r="1.5" fill="%%ACCENT_GREEN%%"/>
+  <circle cx="53" cy="38" r="1.5" fill="%%ACCENT_AMBER%%"/>
+</svg>`
+  },
+  {
+    id: 'site-smart-factory',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Smart Factory / Campus', zh: '智能工厂 / 工业园区' },
+    code: 'FACTORY-SITE',
+    tags: ['factory', 'plant', 'industrial', 'campus', 'gongchang', '工厂', '车间', '智能制造', '工业园区'],
+    equivalentGroup: 'building-site',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Industrial Sawtooth Roof & Factory Walls -->
+  <path d="M 16 66 L 16 38 L 30 26 L 30 38 L 44 26 L 44 38 L 58 26 L 58 66 Z" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Chimney stack -->
+  <rect x="58" y="16" width="8" height="50" rx="1" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="1.5"/>
+  <!-- Gear in factory -->
+  <circle cx="36" cy="50" r="7" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+  <circle cx="36" cy="50" r="3" fill="#ffffff"/>
+</svg>`
+  },
+  {
+    id: 'client-workstation-user',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Workstation with User Avatar', zh: '办公电脑 (带业务人员头像)' },
+    code: 'USER-PC',
+    tags: ['pc', 'user', 'avatar', 'workstation', 'bangong', '办公电脑', '终端机', '职员电脑', '财务机', '运维人员'],
+    equivalentGroup: 'endpoint-device',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Monitor Display Screen -->
+  <rect x="8" y="24" width="42" height="28" rx="4" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <rect x="12" y="28" width="34" height="20" rx="2" fill="#ffffff"/>
+  <!-- Monitor Stand -->
+  <rect x="26" y="52" width="6" height="6" fill="%%BOTTOM_DARK%%"/>
+  <rect x="18" y="58" width="22" height="3" rx="1" fill="%%BOTTOM_DARK%%"/>
+  <!-- User Staff Avatar on the right -->
+  <circle cx="60" cy="30" r="9" fill="%%ACCENT_CYAN%%" stroke="%%BORDER_STROKE%%" stroke-width="1.5"/>
+  <path d="M 48 54 C 48 44 72 44 72 54 Z" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="1.5"/>
+</svg>`
+  },
+  {
+    id: 'client-desktop-pc',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Standard Desktop PC', zh: '台式电脑终端 (显示器+主机)' },
+    code: 'DESKTOP-PC',
+    tags: ['desktop', 'pc', 'computer', 'host', 'taishiji', '台式机', '电脑', '微机', '工作站'],
+    equivalentGroup: 'endpoint-device',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Display Screen -->
+  <rect x="8" y="16" width="46" height="32" rx="4" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <rect x="12" y="20" width="38" height="24" rx="2" fill="#0f172a"/>
+  <!-- PC Stand -->
+  <rect x="28" y="48" width="6" height="8" fill="%%BOTTOM_DARK%%"/>
+  <rect x="20" y="56" width="22" height="3" rx="1" fill="%%BOTTOM_DARK%%"/>
+  <!-- Tower Chassis -->
+  <rect x="58" y="20" width="16" height="40" rx="3" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="1.8"/>
+  <!-- Optical drive and Power LED -->
+  <line x1="62" y1="26" x2="70" y2="26" stroke="#ffffff" stroke-width="1.5"/>
+  <circle cx="66" cy="32" r="1.5" fill="%%ACCENT_GREEN%%"/>
+</svg>`
+  },
+  {
+    id: 'client-business-laptop',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Business Laptop', zh: '商务便携笔记本电脑' },
+    code: 'LAPTOP',
+    tags: ['laptop', 'notebook', 'macbook', 'bijiben', '笔记本', '便携机', '移动办公'],
+    equivalentGroup: 'endpoint-device',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Screen open upright -->
+  <rect x="16" y="18" width="48" height="32" rx="3" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <rect x="20" y="22" width="40" height="24" rx="1.5" fill="#0f172a"/>
+  <!-- Base keyboard chassis -->
+  <polygon points="10,54 70,54 66,60 14,60" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <rect x="34" y="55" width="12" height="2" rx="1" fill="#ffffff" opacity="0.6"/>
+</svg>`
+  },
+  {
+    id: 'client-mobile-phone',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Mobile Phone / Tablet', zh: '智能手机 / 移动终端 (BYOD)' },
+    code: 'MOBILE',
+    tags: ['mobile', 'phone', 'smartphone', 'tablet', 'byod', 'shouji', '智能手机', '平板', '移动终端'],
+    equivalentGroup: 'endpoint-device',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Smartphone Vertical Body -->
+  <rect x="24" y="12" width="32" height="56" rx="7" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Screen Glass -->
+  <rect x="28" y="18" width="24" height="42" rx="3" fill="#0f172a"/>
+  <!-- Home Indicator / Notch -->
+  <circle cx="40" cy="63" r="2" fill="#ffffff"/>
+  <rect x="36" y="15" width="8" height="1.5" rx="0.5" fill="#ffffff" opacity="0.7"/>
+</svg>`
+  },
+  {
+    id: 'client-ip-camera',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'IP Security Camera (IPC)', zh: '网络安防监控摄像头 (IPC)' },
+    code: 'IPC-CAMERA',
+    tags: ['camera', 'ipc', 'cctv', 'security', 'shexiangtou', '摄像头', '安防监控', '网络摄像机', '雪亮工程'],
+    equivalentGroup: 'endpoint-device',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bullet Camera Shell -->
+  <polygon points="20,26 50,30 50,50 20,54" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Lens Front -->
+  <ellipse cx="20" cy="40" rx="4" ry="14" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="1.5"/>
+  <circle cx="20" cy="40" r="5" fill="#38bdf8"/>
+  <!-- Wall Mount Bracket -->
+  <path d="M 50 40 L 62 40 L 62 58 L 68 58" fill="none" stroke="%%BORDER_STROKE%%" stroke-width="3" stroke-linecap="round"/>
+  <!-- Red Recording LED -->
+  <circle cx="26" cy="32" r="1.5" fill="#ef4444"/>
+</svg>`
+  },
+  {
+    id: 'client-network-printer',
+    style: 'flat',
+    provider: 'generic',
+    category: 'physical',
+    deviceType: 'physical',
+    name: { en: 'Network Multi-Function Printer', zh: '网络打印机 / 复合一体机' },
+    code: 'PRINTER',
+    tags: ['printer', 'copier', 'mfp', 'dayinji', '网络打印机', '多功能一体机', '复印机'],
+    equivalentGroup: 'endpoint-device',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Printer Main Body -->
+  <rect x="14" y="32" width="52" height="28" rx="5" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Top Scanner Lid / Paper Feed -->
+  <polygon points="24,18 56,18 60,32 20,32" fill="#ffffff" stroke="%%BORDER_STROKE%%" stroke-width="1.8"/>
+  <!-- Bottom Paper Tray Out -->
+  <rect x="22" y="44" width="36" height="8" rx="2" fill="#0f172a"/>
+  <!-- Ejected Sheet -->
+  <rect x="28" y="46" width="24" height="12" rx="1" fill="#ffffff" stroke="%%BORDER_STROKE%%" stroke-width="1"/>
+</svg>`
+  },
+  {
+    id: 'tunnel-vpn-ipsec',
+    style: 'flat',
+    provider: 'generic',
+    category: 'security',
+    deviceType: 'physical',
+    name: { en: 'IPSec / SSL VPN Secure Tunnel', zh: 'VPN 加密连接通道 (安全隧道)' },
+    code: 'VPN-TUNNEL',
+    tags: ['vpn', 'tunnel', 'ipsec', 'ssl vpn', 'suidao', 'VPN隧道', '加密通道', '点对点VPN', '跨公网通道'],
+    equivalentGroup: 'vpn',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Horizontal Tunnel Pipe -->
+  <rect x="12" y="28" width="56" height="24" rx="12" fill="%%LEFT_FACE%%" fill-opacity="0.25" stroke="%%BORDER_STROKE%%" stroke-width="2.5" stroke-dasharray="4 3"/>
+  <!-- Brass Security Padlock in center -->
+  <path d="M 33 34 C 33 28 47 28 47 34 L 47 38 L 33 38 Z" fill="none" stroke="#f59e0b" stroke-width="3"/>
+  <rect x="28" y="38" width="24" height="18" rx="4" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+  <circle cx="40" cy="45" r="2.5" fill="#1e293b"/>
+  <polygon points="38.5,45 41.5,45 42,51 38,51" fill="#1e293b"/>
+</svg>`
+  },
+  {
+    id: 'tunnel-mpls-circuit',
+    style: 'flat',
+    provider: 'generic',
+    category: 'network',
+    deviceType: 'physical',
+    name: { en: 'MPLS / SD-WAN Virtual Circuit', zh: 'MPLS / EVPN 高速专线通道' },
+    code: 'MPLS-CIRCUIT',
+    tags: ['mpls', 'evpn', 'circuit', 'virtual tunnel', 'zhuanxian', '专线通道', '虚拟电路', '二层透传'],
+    equivalentGroup: 'vpn',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dual High-speed Circuit Beams -->
+  <line x1="8" y1="34" x2="72" y2="34" stroke="%%BORDER_STROKE%%" stroke-width="3" stroke-dasharray="6 4"/>
+  <line x1="8" y1="46" x2="72" y2="46" stroke="%%BORDER_STROKE%%" stroke-width="3" stroke-dasharray="6 4"/>
+  <!-- Multi-protocol Packets with Label tag -->
+  <rect x="24" y="26" width="14" height="28" rx="3" fill="%%ACCENT_CYAN%%"/>
+  <rect x="44" y="26" width="14" height="28" rx="3" fill="%%ACCENT_GREEN%%"/>
+</svg>`
+  },
+  {
+    id: 'cloud-direct-connect',
+    style: 'cloud',
+    provider: 'generic',
+    category: 'network',
+    deviceType: 'cloud',
+    name: { en: 'Cloud Direct Connect / Express', zh: '云物理专线接入 (Direct Connect)' },
+    code: 'CLOUD-DX',
+    tags: ['direct connect', 'express connect', 'dx', 'hybrid cloud', 'zhuanxian', '云专线', '高速通道', '物理专线入云'],
+    equivalentGroup: 'vpn',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="12" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Interlock plug / High speed trunk cable icon -->
+  <path d="M 22 40 L 36 40 M 44 40 L 58 40" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <rect x="34" y="30" width="12" height="20" rx="3" fill="#ffffff"/>
+  <line x1="40" y1="30" x2="40" y2="50" stroke="%%LEFT_FACE%%" stroke-width="2"/>
+</svg>`
+  },
+  {
+    id: 'cloud-hybrid-vpn-gw',
+    style: 'cloud',
+    provider: 'generic',
+    category: 'network',
+    deviceType: 'cloud',
+    name: { en: 'Cloud Hybrid VPN Gateway', zh: '混合云 VPN 对端网关' },
+    code: 'CLOUD-VPNGW',
+    tags: ['vpn gateway', 'hybrid cloud', 'ipsec', 'hunheyun', '混合云网关', '云端VPN', '对接本地'],
+    equivalentGroup: 'vpn',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="12" fill="%%LEFT_FACE%%" stroke="%%BORDER_STROKE%%" stroke-width="2"/>
+  <!-- Shield + Intersecting arrows -->
+  <path d="M 40 18 L 56 26 C 56 46 40 58 40 60 C 40 58 24 46 24 26 Z" fill="#ffffff" fill-opacity="0.2" stroke="#ffffff" stroke-width="2"/>
+  <path d="M 32 38 L 48 38 M 42 32 L 48 38 L 42 44" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+  },
+  {
+    id: 'cloud-security-firewall',
+    style: 'cloud',
+    provider: 'generic',
+    category: 'security',
+    deviceType: 'cloud',
+    name: { en: 'Cloud Virtual Firewall (vFW)', zh: '云端虚拟化安全网关 (vFW)' },
+    code: 'CLOUD-VFW',
+    tags: ['firewall', 'vfw', 'cloud security', 'nsg', 'yunfanghuoqiang', '虚拟防火墙', '云防火墙', '边界防御'],
+    equivalentGroup: 'firewall',
+    isTintable: true,
+    viewBox: '0 0 80 80',
+    svgRaw: `<svg viewBox="0 0 80 80" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="60" height="60" rx="12" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+  <!-- Flame + Digital Grid -->
+  <path d="M 40 22 C 43 28 48 32 48 38 C 48 45 43 50 40 54 C 37 50 32 45 32 38 C 32 32 37 28 40 22 Z" fill="#ffffff"/>
+  <circle cx="40" cy="40" r="3" fill="#ef4444"/>
 </svg>`
   }
 
