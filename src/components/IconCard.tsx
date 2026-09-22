@@ -196,17 +196,17 @@ export const IconCard: React.FC<IconCardProps> = ({
         <button
           type="button"
           onClick={handleCopySvg}
-          className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl border transition-all ${
+          className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl border transition-all active:scale-95 ${
             copiedType === 'svg'
-              ? 'bg-emerald-600 border-emerald-600 text-white font-bold'
-              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800'
+              ? 'bg-emerald-600 border-emerald-600 text-white font-bold shadow-xs'
+              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 dark:hover:bg-blue-950/50 dark:hover:border-blue-700/60 dark:hover:text-blue-300'
           }`}
           title={lang === 'zh' ? '复制 SVG 矢量' : 'Copy SVG'}
         >
           {copiedType === 'svg' ? (
             <Check className="w-3.5 h-3.5" />
           ) : (
-            <Copy className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" />
+            <Copy className="w-3.5 h-3.5" />
           )}
           <span className="text-[11px]">{copiedType === 'svg' ? (lang === 'zh' ? '已拷' : 'Done') : 'SVG'}</span>
         </button>
@@ -215,17 +215,17 @@ export const IconCard: React.FC<IconCardProps> = ({
         <button
           type="button"
           onClick={handleCopyPng}
-          className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl border transition-all ${
+          className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl border transition-all active:scale-95 ${
             copiedType === 'png'
-              ? 'bg-blue-600 border-blue-600 text-white font-bold'
-              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 hover:bg-slate-100 dark:hover:bg-zinc-800'
+              ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-xs'
+              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 dark:hover:bg-blue-950/50 dark:hover:border-blue-700/60 dark:hover:text-blue-300'
           }`}
           title={lang === 'zh' ? '复制 PNG 图片' : 'Copy PNG'}
         >
           {copiedType === 'png' ? (
             <Check className="w-3.5 h-3.5" />
           ) : (
-            <ImageIcon className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" />
+            <ImageIcon className="w-3.5 h-3.5" />
           )}
           <span className="text-[11px]">{copiedType === 'png' ? (lang === 'zh' ? '已拷' : 'Done') : 'PNG'}</span>
         </button>
