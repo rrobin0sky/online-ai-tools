@@ -54,8 +54,8 @@ export default function TermsPage() {
               <h2 className="text-base font-bold text-slate-900 dark:text-white mb-2">2. Use License & Trademark Disclaimer</h2>
               <p>
                 Permission is granted to freely browse and copy SVG code and download icon assets for architecture diagramming and design purposes.
-                All product names, logos, and brands (including AWS, Microsoft Azure, Google Cloud, Alibaba Cloud, Kubernetes) are property of their respective owners.
-                All company, product and service names used in this website are for identification and informational purposes only.
+                All product names, logos, and brands (including China Telecom, China Unicom, China Mobile, Cisco, Huawei, H3C, AWS, Microsoft Azure, Google Cloud, Alibaba Cloud, Kubernetes) are property of their respective owners.
+                All company, product, and carrier service names used in this website are for identification, network topology illustration, and informational purposes only.
               </p>
             </section>
 

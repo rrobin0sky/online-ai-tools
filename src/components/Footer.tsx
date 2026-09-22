@@ -27,10 +27,10 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
         </div>
 
         {/* Right: Essential Lightweight Trademark Disclaimer (Protects against infringement & fits AdSense) */}
-        <div className="text-[11px] text-slate-400 dark:text-zinc-500 text-center md:text-right max-w-xl">
+        <div className="text-[11px] leading-relaxed text-slate-400 dark:text-zinc-500 text-center md:text-right max-w-xl">
           {lang === 'zh'
-            ? '声明：本站为中立架构图辅助工具。Cisco、Huawei、AWS、Azure、Aliyun 等商标与官方标识版权归原厂商所有。'
-            : 'Disclaimer: Independent tool. Cisco, Huawei, AWS, Azure, and other trademarks belong to their respective owners.'}
+            ? '声明：本站为中立技术架构绘图工具。中国电信、中国联通、中国移动、Cisco、Huawei、AWS、Azure 等商标与官方徽标版权均归各自权利人所有，仅供网络拓扑设计、方案示意及学术交流使用。'
+            : 'Disclaimer: Independent technical architecture diagramming tool. Trademarks and logos of China Telecom, China Unicom, China Mobile, Cisco, Huawei, AWS, Azure, etc., belong to their respective owners and are used strictly for network topology schematics and educational purposes.'}
         </div>
       </div>
     </footer>
