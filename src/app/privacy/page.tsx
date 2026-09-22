@@ -7,19 +7,74 @@ import { Footer } from '../../components/Footer';
 import { ArrowLeft, Shield } from 'lucide-react';
 
 export default function PrivacyPage() {
-  const [lang, setLang] = useState<'zh' | 'en'>('en'); // default en for international compliance
+  const [lang, setLang] = useState<'zh' | 'en'>('zh');
   const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('archicons_theme_mode');
+      const isDark = savedTheme
+        ? savedTheme === 'dark'
+        : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(isDark);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      try {
+        const savedLang = localStorage.getItem('archicons_lang') as 'zh' | 'en' | null;
+        if (savedLang === 'zh' || savedLang === 'en') {
+          setLang(savedLang);
+        }
+      } catch (err) {
+        console.error('Failed to load lang from localStorage', err);
+      }
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.classList.add('dark');
+        try {
+          localStorage.setItem('archicons_theme_mode', 'dark');
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        document.documentElement.classList.remove('dark');
+        try {
+          localStorage.setItem('archicons_theme_mode', 'light');
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      return next;
+    });
+  };
+
+  const toggleLang = () => {
+    setLang((prev) => {
+      const next = prev === 'zh' ? 'en' : 'zh';
+      try {
+        localStorage.setItem('archicons_lang', next);
+      } catch (e) {
+        console.error(e);
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-[#09090b] min-h-screen text-slate-900 dark:text-white transition-colors">
       <Header
         lang={lang}
-        onToggleLang={() => setLang(lang === 'zh' ? 'en' : 'zh')}
+        onToggleLang={toggleLang}
         darkMode={darkMode}
-        onToggleDarkMode={() => {
-          setDarkMode(!darkMode);
-          document.documentElement.classList.toggle('dark');
-        }}
+        onToggleDarkMode={toggleDarkMode}
       />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">

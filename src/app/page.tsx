@@ -44,6 +44,16 @@ export default function HomePage() {
         document.documentElement.classList.remove('dark');
       }
 
+      // Load saved language
+      try {
+        const savedLang = localStorage.getItem('archicons_lang') as 'zh' | 'en' | null;
+        if (savedLang === 'zh' || savedLang === 'en') {
+          setLang(savedLang);
+        }
+      } catch (err) {
+        console.error('Failed to load lang from localStorage', err);
+      }
+
       try {
         const saved = localStorage.getItem('archicons_favorites');
         if (saved) {
@@ -78,7 +88,15 @@ export default function HomePage() {
   };
 
   const toggleLang = () => {
-    setLang((prev) => (prev === 'zh' ? 'en' : 'zh'));
+    setLang((prev) => {
+      const next = prev === 'zh' ? 'en' : 'zh';
+      try {
+        localStorage.setItem('archicons_lang', next);
+      } catch (e) {
+        console.error(e);
+      }
+      return next;
+    });
   };
 
   const handleToggleFavorite = (iconId: string) => {

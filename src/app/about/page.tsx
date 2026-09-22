@@ -22,6 +22,16 @@ export default function AboutPage() {
       } else {
         document.documentElement.classList.remove('dark');
       }
+
+      // Load saved language
+      try {
+        const savedLang = localStorage.getItem('archicons_lang') as 'zh' | 'en' | null;
+        if (savedLang === 'zh' || savedLang === 'en') {
+          setLang(savedLang);
+        }
+      } catch (err) {
+        console.error('Failed to load lang from localStorage', err);
+      }
     }
   }, []);
 
@@ -47,11 +57,23 @@ export default function AboutPage() {
     });
   };
 
+  const toggleLang = () => {
+    setLang((prev) => {
+      const next = prev === 'zh' ? 'en' : 'zh';
+      try {
+        localStorage.setItem('archicons_lang', next);
+      } catch (e) {
+        console.error(e);
+      }
+      return next;
+    });
+  };
+
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-[#09090b] min-h-screen text-slate-900 dark:text-white transition-colors">
       <Header
         lang={lang}
-        onToggleLang={() => setLang(lang === 'zh' ? 'en' : 'zh')}
+        onToggleLang={toggleLang}
         darkMode={darkMode}
         onToggleDarkMode={toggleDarkMode}
       />
