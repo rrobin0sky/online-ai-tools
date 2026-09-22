@@ -190,23 +190,23 @@ export const IconCard: React.FC<IconCardProps> = ({
         </div>
       )}
 
-      {/* Dual Copy Action Buttons: Minimal and high-contrast */}
-      <div className="mt-2 pt-2 border-t border-slate-100 dark:border-zinc-800 grid grid-cols-2 gap-1.5 text-xs font-semibold">
+      {/* Dual Copy Action Buttons: Pure Minimal Monochrome */}
+      <div className="mt-2 pt-2 border-t border-slate-100 dark:border-zinc-800/80 grid grid-cols-2 gap-1.5 text-xs font-semibold">
         {/* SVG Copy */}
         <button
           type="button"
           onClick={handleCopySvg}
           className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl border transition-all active:scale-95 ${
             copiedType === 'svg'
-              ? 'bg-emerald-600 border-emerald-600 text-white font-bold shadow-xs'
-              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 dark:hover:bg-blue-950/50 dark:hover:border-blue-700/60 dark:hover:text-blue-300'
+              ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 border-transparent font-bold shadow-xs'
+              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/80 text-slate-700 dark:text-zinc-300 hover:bg-slate-100 hover:border-slate-300 hover:text-black dark:hover:bg-zinc-800 dark:hover:border-zinc-700 dark:hover:text-white'
           }`}
           title={lang === 'zh' ? '复制 SVG 矢量' : 'Copy SVG'}
         >
           {copiedType === 'svg' ? (
-            <Check className="w-3.5 h-3.5" />
+            <Check className="w-3.5 h-3.5 text-emerald-400 dark:text-emerald-600" />
           ) : (
-            <Copy className="w-3.5 h-3.5" />
+            <Copy className="w-3.5 h-3.5 opacity-70" />
           )}
           <span className="text-[11px]">{copiedType === 'svg' ? (lang === 'zh' ? '已拷' : 'Done') : 'SVG'}</span>
         </button>
@@ -217,15 +217,15 @@ export const IconCard: React.FC<IconCardProps> = ({
           onClick={handleCopyPng}
           className={`flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl border transition-all active:scale-95 ${
             copiedType === 'png'
-              ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-xs'
-              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-700 dark:text-zinc-300 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 dark:hover:bg-blue-950/50 dark:hover:border-blue-700/60 dark:hover:text-blue-300'
+              ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 border-transparent font-bold shadow-xs'
+              : 'border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/80 text-slate-700 dark:text-zinc-300 hover:bg-slate-100 hover:border-slate-300 hover:text-black dark:hover:bg-zinc-800 dark:hover:border-zinc-700 dark:hover:text-white'
           }`}
           title={lang === 'zh' ? '复制 PNG 图片' : 'Copy PNG'}
         >
           {copiedType === 'png' ? (
-            <Check className="w-3.5 h-3.5" />
+            <Check className="w-3.5 h-3.5 text-emerald-400 dark:text-emerald-600" />
           ) : (
-            <ImageIcon className="w-3.5 h-3.5" />
+            <ImageIcon className="w-3.5 h-3.5 opacity-70" />
           )}
           <span className="text-[11px]">{copiedType === 'png' ? (lang === 'zh' ? '已拷' : 'Done') : 'PNG'}</span>
         </button>

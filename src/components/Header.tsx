@@ -112,9 +112,9 @@ export const Header: React.FC<HeaderProps> = ({
                     key={style.id}
                     type="button"
                     onClick={() => onStyleChange(style.id)}
-                    className={`px-2 sm:px-3 py-1 rounded-lg text-xs font-extrabold whitespace-nowrap transition-all ${
+                    className={`px-2 sm:px-3 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-all ${
                       isSelected
-                        ? 'bg-blue-600 text-white shadow-xs'
+                        ? 'bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-xs'
                         : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
                     }`}
                     title={style.description[lang]}
