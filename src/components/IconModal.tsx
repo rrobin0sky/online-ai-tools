@@ -202,18 +202,18 @@ export const IconModal: React.FC<IconModalProps> = ({
           </div>
         )}
 
-        {/* Primary Action Buttons: Pure Monochrome (Black & White), Zero Color Interference */}
+        {/* Primary Action Buttons: Twin Pure Neutral Muted Actions */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-          {/* Copy SVG: Primary Action (Monochrome Solid) */}
+          {/* Copy SVG: Twin Neutral Outline Style */}
           <button
             type="button"
             onClick={handleCopySvg}
-            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold text-xs transition-all active:scale-[0.97] shadow-xs bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-950 border border-transparent"
+            className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold text-xs border transition-all active:scale-[0.97] shadow-2xs bg-zinc-100/90 hover:bg-zinc-200/80 dark:bg-zinc-800/80 dark:hover:bg-zinc-750 text-zinc-900 dark:text-zinc-100 border-zinc-200 dark:border-zinc-700/80"
           >
             {copiedType === 'svg' ? (
-              <Check className="w-4 h-4 text-emerald-400 dark:text-emerald-600" />
+              <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             ) : (
-              <Copy className="w-4 h-4 opacity-75" />
+              <Copy className="w-4 h-4 opacity-75 text-zinc-500 dark:text-zinc-400" />
             )}
             <span>
               {copiedType === 'svg'
@@ -222,7 +222,7 @@ export const IconModal: React.FC<IconModalProps> = ({
             </span>
           </button>
 
-          {/* Copy PNG: Secondary Action (Monochrome Subtle Outline) */}
+          {/* Copy PNG: Twin Neutral Outline Style */}
           <button
             type="button"
             onClick={() => handleCopyPng(256)}
