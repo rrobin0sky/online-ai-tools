@@ -145,7 +145,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="86" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="86" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Multi-slot Modular Chassis Shell -->
   <polygon points="60,14 98,34 60,54 22,34" fill="url(#iso-cs-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,34 60,54 60,84 22,64" fill="url(#iso-cs-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -212,7 +212,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Standard 1U Switch Chassis -->
   <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-as-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,46 60,66 60,82 22,62" fill="url(#iso-as-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -269,7 +269,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="80" rx="46" ry="15" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="80" rx="46" ry="15" fill="#0f172a" opacity="0.25"/>
   <!-- Lower Cylinder Body -->
   <path d="M 20,40 C 20,58 38,72 60,72 C 82,72 100,58 100,40 L 100,58 C 100,76 82,90 60,90 C 38,90 20,76 20,58 Z" fill="url(#iso-rt-side)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.4"/>
   <!-- Outer Bevel Ring -->
@@ -329,7 +329,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Base Chassis Faces -->
   <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-fw-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.6"/>
   <polygon points="22,46 60,66 60,84 22,64" fill="url(#iso-fw-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.4"/>
@@ -381,7 +381,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Base Chassis -->
   <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-waf-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,46 60,66 60,82 22,62" fill="url(#iso-waf-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -432,7 +432,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Chassis Base -->
   <polygon points="60,24 98,44 60,64 22,44" fill="url(#iso-bst-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,44 60,64 60,82 22,62" fill="url(#iso-bst-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -486,7 +486,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Server 2U Chassis -->
   <polygon points="60,22 98,42 60,62 22,42" fill="url(#iso-srv-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,42 60,62 60,82 22,62" fill="url(#iso-srv-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -544,7 +544,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="84" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="84" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Storage Array Chassis -->
   <polygon points="60,18 98,38 60,58 22,38" fill="url(#iso-san-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,38 60,58 60,84 22,64" fill="url(#iso-san-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -599,7 +599,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Isometric Balancer Hub Chassis -->
   <polygon points="60,24 98,44 60,64 22,44" fill="url(#iso-hlb-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,44 60,64 60,82 22,62" fill="url(#iso-hlb-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -647,7 +647,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="80" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="80" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Radiating 2.5D Isometric Wi-Fi Wave Rings -->
   <g fill="none" stroke="%%ACCENT_CYAN%%" stroke-width="1.8" stroke-linecap="round">
     <path d="M22,30 C32,18 88,18 98,30" opacity="0.3"/>
@@ -693,7 +693,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="88" rx="36" ry="10" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="88" rx="36" ry="10" fill="#0f172a" opacity="0.25"/>
   <!-- Tall Isometric 42U Cabinet Shell -->
   <polygon points="60,8 88,22 60,36 32,22" fill="url(#iso-rk-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="32,22 60,36 60,90 32,76" fill="url(#iso-rk-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -744,7 +744,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="80" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="80" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
   <!-- SFP Metallic Body -->
   <polygon points="50,26 84,43 54,58 20,41" fill="url(#iso-sfp-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="20,41 54,58 54,74 20,57" fill="url(#iso-sfp-side)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -786,7 +786,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Isometric Projected Ring -->
-  <ellipse cx="60" cy="80" rx="46" ry="15" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="80" rx="46" ry="15" fill="#0f172a" opacity="0.25"/>
   <ellipse cx="60" cy="80" rx="42" ry="14" fill="none" stroke="%%GRID_GLOW%%" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.6"/>
   <!-- Floating 2.5D Volumetric Cloud Mesh -->
   <path d="M30,52 C20,52 14,44 14,35 C14,27 20,20 28,18 C31,10 40,5 50,5 C60,5 68,11 72,19 C77,15 84,13 90,13 C102,13 110,22 110,33 C110,44 100,52 90,52 Z" fill="%%BOTTOM_DARK%%" opacity="0.4" transform="translate(0, 10)"/>
@@ -833,7 +833,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="84" rx="42" ry="13" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="84" rx="42" ry="13" fill="#0f172a" opacity="0.25"/>
   <!-- Virtual Hypervisor Dashed Base Plate -->
   <polygon points="60,60 92,76 60,92 28,76" fill="none" stroke="%%GRID_GLOW%%" stroke-width="1.5" stroke-dasharray="4 3"/>
   <!-- Floating Virtual VM Instance Body -->
@@ -881,7 +881,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <polygon points="60,24 98,44 60,64 22,44" fill="url(#iso-cslb-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,44 60,64 60,82 22,62" fill="url(#iso-cslb-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
   <polygon points="60,64 98,44 98,62 60,82" fill="url(#iso-cslb-right)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -924,7 +924,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="86" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="86" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
   <!-- Tier 3 (Bottom Disk) -->
   <path d="M26,52 C26,65 41,75 60,75 C79,75 94,65 94,52 L94,64 C94,77 79,87 60,87 C41,87 26,77 26,64 Z" fill="url(#iso-rds-side)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.4"/>
   <ellipse cx="60" cy="52" rx="34" ry="12" fill="url(#iso-rds-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.6"/>
@@ -967,7 +967,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="84" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="84" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
   <!-- Storage Bucket Cylinder -->
   <path d="M30,36 C30,52 43,62 60,62 C77,62 90,52 90,36 L90,62 C90,78 77,88 60,88 C43,88 30,78 30,62 Z" fill="url(#iso-oss-side)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
   <ellipse cx="60" cy="36" rx="30" ry="13" fill="url(#iso-oss-top)" stroke="#ffffff" stroke-width="1.5"/>
@@ -1008,7 +1008,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="84" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="84" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <!-- Dashed Virtual Security Boundary Base -->
   <polygon points="60,28 98,48 60,68 22,48" fill="url(#iso-sg-top)" fill-opacity="0.2" stroke="%%BORDER_STROKE%%" stroke-width="1.5" stroke-dasharray="5 3"/>
   <!-- Floating Transparent Virtual Shield Box -->
@@ -1053,7 +1053,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-vpn-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,46 60,66 60,82 22,62" fill="url(#iso-vpn-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
   <polygon points="60,66 98,46 98,62 60,82" fill="url(#iso-vpn-right)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -1098,7 +1098,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="84" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="84" rx="42" ry="12" fill="#0f172a" opacity="0.25"/>
   <!-- Hexagonal Isometric Container Cell -->
   <polygon points="60,18 88,32 88,62 60,76 32,62 32,32" fill="none" stroke="%%GRID_GLOW%%" stroke-width="1.2" stroke-dasharray="3 3"/>
   <!-- Central Container Cube -->
@@ -1139,7 +1139,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-vsw-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,46 60,66 60,82 22,62" fill="url(#iso-vsw-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
   <polygon points="60,66 98,46 98,62 60,82" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
@@ -1180,7 +1180,7 @@ export const ICONS: IconMeta[] = [
     </linearGradient>
   </defs>
   <!-- Ground Soft Shadow -->
-  <ellipse cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
+  <ellipse class="iso-ground-shadow" cx="60" cy="82" rx="46" ry="14" fill="#0f172a" opacity="0.25"/>
   <polygon points="60,26 98,46 60,66 22,46" fill="url(#iso-nat-top)" stroke="%%BORDER_STROKE%%" stroke-width="1" stroke-opacity="0.8"/>
   <polygon points="22,46 60,66 60,82 22,62" fill="url(#iso-nat-left)" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>
   <polygon points="60,66 98,46 98,62 60,82" fill="%%BOTTOM_DARK%%" stroke="%%BORDER_STROKE%%" stroke-width="0.8" stroke-opacity="0.5"/>

@@ -56,27 +56,41 @@ export const Header: React.FC<HeaderProps> = ({
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-13 sm:h-[52px] flex items-center justify-between gap-2 sm:gap-4">
-        {/* 1. Left: Pure Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 flex-shrink-0 group">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-black dark:bg-white flex items-center justify-center text-white dark:text-black transition-transform group-hover:scale-105 active:scale-95 shadow-xs">
-            {/* 30° Isometric Cube & Topology Node SVG */}
-            <svg
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-current"
-            >
-              <path
-                d="M16 4L26 9.77V21.32L16 27.09L6 21.32V9.77L16 4Z"
-                strokeWidth="2"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M16 4V15.54M16 15.54L26 9.77M16 15.54L6 9.77M16 15.54V27.09"
-                strokeWidth="2"
-                strokeLinejoin="round"
-              />
-              <circle cx="16" cy="15.54" r="2.2" fill="currentColor" />
+        {/* 1. Left: Unified Official Brand Super-Symbol (1:1 with Favicon) */}
+        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group">
+          <div className="w-8 h-8 rounded-xl shadow-xs transition-transform group-hover:scale-105 active:scale-95 flex items-center justify-center overflow-hidden">
+            <svg viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="header-arch-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1d4ed8"/>
+                  <stop offset="50%" stop-color="#3b82f6"/>
+                  <stop offset="100%" stop-color="#7c3aed"/>
+                </linearGradient>
+                <filter id="header-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#000000" flood-opacity="0.3"/>
+                </filter>
+              </defs>
+              <rect width="32" height="32" rx="7.5" fill="url(#header-arch-bg)"/>
+              <rect width="32" height="32" rx="7.5" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25"/>
+              <g filter="url(#header-glow)">
+                <path
+                  d="M16 5.5 L25 10.7 V21.3 L16 26.5 L7 21.3 V10.7 Z"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M16 5.5 V16 L25 10.7 M16 16 L7 10.7 M16 16 V26.5"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                />
+                <circle cx="16" cy="16" r="2.6" fill="#38bdf8"/>
+                <circle cx="16" cy="16" r="1.4" fill="#ffffff"/>
+              </g>
             </svg>
           </div>
           <div className="flex items-baseline gap-1.5">

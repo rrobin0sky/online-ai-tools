@@ -50,3 +50,18 @@ body {
   background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1.2px, transparent 1.2px);
 }
 
+/* =========================================================================
+   Shadow-to-Glow Adaptive Lighting Engine
+   Light mode: natural physical contact occlusion shadow (#0f172a / 0.25)
+   Dark mode: sci-fi holographic pedestal glow (ambient cyan/blue reflection)
+   ========================================================================= */
+.iso-ground-shadow {
+  transition: fill 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+}
+
+.dark .iso-ground-shadow {
+  fill: #38bdf8 !important;
+  opacity: 0.42 !important;
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.65));
+}
+
